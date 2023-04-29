@@ -147,16 +147,7 @@ public class MainActivity extends AppCompatActivity {
             }
             fragmentManager.beginTransaction().add(R.id.fragment_container, new Fragment_room()).commit();
 }
-//        String message = "hello";
-//        Fragment_room fv = new Fragment_room();
-//        Bundle bundle = new Bundle();
-//        bundle.putString("message",message);
-//        fv.setArguments(bundle);
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-////        fragmentTransaction.replace(R.id.fragment_container, fv, null);
-//        fragmentTransaction.replace(R.id.fragment_container, fv, null);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
+
     }
 
     @Override
