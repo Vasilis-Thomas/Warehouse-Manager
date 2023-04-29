@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Economy E-shop Application</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="login_preference">signuploginfirebase_loginPreference</string>
+    <string name="login_status">signuploginfirebase_loginStatus</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="set_toolbar_title">SETTINGS</string>
+
+    <string name="firebaseUserEmail"></string>
+
+</resources>

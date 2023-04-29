@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "775339041304",
+    "project_id": "signup-login-drawer-firebase",
+    "storage_bucket": "signup-login-drawer-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775339041304:android:1a5c16d452c7204112d96d",
+        "android_client_info": {
+          "package_name": "com.example.eshopapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775339041304-jkbl1kpc0djueb23pdkfdg9pnmdq554u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6VcQKHzQVEpGsrS5lqvAHQ8gnyOd3fcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775339041304-jkbl1kpc0djueb23pdkfdg9pnmdq554u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
