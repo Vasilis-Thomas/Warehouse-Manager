@@ -10,6 +10,7 @@ import com.example.eshopapplication.R;
 
 public class AppDataBaseActivity extends AppCompatActivity {
     // Η αντιστοιχη MainActivity.class του παραδειγματος του Ευκλιδη
+    //AYTH H CLASS THA KATARGITHEI !!!
     public static FragmentManager fragmentManager;
     public static MyAppDatabase myAppDatabase;
 
@@ -24,7 +25,7 @@ public class AppDataBaseActivity extends AppCompatActivity {
             if(savedInstanceState!=null){
                 return;
             }
-            fragmentManager.beginTransaction().add(R.id.fragment_container_database, new RoomUI_Fragment()).commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_container_database, new Product_Fragment()).commit();
         }
     }
 }

@@ -10,5 +10,6 @@
     <string name="product_tabItem">Product</string>
     <string name="supplier_tabItem">Supplier</string>
     <string name="supplies_tabItem">Supplies</string>
+    <string name="text_prompt_product_ui">After filling all the fields, \n select one of the actions below:</string>
 
 </resources>

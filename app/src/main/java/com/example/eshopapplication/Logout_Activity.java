@@ -67,13 +67,13 @@ public class Logout_Activity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.dr_home:
                         menuItem.setChecked(false);
-//                        startActivity(new Intent(Logout_Activity.this, MainActivity.class));
-                        Intent intent = new Intent(Logout_Activity.this, LoginActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("StringKey1", "from :- Logout Activity");
-                        Fragment_room fv = new Fragment_room();
-                        fv.setArguments(bundle);
-                        startActivity(intent);
+                        startActivity(new Intent(Logout_Activity.this, MainActivity.class));
+//                        Intent intent = new Intent(Logout_Activity.this, LoginActivity.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("StringKey1", "from :- Logout Activity");
+//                        Supplier_Fragment fv = new Supplier_Fragment();
+//                        fv.setArguments(bundle);
+//                        startActivity(intent);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_contacts:

@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.room.Room;
 
 import com.google.android.material.navigation.NavigationView;
@@ -27,6 +29,8 @@ import java.util.Objects;
 
 import database.AppDataBaseActivity;
 import database.MyAppDatabase;
+import database.Product_Fragment;
+import database.Supplier_Fragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     TextView email_text, toolbarTitle;
     AlertDialog.Builder builder;
 
+    Fragment fragment;
+    FragmentTransaction fragmentTransaction;
     TabLayout tablayout;
 
     private ListView mDrawerList;
@@ -82,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout   = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
+        navigationView.setCheckedItem(R.id.dr_home);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -114,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.logout_activity:
                         menuItem.setChecked(true);
-//                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
-                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
+//                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 //                        Intent n = new Intent(MainActivity.this, Logout_Activity.class);
                         drawerLayout.closeDrawers();
                         return true;
@@ -145,19 +152,51 @@ public class MainActivity extends AppCompatActivity {
 
 
         tablayout = findViewById(R.id.tabLayout);
-//        tablayout.addTab(tablayout.newTab().setText("Product"));
-//        tablayout.addTab(tablayout.newTab().setText("Supplier"));
-//        tablayout.addTab(tablayout.newTab().setText("Supplies"));
-//        tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
         fragmentManager = getSupportFragmentManager();
         myAppDatabase = Room.databaseBuilder(getApplicationContext(), MyAppDatabase.class,"reservesBD").allowMainThreadQueries().build();
-        if(findViewById(R.id.fragment_container)!=null){
-            if(savedInstanceState!=null){
+        if(findViewById(R.id.fragment_container)!=null) {
+            if (savedInstanceState != null) {
                 return;
             }
-            fragmentManager.beginTransaction().add(R.id.fragment_container, new Fragment_room()).commit();
-}
+//            fragmentManager.beginTransaction().add(R.id.fragment_container, new Product_Fragment()).setTransition(fragmentManager.TRANSIT_FRAGMENT_OPEN).commit();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.fragment_container, new Product_Fragment());
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            fragmentTransaction.commit();
+        }
+
+        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        fragment = new Product_Fragment();
+                        break;
+
+                    case 1:
+                        fragment = new Supplier_Fragment();
+                        break;
+
+                    case 2:
+                        fragment = new Product_Fragment();
+                        break;
+                }
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 

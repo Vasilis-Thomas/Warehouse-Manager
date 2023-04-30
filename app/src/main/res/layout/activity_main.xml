@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
+    android:background="@color/colorSecond1"
     android:fitsSystemWindows="true"
     tools:context="com.example.eshopapplication.MainActivity">
 
@@ -15,7 +16,6 @@
         android:orientation="vertical">
 
         <include
-
             layout="@layout/toolbar_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -24,31 +24,38 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorSecond2"
             android:contentDescription="Tabs for navigating in different tables-fragments UIs of the app"
             android:orientation="vertical"
-            app:tabSelectedTextColor="@color/colorPrimary1"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
-
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
+            app:tabIndicatorColor="@color/colorPrimary3"
+            app:tabSelectedTextColor="@color/colorPrimary3"
+            app:tabTextColor="@color/colorPrimary2">
 
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/item1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_tabItem" />
+                android:text="@string/product_tabItem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/item2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/supplier_tabItem" />
+                android:text="@string/supplier_tabItem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/item3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/supplies_tabItem" />
-
+                android:text="@string/supplies_tabItem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -61,8 +68,6 @@
             tools:layout_editor_absoluteX="0dp">
 
         </FrameLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+//TO CLASS AYTO EINAI DEIGMA ... THA DIAGRAFEI
 @Entity(tableName = "users")
 public class User {
 

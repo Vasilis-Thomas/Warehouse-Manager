@@ -23,4 +23,17 @@ public interface MyDao {
     @Query("select * from users")
     public List<User> getUsers();
 
+    @Insert
+    public  void addProduct(Product product);
+
+    @Delete
+    public void deleteProduct(Product product);
+
+    @Update
+    public void updateProduct(Product product);
+
+//    @Query("select * from product")
+//    public List<Product> getProduct();
+
+
 }
