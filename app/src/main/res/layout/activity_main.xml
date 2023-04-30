@@ -8,28 +8,63 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.eshopapplication.MainActivity">
 
-
-    <androidx.viewpager.widget.ViewPager
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/toolbar_layout"></include>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+
+            layout="@layout/toolbar_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top" >
+            android:contentDescription="Tabs for navigating in different tables-fragments UIs of the app"
+            android:orientation="vertical"
+            app:tabSelectedTextColor="@color/colorPrimary1"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
+
+
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/item1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_tabItem" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/item2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/supplier_tabItem" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/item3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/supplies_tabItem" />
+
 
         </com.google.android.material.tabs.TabLayout>
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="500dp">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+            tools:layout_editor_absoluteX="0dp">
+
         </FrameLayout>
 
-    </androidx.viewpager.widget.ViewPager>
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.google.android.material.navigation.NavigationView

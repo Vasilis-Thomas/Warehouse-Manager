@@ -19,8 +19,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.room.Room;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 import database.AppDataBaseActivity;
 import database.MyAppDatabase;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     TextView email_text, toolbarTitle;
     AlertDialog.Builder builder;
+
+    TabLayout tablayout;
 
     private ListView mDrawerList;
 
@@ -139,6 +144,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        tablayout = findViewById(R.id.tabLayout);
+//        tablayout.addTab(tablayout.newTab().setText("Product"));
+//        tablayout.addTab(tablayout.newTab().setText("Supplier"));
+//        tablayout.addTab(tablayout.newTab().setText("Supplies"));
+//        tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
         fragmentManager = getSupportFragmentManager();
         myAppDatabase = Room.databaseBuilder(getApplicationContext(), MyAppDatabase.class,"reservesBD").allowMainThreadQueries().build();
         if(findViewById(R.id.fragment_container)!=null){
@@ -166,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
         actionBar.setTitle("");
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
