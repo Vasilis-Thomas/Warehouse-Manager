@@ -6,30 +6,28 @@ import androidx.room.PrimaryKey;
 
     @Entity(tableName = "product")
     public class Product {
+        @PrimaryKey @ColumnInfo(name = "productID")
+        private int pid;
 
-        @PrimaryKey @ColumnInfo(name = "ProductID")
-        private int id;
-
-        @ColumnInfo(name = "ProductName")
+        @ColumnInfo(name = "productName")
         private String name;
 
-        @ColumnInfo(name = "Category")
+        @ColumnInfo(name = "category")
         private String category;
 
-        @ColumnInfo(name = "Price")
+        @ColumnInfo(name = "price")
         private double price;
 
-        @ColumnInfo(name = "Stock")
+        @ColumnInfo(name = "stock")
         private int stock; // αποθεμα προϊοντος
 
 
-
-        public int getId() {
-            return id;
+        public int getPid() {
+            return pid;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setPid(int pid) {
+            this.pid = pid;
         }
 
         public String getName() {

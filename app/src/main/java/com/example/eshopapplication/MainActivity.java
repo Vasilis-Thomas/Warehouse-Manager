@@ -27,10 +27,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-import database.AppDataBaseActivity;
 import database.MyAppDatabase;
 import database.Product_Fragment;
 import database.Supplier_Fragment;
+import database.Supplies_Fragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.dr_marketplace:
                         menuItem.setChecked(true);
-                        startActivity(new Intent(MainActivity.this, AppDataBaseActivity.class));
+//                        startActivity(new Intent(MainActivity.this, AppDataBaseActivity.class));
                         drawerLayout.closeDrawers();
                         return true;
 
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        fragment = new Product_Fragment();
+                        fragment = new Supplies_Fragment();
                         break;
                 }
                 fragmentTransaction = fragmentManager.beginTransaction();

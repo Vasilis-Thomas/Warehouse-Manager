@@ -10,19 +10,6 @@ import java.util.List;
 
 @Dao
 public interface MyDao {
-
-    @Insert
-    public  void addUser(User user);
-
-    @Delete
-    public void deleteUser(User user);
-
-    @Update
-    public void updateUser(User user);
-
-    @Query("select * from users")
-    public List<User> getUsers();
-
     @Insert
     public  void addProduct(Product product);
 
@@ -32,8 +19,36 @@ public interface MyDao {
     @Update
     public void updateProduct(Product product);
 
-//    @Query("select * from product")
-//    public List<Product> getProduct();
+    @Query("select * from product")
+    public List<Product> getProduct();
+
+
+    @Insert
+    public  void addSupplier(Supplier supplier);
+
+    @Delete
+    public void deleteSupplier(Supplier supplier);
+
+    @Update
+    public void updateSupplier(Supplier supplier);
+
+    @Query("select * from supplier")
+    public List<Supplier> getSupplier();
+
+//    @Query("SELECT productID FROM product WHERE productID= :" + var_productID )
+//    public List<Product> getIDProduct(int var_productID);
+
+    @Insert
+    public void addSupply(Supplies supplies);
+
+    @Delete
+    public void deleteSupply(Supplies supplies);
+
+    @Update
+    public void updateSupply(Supplies supplies);
+
+    @Query("select * from supplies")
+    public List<Supplies> getSupplies();
 
 
 }

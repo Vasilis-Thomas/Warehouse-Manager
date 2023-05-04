@@ -27,6 +27,16 @@
         <item name="itemBackground">?attr/drawableNavigationItemBackground</item>
     </style>
 
+    <style name="MyStyleTextAppearanceInTextInputLayout">
+        <item name="colorAccent">@color/colorDrawerLayoutBackground</item>
+    </style>
+
+
+<!--    <style name="HelperTextAppearance" parent="TextAppearance.AppCompat">-->
+<!--        <item name="android:textColorHint">@color/colorDrawerLayoutBackground</item>-->
+<!--        <item name="android:textSize">16sp</item>-->
+<!--    </style>-->
+
 <!--    <style name="Theme.ApplicationwithMenu" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
 <!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
 <!--        <item name="colorPrimary">@color/purple_500</item>-->
