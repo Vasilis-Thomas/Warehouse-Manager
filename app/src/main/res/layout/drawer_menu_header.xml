@@ -17,15 +17,13 @@
         android:layout_height="81dp"
         android:contentDescription="Navigation header"
         android:layout_marginTop="4dp"
-
-
         app:srcCompat="@drawable/logo_transparent"></ImageView>
 
     <TextView
-        android:id="@+id/drawer_menu_header_admin"
+        android:id="@+id/drawer_menu_header_username_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Type: Admin"
+        android:text="Username: 'username'"
         android:textSize="16sp"
         android:textColor="@color/colorSecond2"
         android:layout_marginStart="10dp"

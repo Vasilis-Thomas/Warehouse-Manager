@@ -32,7 +32,7 @@ public class Logout_Activity extends AppCompatActivity {
     private Button logoutButton;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    TextView email_text;
+    TextView username_text, email_text;
     AlertDialog.Builder builder;
 
     @Override
@@ -103,14 +103,19 @@ public class Logout_Activity extends AppCompatActivity {
 
         FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseuser != null){
+            String userName = firebaseuser.getDisplayName();
             String userEmail = firebaseuser.getEmail();
             View menu_drawer_head = navigationView.getHeaderView(0);
+            username_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_username_text);
             email_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_email_text);
+            username_text.setText(userName);
             email_text.setText(userEmail);
         }
         else{
             View menu_drawer_head = navigationView.getHeaderView(0);
+            username_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_username_text);
             email_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_email_text);
+            username_text.setText("Username: Unknown");
             email_text.setText("Unknown");
         }
 

@@ -87,7 +87,7 @@
                     android:textColorHint="@color/colorDrawerLayoutBackground"
                     android:textSize="20sp"
                     android:inputType="textPersonName"
-                    android:maxLength="20"
+                    android:maxLength="30"
                     android:background="@color/colorSecond1">
                 </com.google.android.material.textfield.TextInputEditText>
 
@@ -114,7 +114,7 @@
                     android:background="@color/colorSecond1"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:maxLength="20"
+                    android:maxLength="40"
                     android:textColor="@color/colorPrimary3"
                     android:textColorHint="@color/colorDrawerLayoutBackground"
                     android:textSize="20sp">

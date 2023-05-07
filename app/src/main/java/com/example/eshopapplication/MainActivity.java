@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static MyAppDatabase myAppDatabase;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    TextView email_text, toolbarTitle;
+    TextView username_text, email_text, toolbarTitle;
     AlertDialog.Builder builder;
 
     Fragment fragment;
@@ -133,16 +133,19 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseuser != null){
-//            String userMame = firebaseUser.getDisplayName();
 //            Uri userphoto = firebaseUser.getPhotoUrl();
 //            String userID = firebaseUser.getUid();
 //            boolean emailVerified = firebaseUser.isEmailVerified();
 
 //            String textaki = String.valueOf(navigationView.getHeaderCount());  // Για να βρω τον αριθμο των Headers του NavigationView
+            String userName = firebaseuser.getDisplayName();
             String userEmail = firebaseuser.getEmail();
             View menu_drawer_head = navigationView.getHeaderView(0);
+            username_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_username_text);
             email_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_email_text);
+            username_text.setText(userName);
             email_text.setText(userEmail);
+            Log.i(TAG,"username_text: "+email_text.getText());
         }
         else{
             View menu_drawer_head = navigationView.getHeaderView(0);

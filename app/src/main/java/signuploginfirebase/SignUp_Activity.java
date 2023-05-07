@@ -3,6 +3,7 @@ package signuploginfirebase;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,9 +18,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUp_Activity extends AppCompatActivity {
-
+    public final static String TAG = "signuploginfirebase";
     private FirebaseAuth auth;
     private EditText signupUsername, signupEmail, signupPassword, signupConfirmpassword;
     private TextView redirectToLoginText;
@@ -79,7 +82,7 @@ public class SignUp_Activity extends AppCompatActivity {
                     signupConfirmpassword.setError("Confirm password and password must be the same");
                 }
 
-                else if (!(useremail.length() > 4 && username.length() > 9)){
+                else if (!(useremail.length() > 9 && username.length() > 4)){
                     signupUsername.setError("Username must be minimum 4 characters");
                     signupEmail.setError("Email must be minimum 9 characters");
                 }
@@ -89,6 +92,16 @@ public class SignUp_Activity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                FirebaseUser user = auth.getCurrentUser();
+                                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
+                                user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Log.d(TAG, "User profile updated, displayName is set: " +username);
+                                        }
+                                    }
+                                });
                                 Toast.makeText(SignUp_Activity.this, "SignUp Succesful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SignUp_Activity.this, LoginActivity.class));
 //                                Intent intent = new Intent(SignUp_Activity.this, LoginActivity.class);

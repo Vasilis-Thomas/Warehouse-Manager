@@ -16,6 +16,7 @@
             tools:layout_editor_absoluteY="-36dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/nested_constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorSecond1">
@@ -170,10 +171,25 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/supply_error_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/redFix"
+                    android:textSize="18dp"
+                    android:textStyle="italic"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/supplies_msrp_til">
+                </TextView>
+
+                <TextView
                     android:id="@+id/question_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="70dp"
                     android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
                     android:padding="8dp"
