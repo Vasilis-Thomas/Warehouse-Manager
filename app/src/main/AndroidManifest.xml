@@ -13,15 +13,12 @@
         android:theme="@style/Theme.Economy_E_shop_Application"
         tools:targetApi="31">
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.example.eshopapplication.SettingsActivity"
             android:exported="false">
 <!--           <meta-data-->
 <!--               android:name="android.support.PARENT_ACTIVITY"-->
 <!--               android:value="com.example.eshopapplication.SettingsActivity"/>-->
         </activity>
-        <activity
-            android:name="database.AppDataBaseActivity"
-            android:exported="false" />
         <activity
             android:name=".Startup_Activity"
             android:exported="true">
