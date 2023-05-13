@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.List;
 
 public class Supplier_Fragment extends Fragment {
-    private final static String TAG = "database (Supplier_Fragment)";
+    private final static String TAG = "remote.database (Supplier_Fragment)";
     TextInputEditText supplierID, supplierName, email, phone, address;
     Button insertButton, deleteButton, updateButton, queryButton;
 
@@ -183,17 +183,46 @@ public class Supplier_Fragment extends Fragment {
             }
         });
 
-        queryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int var_id = 0;
+                try {
+                    var_id = Integer.parseInt(supplierID.getText().toString());
+                } catch (NumberFormatException ex) {
+                    System.out.println("Could not parse" + ex);
+                }
 
+                boolean flagSupplierID = false;
+                    List<Supplier> asupplier = MainActivity.myAppDatabase.myDao().getSupplier();
+                    for (Supplier i : asupplier) {
+                        int var_supplierID_for_check = i.getSid();
+                        if (var_supplierID_for_check == var_id) {
+                            flagSupplierID = true;
+                            break;
+                        }
+                    }
+                try {
+                    if(supplierID.getText().length() == 0 || !flagSupplierID)
+                        throw new Exception("Exception thrown");
+                    Supplier supplier = new Supplier();
+                    supplier.setSid(var_id);
+                    MainActivity.myAppDatabase.myDao().deleteSupplier(supplier);
+                    Toast.makeText(getActivity(), "Supplier delete successfully", Toast.LENGTH_LONG).show();
+                    supplierID.setText("");
+                    supplierName.setText("");
+                    email.setText("");
+                    phone.setText("");
+                    address.setText("");
+                    setErrorMessagesToNull();
+                } catch (Exception e) {
+                    String message = e.getMessage();
+                    Toast.makeText(getActivity(), "Supplier delete did not happend "+message, Toast.LENGTH_LONG).show();
+                    if(supplierID.getText().length() == 0)
+                        supplierID.setError("You must fill this field");
+                    else if(!flagSupplierID)
+                        supplierID.setError("The SuppliertID you filled does not exist");
+                }
             }
         });
         return view;

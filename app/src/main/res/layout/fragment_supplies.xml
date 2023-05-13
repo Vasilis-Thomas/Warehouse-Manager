@@ -1,285 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:context="database.Supplies_Fragment"
-        android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="database.Supplies_Fragment"
+    android:orientation="vertical">
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-36dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nested_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="-36dp">
+            android:background="@color/colorSecond1">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/nested_constraintLayout"
+            <TextView
+                android:id="@+id/content_description_txtview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:text="SUPPLIES"
+                android:textColor="@color/colorPrimary3"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/supplies_productid_til"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorSecond1">
-
-                <TextView
-                    android:id="@+id/content_description_txtview"
-                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                android:textCursorDrawable="@null"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/content_description_txtview">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/supplies_productid_tiet"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:padding="10dp"
-                    android:text="SUPPLIES"
+                    android:hint="Product ID"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
                     android:textColor="@color/colorPrimary3"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></TextView>
+                    android:textSize="20sp"
+                    android:maxLength="10"
+                    android:inputType="number"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/supplies_productid_til"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/supplies_supplierid_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                android:textCursorDrawable="@null"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/supplies_productid_til">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/supplies_supplierid_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:backgroundTint="@color/colorPrimary3"
+                    android:hint="Supplier ID"
+                    android:textColor="@color/colorPrimary3"
                     android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:paddingStart="8dp"
+                    android:textSize="20sp"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/supplies_date_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                android:textCursorDrawable="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/supplies_supplierid_til">
+                <EditText
+                    android:id="@+id/supplies_date_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorSecond1"
+                    android:hint="Supply Date"
+                    android:inputType="datetime"
+                    android:maxLength="20"
+                    android:textColor="@color/colorPrimary3"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textSize="20sp">
+                </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/supplies_quantity_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/supplies_date_til">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/supplies_quantity_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Quantity"
+                    android:textColor="@color/colorPrimary3"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
                     android:textCursorDrawable="@null"
-                    app:hintAnimationEnabled="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/content_description_txtview">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/supplies_productid_tiet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Product ID"
-                        android:textColorHint="@color/colorDrawerLayoutBackground"
-                        android:textColor="@color/colorPrimary3"
-                        android:textSize="20sp"
-                        android:maxLength="10"
-                        android:inputType="number"
-                        android:background="@color/colorSecond1">
-                    </com.google.android.material.textfield.TextInputEditText>
+                    android:textSize="20sp"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/supplies_supplierid_til"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/supplies_msrp_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/supplies_quantity_til">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/supplies_msrp_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/colorPrimary3"
+                    android:hint="MSRP"
+                    android:textColor="@color/colorPrimary3"
                     android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:paddingStart="8dp"
                     android:textCursorDrawable="@null"
-                    app:hintAnimationEnabled="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/supplies_productid_til">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/supplies_supplierid_tiet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Supplier ID"
-                        android:textColor="@color/colorPrimary3"
-                        android:textColorHint="@color/colorDrawerLayoutBackground"
-                        android:textSize="20sp"
-                        android:inputType="number"
-                        android:maxLength="20"
-                        android:background="@color/colorSecond1">
-                    </com.google.android.material.textfield.TextInputEditText>
+                    android:textSize="20sp"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/supply_error_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/redFix"
+                android:textSize="18dp"
+                android:textStyle="italic"
 
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/supplies_msrp_til">
+            </TextView>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/supplies_date_til"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/colorPrimary3"
-                    android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:paddingStart="8dp"
-                    android:textCursorDrawable="@null"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/supplies_supplierid_til">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/supplies_date_tiet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorSecond1"
-                        android:hint="Supply Date"
-                        android:inputType="datetime"
-                        android:maxLength="20"
-                        android:textColor="@color/colorPrimary3"
-                        android:textColorHint="@color/colorDrawerLayoutBackground"
-                        android:textSize="20sp">
-                    </com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/question_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:foregroundGravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
+                android:text="@string/text_prompt_product_ui"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary1"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/supplies_msrp_til">
+                <!--        android:textAppearance="@color/redFix"-->
+            </TextView>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/supplies_quantity_til"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/colorPrimary3"
-                    android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:paddingStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/supplies_date_til">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/supplies_quantity_tiet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Quantity"
-                        android:textColor="@color/colorPrimary3"
-                        android:textColorHint="@color/colorDrawerLayoutBackground"
-                        android:textCursorDrawable="@null"
-                        android:textSize="20sp"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:background="@color/colorSecond1">
-                    </com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/insert_button"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary1"
+                android:drawableLeft="@drawable/ic_config_add_circle_outline_24"
+                android:gravity="center"
+                android:soundEffectsEnabled="true"
+                android:text="Add New Supply"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question_text"></Button>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/supplies_msrp_til"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/colorPrimary3"
-                    android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:paddingStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/supplies_quantity_til">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/supplies_msrp_tiet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="MSRP"
-                        android:textColor="@color/colorPrimary3"
-                        android:textColorHint="@color/colorDrawerLayoutBackground"
-                        android:textCursorDrawable="@null"
-                        android:textSize="20sp"
-                        android:inputType="numberDecimal"
-                        android:maxLength="10"
-                        android:background="@color/colorSecond1">
-                    </com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/query_button"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary1"
+                android:drawableLeft="@drawable/ic_config_outline_arrow_circle_right_24"
+                android:gravity="center"
+                android:soundEffectsEnabled="true"
+                android:text="Entry Queries"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/insert_button">
+            </Button>
 
-                <TextView
-                    android:id="@+id/supply_error_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/redFix"
-                    android:textSize="18dp"
-                    android:textStyle="italic"
+            <Button
+                android:id="@+id/update_button"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary1"
+                android:drawableLeft="@drawable/ic_config_outline_update_24"
+                android:gravity="center"
+                android:soundEffectsEnabled="true"
+                android:text="Update Supply"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/query_button"></Button>
 
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/supplies_msrp_til">
-                </TextView>
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary1"
+                android:drawableLeft="@drawable/ic_config_outline_delete_24"
+                android:gravity="center"
+                android:soundEffectsEnabled="true"
+                android:text="Delete Supply"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/update_button"></Button>
 
-                <TextView
-                    android:id="@+id/question_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
-                    android:foregroundGravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:padding="8dp"
-                    android:text="@string/text_prompt_product_ui"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorPrimary1"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/supplies_msrp_til">
-                    <!--        android:textAppearance="@color/redFix"-->
-                </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/delete_button">
+            </TextView>
 
-                <Button
-                    android:id="@+id/insert_button"
-                    android:layout_width="190dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="@color/colorPrimary1"
-                    android:drawableLeft="@drawable/ic_config_add_circle_outline_24"
-                    android:gravity="center"
-                    android:soundEffectsEnabled="true"
-                    android:text="Add New Supply"
-                    android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/question_text"></Button>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Button
-                    android:id="@+id/query_button"
-                    android:layout_width="190dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="@color/colorPrimary1"
-                    android:drawableLeft="@drawable/ic_config_outline_arrow_circle_right_24"
-                    android:gravity="center"
-                    android:soundEffectsEnabled="true"
-                    android:text="Entry Queries"
-                    android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/insert_button">
-                </Button>
+    </ScrollView>
 
-                <Button
-                    android:id="@+id/update_button"
-                    android:layout_width="190dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="@color/colorPrimary1"
-                    android:drawableLeft="@drawable/ic_config_outline_update_24"
-                    android:gravity="center"
-                    android:soundEffectsEnabled="true"
-                    android:text="Update Supply"
-                    android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/query_button"></Button>
-
-                <Button
-                    android:id="@+id/delete_button"
-                    android:layout_width="190dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="@color/colorPrimary1"
-                    android:drawableLeft="@drawable/ic_config_outline_delete_24"
-                    android:gravity="center"
-                    android:soundEffectsEnabled="true"
-                    android:text="Delete Supply"
-                    android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/update_button"></Button>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/delete_button">
-                </TextView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

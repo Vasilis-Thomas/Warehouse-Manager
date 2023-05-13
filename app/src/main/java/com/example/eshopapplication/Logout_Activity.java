@@ -1,7 +1,5 @@
 package com.example.eshopapplication;
 
-import static com.example.eshopapplication.MainActivity.showInfo;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -93,7 +91,7 @@ public class Logout_Activity extends AppCompatActivity {
                         return true;
                     case R.id.dr_about:
                         menuItem.setChecked(true);
-                        showInfo(builder);
+//                        showInfo(builder);
                         drawerLayout.closeDrawers();
                         return true;
                 }

@@ -3,7 +3,6 @@ package com.example.eshopapplication;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -20,6 +19,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 import signuploginfirebase.LoginActivity;
 import signuploginfirebase.sharedPreferenceConfig;
@@ -42,9 +43,8 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         sharedPreferenceConfig = new sharedPreferenceConfig(getApplicationContext());
 
-        makeToolbarButtonArrowBack(toolbar);
+        toolbar = makeToolbarButtonArrowBack();
 
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         usernameTxt = findViewById(R.id.username_txt);
         emailTxt = findViewById(R.id.email_txt);
@@ -178,27 +178,16 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-//    public Toolbar makeToolbarButtonArrowBack(Toolbar toolbar){
-//        toolbar = findViewById(R.id.toolbar_layout);
-//        setSupportActionBar(toolbar);
-//        ActionBar actionBar = getSupportActionBar();
-//            Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
-////        actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setHomeAsUpIndicator(R.drawable.ic_round_arrow_back_24);
-//            actionBar.setTitle("");
-//        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-//        toolbarTitle.setText(R.string.set_toolbar_title);
-//        return toolbar;
-//    }
-
-    public Toolbar makeToolbarButtonArrowBack(Toolbar toolbar){
+    public Toolbar makeToolbarButtonArrowBack(){
         toolbar = findViewById(R.id.toolbar_layout);
-        Log.d(TAG,"DOYLEPSE PALIO MALAKIA "+ toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-//        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
+            Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_round_arrow_back_24);
+            actionBar.setTitle("");
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText(R.string.set_toolbar_title);
         return toolbar;
     }
 

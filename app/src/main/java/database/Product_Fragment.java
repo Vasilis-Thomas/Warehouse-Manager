@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.List;
 
 public class Product_Fragment extends Fragment {
-    private final static String TAG = "database (Product_Fragment)";
+    private final static String TAG = "remote.database (Product_Fragment)";
     TextInputEditText id, name, category, price, stock;
 //    TextInputLayout id, name, category, price;
     Button insertButton, deleteButton, updateButton, queryButton;
@@ -206,17 +206,47 @@ public class Product_Fragment extends Fragment {
             }
         });
 
-        queryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int var_id = 0;
+                try {
+                    var_id = Integer.parseInt(id.getText().toString());
+                } catch (NumberFormatException ex) {
+                    System.out.println("Could not parse" + ex);
+                }
 
+                    boolean flagProductID = false;
+                    List<Product> aproduct = MainActivity.myAppDatabase.myDao().getProduct();
+                    for (Product i : aproduct) {
+                        int var_productID_for_check = i.getPid();
+                        if (var_productID_for_check == var_id) {
+                            flagProductID = true;
+                            break;
+                        }
+                    }
+                try {
+                    if(id.getText().length() == 0 || !flagProductID)
+                        throw new Exception("Exception thrown");
+                    Product product = new Product();
+                    product.setPid(var_id);
+                    MainActivity.myAppDatabase.myDao().deleteProduct(product);
+                    Toast.makeText(getActivity(), "Product delete successfully", Toast.LENGTH_LONG).show();
+                    id.setText("");
+                    name.setText("");
+                    category.setText("");
+                    price.setText("");
+                    stock.setText("");
+                    setErrorMessagesToNull();
+                } catch (Exception e) {
+                    String message = e.getMessage();
+                    Toast.makeText(getActivity(), "Product delete dint happend", Toast.LENGTH_LONG).show();
+                    if(id.getText().length() == 0)
+                        id.setError("You must fill this field");
+                    else if(!flagProductID)
+                        id.setError("The productID you filled does not exist");
+                }
             }
         });
         return view;
