@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="remote.database.Orders_Activity"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-36dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nested_constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorSecond1">
+
+            <TextView
+                android:id="@+id/content_description_txtview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:text="ORDERS"
+                android:textColor="@color/colorPrimary3"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orders_orderid_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                android:textCursorDrawable="@null"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/content_description_txtview">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orders_orderid_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Order ID"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textColor="@color/colorPrimary3"
+                    android:textSize="20sp"
+                    android:maxLength="10"
+                    android:inputType="number"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orders_productid_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                android:textCursorDrawable="@null"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orders_orderid_til">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orders_productid_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Product ID"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textColor="@color/colorPrimary3"
+                    android:textSize="20sp"
+                    android:maxLength="10"
+                    android:inputType="number"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orders_customername_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                android:textCursorDrawable="@null"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orders_productid_til">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orders_customernameid_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Customer Name"
+                    android:textColor="@color/colorPrimary3"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textSize="20sp"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orders_orderdate_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                android:textCursorDrawable="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orders_customername_til">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orders_orderdate_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorSecond1"
+                    android:hint="Order Date"
+                    android:inputType="datetime"
+                    android:maxLength="20"
+                    android:textColor="@color/colorPrimary3"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textSize="20sp">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orders_quantity_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orders_orderdate_til">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orders_quantity_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Quantity"
+                    android:textColor="@color/colorPrimary3"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textCursorDrawable="@null"
+                    android:textSize="20sp"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/supply_error_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/redFix"
+                android:textSize="18dp"
+                android:textStyle="italic"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orders_quantity_til">
+            </TextView>
+
+            <TextView
+                android:id="@+id/question_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:foregroundGravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
+                android:text="@string/text_prompt_product_ui"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary1"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orders_quantity_til">
+                <!--        android:textAppearance="@color/redFix"-->
+            </TextView>
+
+            <Button
+                android:id="@+id/insert_button"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary1"
+                android:drawableLeft="@drawable/ic_config_add_circle_outline_24"
+                android:gravity="center"
+                android:soundEffectsEnabled="true"
+                android:text="Add New ORDER"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question_text"></Button>
+
+            <Button
+                android:id="@+id/query_button"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary1"
+                android:drawableLeft="@drawable/ic_config_outline_arrow_circle_right_24"
+                android:gravity="center"
+                android:soundEffectsEnabled="true"
+                android:text="Entry Queries"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/insert_button">
+            </Button>
+
+            <Button
+                android:id="@+id/update_button"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary1"
+                android:drawableLeft="@drawable/ic_config_outline_update_24"
+                android:gravity="center"
+                android:soundEffectsEnabled="true"
+                android:text="Update ORDER"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/query_button"></Button>
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary1"
+                android:drawableLeft="@drawable/ic_config_outline_delete_24"
+                android:gravity="center"
+                android:soundEffectsEnabled="true"
+                android:text="Delete Order"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/update_button"></Button>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/delete_button">
+            </TextView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
