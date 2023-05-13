@@ -7,24 +7,24 @@
             android:background="@color/colorPrimary4">
 
                 <item
-                    android:id="@+id/dr_home"
-                    android:icon="@drawable/ic_home"
-                    android:title="Home">
+                    android:id="@+id/dr_database"
+                    android:icon="@drawable/ic_database_storage"
+                    android:title="Database">
                 </item>
                 <item
-                    android:id="@+id/dr_contacts"
-                    android:icon="@drawable/ic_contacts"
-                    android:title="Contacts">
+                    android:id="@+id/dr_orders"
+                    android:icon="@drawable/ic_orders"
+                    android:title="Orders">
                 </item>
                 <item
-                    android:id="@+id/dr_find"
-                    android:icon="@drawable/ic_find"
-                    android:title="Search">
+                    android:id="@+id/dr_product_inventory"
+                    android:icon="@drawable/ic_inventory"
+                    android:title="Product Inventory">
                 </item>
                 <item
-                    android:id="@+id/dr_marketplace"
-                    android:icon="@drawable/ic_nav_marketplace"
-                    android:title="Marketplace">
+                    android:id="@+id/dr_supplier_info"
+                    android:icon="@drawable/ic_supplier"
+                    android:title="Supplier Info">
                 </item>
                 <item
                     android:id="@+id/dr_about"
@@ -32,9 +32,9 @@
                     android:title="About">
                 </item>
                 <item
-                    android:id="@+id/logout_activity"
-                    android:icon="@drawable/ic_about"
-                    android:title="Logout Activity">
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Logout">
                 </item>
         </group>
 </menu>

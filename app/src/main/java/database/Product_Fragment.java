@@ -114,7 +114,7 @@ public class Product_Fragment extends Fragment {
                         int var_productID_for_check = i.getPid();
                         if(var_productID_for_check == var_id){
                             flagProductID = true;  // THA GINEI true APO TH STIGMH POY TO var_productID YPARXEI STHN VASH DHLADH STON PINAKA product
-                            Log.i(TAG,"TO flagProductID egine true");
+                            Log.i(TAG,"flagProductID set true");
                             break;
                         }
                     }

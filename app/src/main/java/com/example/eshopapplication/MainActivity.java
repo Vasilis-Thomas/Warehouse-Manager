@@ -81,45 +81,45 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG,"onCreate callback method");
 
 
-
-
         makeToolbarButton(toolbar);
 
         drawerLayout   = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
-        navigationView.setCheckedItem(R.id.dr_home);
+        navigationView.setCheckedItem(R.id.dr_database);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.dr_home:
-//                           menuItem.setChecked(false);
-                        drawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.dr_contacts:
-                           menuItem.setChecked(true);
-                        drawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.dr_find:
-                          menuItem.setChecked(true);
-                        return true;
-
-                    case R.id.dr_marketplace:
+                    case R.id.dr_database:
                         menuItem.setChecked(true);
-//                        startActivity(new Intent(MainActivity.this, AppDataBaseActivity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
+
+                    case R.id.dr_orders:
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        return true;
+
+                    case R.id.dr_product_inventory:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(MainActivity.this, Product_Inventory_Activity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
+
+                    case R.id.dr_supplier_info:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(MainActivity.this, Supplier_Info_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
 
                     case R.id.dr_about:
-                          menuItem.setChecked(true);
+                        menuItem.setChecked(true);
                         showInfo(builder);
                         drawerLayout.closeDrawers();
                         return true;
 
-                    case R.id.logout_activity:
+                    case R.id.logout:
                         menuItem.setChecked(true);
                         startActivity(new Intent(MainActivity.this, Logout_Activity.class));
 //                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));

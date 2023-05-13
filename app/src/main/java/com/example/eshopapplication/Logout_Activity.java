@@ -65,8 +65,8 @@ public class Logout_Activity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.dr_home:
-                        menuItem.setChecked(false);
+                    case R.id.dr_database:
+                        menuItem.setChecked(true);
                         startActivity(new Intent(Logout_Activity.this, MainActivity.class));
 //                        Intent intent = new Intent(Logout_Activity.this, LoginActivity.class);
 //                        Bundle bundle = new Bundle();
@@ -76,24 +76,28 @@ public class Logout_Activity extends AppCompatActivity {
 //                        startActivity(intent);
                         drawerLayout.closeDrawers();
                         return true;
-                    case R.id.dr_contacts:
+                    case R.id.dr_orders:
                         menuItem.setChecked(true);
 
                         drawerLayout.closeDrawers();
                         return true;
-                    case R.id.dr_find:
+                    case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
-
-                        return true;
-                    case R.id.dr_marketplace:
-                        menuItem.setChecked(true);
-
+                        startActivity(new Intent(Logout_Activity.this, Product_Inventory_Activity.class));
                         drawerLayout.closeDrawers();
-
+                        return true;
+                    case R.id.dr_supplier_info:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(Logout_Activity.this, Supplier_Info_Activity.class));
+                        drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_about:
                         menuItem.setChecked(true);
                         showInfo(builder);
+                        drawerLayout.closeDrawers();
+                        return true;
+                    case R.id.logout:
+                        menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         return true;
                 }

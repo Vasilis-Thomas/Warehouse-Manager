@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.eshopapplication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SENDTO" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,23 +15,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Economy_E_shop_Application"
         tools:targetApi="31">
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="false">
-<!--           <meta-data-->
-<!--               android:name="android.support.PARENT_ACTIVITY"-->
-<!--               android:value="com.example.eshopapplication.SettingsActivity"/>-->
-        </activity>
-        <activity
-            android:name="database.AppDataBaseActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Startup_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Product_Inventory_Activity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Supplier_Info_Activity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+                <data android:scheme="mailto" />
             </intent-filter>
         </activity>
         <activity
