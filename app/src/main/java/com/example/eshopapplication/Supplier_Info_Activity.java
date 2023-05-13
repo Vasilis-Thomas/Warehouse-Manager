@@ -1,6 +1,6 @@
 package com.example.eshopapplication;
 
-import static com.example.eshopapplication.MainActivity.showInfo;
+//import static com.example.eshopapplication.MainActivity.showInfo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
 import database.Supplier;
+import remote.database.Orders_Activity;
 
 public class Supplier_Info_Activity extends AppCompatActivity {
 
@@ -93,7 +94,7 @@ public class Supplier_Info_Activity extends AppCompatActivity {
                         return true;
                     case R.id.dr_orders:
                         menuItem.setChecked(true);
-
+                        startActivity(new Intent(Supplier_Info_Activity.this, Orders_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_product_inventory:
@@ -107,12 +108,12 @@ public class Supplier_Info_Activity extends AppCompatActivity {
                         return true;
                     case R.id.dr_about:
                         menuItem.setChecked(true);
-                        showInfo(builder);
+                        //showInfo(builder);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.logout:
                         menuItem.setChecked(true);
-                        startActivity(new Intent(Supplier_Info_Activity.this, Logout_Activity.class));
+                        startActivity(new Intent(Supplier_Info_Activity.this, SettingsActivity.class));
 //                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 //                        Intent n = new Intent(MainActivity.this, Logout_Activity.class);
                         drawerLayout.closeDrawers();

@@ -31,6 +31,10 @@
         <item name="colorAccent">@color/colorDrawerLayoutBackground</item>
     </style>
 
+    <style name="TextLabel" parent="TextAppearance.Design.HelperText">
+        <item name="android:textSize">20sp</item>
+    </style>
+
 
 <!--    <style name="HelperTextAppearance" parent="TextAppearance.AppCompat">-->
 <!--        <item name="android:textColorHint">@color/colorDrawerLayoutBackground</item>-->

@@ -1,4 +1,4 @@
-//package database;
+//package remote.database;
 //
 //import android.os.Bundle;
 //import android.view.LayoutInflater;

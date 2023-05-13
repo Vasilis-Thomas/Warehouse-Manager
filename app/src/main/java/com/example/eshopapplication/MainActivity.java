@@ -31,6 +31,7 @@ import database.MyAppDatabase;
 import database.Product_Fragment;
 import database.Supplier_Fragment;
 import database.Supplies_Fragment;
+import remote.database.Orders_Activity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -81,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG,"onCreate callback method");
 
 
-        makeToolbarButton(toolbar);
+
+        toolbar = makeToolbarButton();
+
 
         drawerLayout   = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.dr_orders:
                         menuItem.setChecked(true);
+                        startActivity(new Intent(MainActivity.this, Orders_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
 
@@ -115,15 +119,14 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.dr_about:
                         menuItem.setChecked(true);
-                        showInfo(builder);
+                        //showInfo(builder);
                         drawerLayout.closeDrawers();
                         return true;
 
                     case R.id.logout:
                         menuItem.setChecked(true);
-                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
-//                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-//                        Intent n = new Intent(MainActivity.this, Logout_Activity.class);
+//                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
+                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                         drawerLayout.closeDrawers();
                         return true;
                 }
@@ -215,8 +218,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public Toolbar makeToolbarButton(Toolbar toolbar){
-        toolbar = findViewById(R.id.toolbar_layout);
+    public Toolbar makeToolbarButton(){
+        Toolbar toolbar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
@@ -227,15 +230,15 @@ public class MainActivity extends AppCompatActivity {
         return toolbar;
     }
 
-    public static void showInfo(AlertDialog.Builder b){
-        b.setTitle("Application Information").
-                setMessage("Constructors: Nikolas Sarakenidis, Vasilis Thomas\n"
-                        + "Institution: International University of Greece\n"
-                        + "Supervisor: Euklidis Keramopoylos\n"
-                        + "Project name: Economy E-shop Application\n"
-                        + "Application: Android\n"
-                        + "MinimumSdk: 24").show();
-    }
+//    public static void showInfo(AlertDialog.Builder b){
+//        b.setTitle("Application Information").
+//                setMessage("Constructors: Nikolas Sarakenidis, Vasilis Thomas\n"
+//                        + "Institution: International University of Greece\n"
+//                        + "Supervisor: Euklidis Keramopoylos\n"
+//                        + "Project name: Economy E-shop Application\n"
+//                        + "Application: Android\n"
+//                        + "MinimumSdk: 24").show();
+//    }
 
     @Override
     protected void onRestart(){

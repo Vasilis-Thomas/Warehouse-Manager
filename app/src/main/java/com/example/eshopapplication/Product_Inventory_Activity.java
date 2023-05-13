@@ -1,6 +1,6 @@
 package com.example.eshopapplication;
 
-import static com.example.eshopapplication.MainActivity.showInfo;
+//import static com.example.eshopapplication.MainActivity.showInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.Product;
+import remote.database.Orders_Activity;
 
 public class Product_Inventory_Activity extends AppCompatActivity{
     public Toolbar toolbar;
@@ -222,8 +223,6 @@ public class Product_Inventory_Activity extends AppCompatActivity{
 
         searchBtn.performClick();
 
-        //new comment git commit test
-
         makeToolbarButton(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -236,22 +235,15 @@ public class Product_Inventory_Activity extends AppCompatActivity{
                     case R.id.dr_database:
                         menuItem.setChecked(true);
                         startActivity(new Intent(Product_Inventory_Activity.this, MainActivity.class));
-//                        Intent intent = new Intent(Logout_Activity.this, LoginActivity.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("StringKey1", "from :- Logout Activity");
-//                        Supplier_Fragment fv = new Supplier_Fragment();
-//                        fv.setArguments(bundle);
-//                        startActivity(intent);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_orders:
                         menuItem.setChecked(true);
-
+                        startActivity(new Intent(Product_Inventory_Activity.this, Orders_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
-
                         return true;
                     case R.id.dr_supplier_info:
                         menuItem.setChecked(true);
@@ -260,12 +252,12 @@ public class Product_Inventory_Activity extends AppCompatActivity{
                         return true;
                     case R.id.dr_about:
                         menuItem.setChecked(true);
-                        showInfo(builder);
+                        //showInfo(builder);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.logout:
                         menuItem.setChecked(true);
-                        startActivity(new Intent(Product_Inventory_Activity.this, Logout_Activity.class));
+                        startActivity(new Intent(Product_Inventory_Activity.this, SettingsActivity.class));
 //                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 //                        Intent n = new Intent(MainActivity.this, Logout_Activity.class);
                         drawerLayout.closeDrawers();

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="database.Supplies_Fragment"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="remote.database.Orders_Activity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:padding="10dp"
-                android:text="SUPPLIES"
+                android:text="ORDERS"
                 android:textColor="@color/colorPrimary3"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -36,138 +35,136 @@
                 app:layout_constraintTop_toTopOf="parent"></TextView>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/supplies_productid_til"
+                android:id="@+id/orders_orderid_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:backgroundTint="@color/colorPrimary3"
-                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:paddingStart="8dp"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:textCursorDrawable="@null"
                 app:hintAnimationEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/content_description_txtview">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/supplies_productid_tiet"
+                    android:id="@+id/orders_orderid_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Product ID"
-                    android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:textColor="@color/colorPrimary3"
-                    android:textSize="20sp"
-                    android:maxLength="10"
+                    android:background="@color/colorSecond1"
+                    android:hint="Order ID"
                     android:inputType="number"
-                    android:background="@color/colorSecond1">
-                </com.google.android.material.textfield.TextInputEditText>
-
+                    android:maxLength="10"
+                    android:textColor="@color/colorPrimary3"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textSize="20sp"></com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/supplies_supplierid_til"
+                android:id="@+id/orders_productid_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/colorPrimary3"
-                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:paddingStart="8dp"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:textCursorDrawable="@null"
                 app:hintAnimationEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supplies_productid_til">
+                app:layout_constraintTop_toBottomOf="@+id/orders_orderid_til">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/supplies_supplierid_tiet"
+                    android:id="@+id/orders_productid_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Supplier ID"
+                    android:background="@color/colorSecond1"
+                    android:hint="Product ID"
+                    android:inputType="number"
+                    android:maxLength="10"
                     android:textColor="@color/colorPrimary3"
                     android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:textSize="20sp"
-                    android:inputType="number"
-                    android:maxLength="20"
-                    android:background="@color/colorSecond1">
-                </com.google.android.material.textfield.TextInputEditText>
-
+                    android:textSize="20sp"></com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/supplies_date_til"
+                android:id="@+id/orders_customername_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/colorPrimary3"
-                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:paddingStart="8dp"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:textCursorDrawable="@null"
+                app:hintAnimationEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supplies_supplierid_til">
-                <EditText
-                    android:id="@+id/supplies_date_tiet"
+                app:layout_constraintTop_toBottomOf="@+id/orders_productid_til">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/orders_customernameid_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorSecond1"
-                    android:hint="Supply Date"
+                    android:hint="Customer Name"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:textColor="@color/colorPrimary3"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textSize="20sp"></com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/orders_orderdate_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:paddingStart="8dp"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:textCursorDrawable="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orders_customername_til">
+
+                <EditText
+                    android:id="@+id/orders_orderdate_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorSecond1"
+                    android:hint="Order Date"
                     android:inputType="datetime"
                     android:maxLength="20"
                     android:textColor="@color/colorPrimary3"
                     android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:textSize="20sp">
-                </EditText>
+                    android:textSize="20sp"></EditText>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/supplies_quantity_til"
+                android:id="@+id/orders_quantity_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/colorPrimary3"
-                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:paddingStart="8dp"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supplies_date_til">
+                app:layout_constraintTop_toBottomOf="@+id/orders_orderdate_til">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/supplies_quantity_tiet"
+                    android:id="@+id/orders_quantity_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorSecond1"
                     android:hint="Quantity"
-                    android:textColor="@color/colorPrimary3"
-                    android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:textCursorDrawable="@null"
-                    android:textSize="20sp"
                     android:inputType="number"
                     android:maxLength="10"
-                    android:background="@color/colorSecond1">
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/supplies_msrp_til"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/colorPrimary3"
-                android:textColorHint="@color/colorDrawerLayoutBackground"
-                android:paddingStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supplies_quantity_til">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/supplies_msrp_tiet"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="MSRP"
                     android:textColor="@color/colorPrimary3"
                     android:textColorHint="@color/colorDrawerLayoutBackground"
                     android:textCursorDrawable="@null"
-                    android:textSize="20sp"
-                    android:inputType="numberDecimal"
-                    android:maxLength="10"
-                    android:background="@color/colorSecond1">
-                </com.google.android.material.textfield.TextInputEditText>
+                    android:textSize="20sp"></com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -182,8 +179,7 @@
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supplies_msrp_til">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@+id/orders_quantity_til"></TextView>
 
             <TextView
                 android:id="@+id/question_text"
@@ -200,7 +196,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supplies_msrp_til">
+                app:layout_constraintTop_toBottomOf="@+id/orders_quantity_til">
                 <!--        android:textAppearance="@color/redFix"-->
             </TextView>
 
@@ -213,7 +209,7 @@
                 android:drawableLeft="@drawable/ic_config_add_circle_outline_24"
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
-                android:text="Add New Supply"
+                android:text="Add New ORDER"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -234,8 +230,7 @@
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/insert_button">
-            </Button>
+                app:layout_constraintTop_toBottomOf="@+id/insert_button"></Button>
 
             <Button
                 android:id="@+id/update_button"
@@ -246,7 +241,7 @@
                 android:drawableLeft="@drawable/ic_config_outline_update_24"
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
-                android:text="Update Supply"
+                android:text="Update ORDER"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -262,7 +257,7 @@
                 android:drawableLeft="@drawable/ic_config_outline_delete_24"
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
-                android:text="Delete Supply"
+                android:text="Delete Order"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -274,12 +269,10 @@
                 android:layout_height="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/delete_button">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@+id/delete_button"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
