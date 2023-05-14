@@ -35,7 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
     NavigationView navigationView;
     TextView username_text, email_text;
     AlertDialog.Builder builder;
-    TextView toolbarTitle, usernameTxt, emailTxt, reportABugTxt, infoTxt, logoutTxt;
+    TextView toolbarTitle, usernameTxt, emailTxt, reportABugTxt, infoTxt, logoutTxt, logoutSubTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         sharedPreferenceConfig = new sharedPreferenceConfig(getApplicationContext());
 
-        toolbar = makeToolbarButtonArrowBack();
+        toolbar = makeToolbar();
 
 
         usernameTxt = findViewById(R.id.username_txt);
@@ -52,6 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         reportABugTxt = findViewById(R.id.report_a_bug_txt);
         infoTxt = findViewById(R.id.info_txt);
         logoutTxt = findViewById(R.id.logout_txt);
+        logoutSubTxt = findViewById(R.id.logout_subtxt);
 //        versionTxt = findViewById(R.id.version_txt);
 
 
@@ -114,7 +115,6 @@ public class SettingsActivity extends AppCompatActivity {
             email_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_email_text);
             username_text.setText(userName);
             email_text.setText(userEmail);
-//        }
 //        else{
 //            View menu_drawer_head = navigationView.getHeaderView(0);
 //            username_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_username_text);
@@ -124,6 +124,8 @@ public class SettingsActivity extends AppCompatActivity {
 //        }
             usernameTxt.setText(userName);
             emailTxt.setText(userEmail);
+
+            logoutSubTxt.setText("You have been signed up as "+  userName);
 
             reportABugTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -186,16 +188,16 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-    public Toolbar makeToolbarButtonArrowBack(){
+    public Toolbar makeToolbar() {
         toolbar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-            Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 //        actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_round_arrow_back_24);
-            actionBar.setTitle("");
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
+        actionBar.setTitle("");
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(R.string.set_toolbar_title);
+        toolbarTitle.setText(R.string.set_toolbar_title_to_settings_activity);
         return toolbar;
     }
 

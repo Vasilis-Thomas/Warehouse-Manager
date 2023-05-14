@@ -20,18 +20,19 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="60dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:fillViewport="true"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="-36dp">
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="-193dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nested_constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:background="@color/colorSecond1">
 
                 <TextView
@@ -227,24 +228,9 @@
                     android:textSize="18sp"
                     app:cornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/question_text"></Button>
-
-                <Button
-                    android:id="@+id/query_button"
-                    android:layout_width="190dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="@color/colorPrimary1"
-                    android:drawableLeft="@drawable/ic_config_outline_arrow_circle_right_24"
-                    android:gravity="center"
-                    android:soundEffectsEnabled="true"
-                    android:text="Entry Queries"
-                    android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/insert_button"></Button>
 
                 <Button
                     android:id="@+id/update_button"
@@ -259,8 +245,9 @@
                     android:textSize="18sp"
                     app:cornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.8"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/query_button"></Button>
+                    app:layout_constraintTop_toBottomOf="@+id/question_text"></Button>
 
                 <Button
                     android:id="@+id/delete_button"
