@@ -1,8 +1,10 @@
 package remote.database;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -11,22 +13,37 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.eshopapplication.MainActivity;
+import com.example.eshopapplication.Product_Inventory_Activity;
 import com.example.eshopapplication.R;
+import com.example.eshopapplication.SettingsActivity;
+import com.example.eshopapplication.Supplier_Info_Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import database.Product;
 
 public class Orders_Activity extends AppCompatActivity {
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    TextView username_text, email_text, usernameTxt, emailTxt;
     private final static String TAG = "remote.database (Orders Activity)";
     protected static FirebaseFirestore db;
     //    TextInputEditText orderID, productID, customerName, orderDate, quantity; // msrp = recommended supplier price
@@ -34,12 +51,71 @@ public class Orders_Activity extends AppCompatActivity {
     Button insertButton, deleteButton, updateButton, queryButton;
     TextView displaySupplyError, questionText;
     EditText dateEdt;
-    TextView orderDate;
+    TextView orderDate, toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
+
+        toolbar = makeToolbar();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigationView);
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.dr_database:
+                        menuItem.setChecked(false);
+                        startActivity(new Intent(Orders_Activity.this, MainActivity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
+
+                    case R.id.dr_orders:
+//                        menuItem.setChecked(true);
+//                        startActivity(new Intent(Orders_Activity.this, Orders_Activity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
+
+                    case R.id.dr_product_inventory:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(Orders_Activity.this, Product_Inventory_Activity.class));
+                        return true;
+
+                    case R.id.dr_supplier_info:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(Orders_Activity.this, Supplier_Info_Activity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
+
+                    case R.id.dr_about:
+                        menuItem.setChecked(true);
+//                        showInfo(builder);
+                        drawerLayout.closeDrawers();
+                        return true;
+
+                    case R.id.logout:
+                        menuItem.setChecked(true);
+//                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
+                        startActivity(new Intent(Orders_Activity.this, SettingsActivity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseuser != null) {
+            String userName = firebaseuser.getDisplayName();
+            String userEmail = firebaseuser.getEmail();
+            View menu_drawer_head = navigationView.getHeaderView(0);
+            username_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_username_text);
+            email_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_email_text);
+            username_text.setText(userName);
+            email_text.setText(userEmail);
+        }
 
         displaySupplyError = findViewById(R.id.supply_error_textview);
         questionText = findViewById(R.id.question_text);
@@ -362,6 +438,30 @@ public class Orders_Activity extends AppCompatActivity {
 //            }
 //        });
 //        return view;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                drawerLayout.openDrawer((GravityCompat.START));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public Toolbar makeToolbar(){
+        toolbar = findViewById(R.id.toolbar_layout);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
+        actionBar.setTitle("");
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText(R.string.app_name);
+        return toolbar;
     }
 
     public void setErrorMessagesToNull() {
