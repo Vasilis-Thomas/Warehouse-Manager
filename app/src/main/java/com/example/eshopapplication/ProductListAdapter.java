@@ -1,6 +1,7 @@
 package com.example.eshopapplication;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     private List<ProductInfo> productInfo;
 
-    private int image = R.drawable.image;
+    //private int image = R.drawable.image;
     Context context;
 
     @Override
@@ -43,7 +44,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.stockTxt.setText("Stock: " + String.valueOf(productInfo.get(position).getStock()));
         holder.priceTxt.setText(String.valueOf(productInfo.get(position).getPrice())); // ***************************//
 
-        holder.productImg.setImageResource(image);
+        holder.productImg.setImageBitmap(BitmapFactory.decodeByteArray(productInfo.get(position).getImage(), 0, productInfo.get(position).getImage().length));
+
+       // BitmapFactory.decodeByteArray(productInfo.get(position).getImage(), 0, productInfo.get(position).getImage().length)
+        //holder.productImg.setImageResource(image);
 
         // detect item selection
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -5,13 +5,16 @@ public class ProductInfo {
     private String category;
     private double price;
     private int stock;
+    private byte[] image;
     private String supplier;
 
-    public ProductInfo(String productName, String category, double price, int stock, String supplier) {
+
+    public ProductInfo(String productName, String category, double price, int stock, byte[] image, String supplier) {
         this.productName = productName;
         this.category = category;
         this.price = price;
         this.stock = stock;
+        this.image = image;
         this.supplier = supplier;
     }
 
@@ -45,6 +48,14 @@ public class ProductInfo {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getSupplier() {

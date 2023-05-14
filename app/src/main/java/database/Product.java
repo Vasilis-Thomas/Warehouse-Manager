@@ -19,8 +19,14 @@ import androidx.room.PrimaryKey;
         private double price;
 
         @ColumnInfo(name = "stock")
-        private int stock; // αποθεμα προϊοντος
+        private int stock; // απόθεμα προϊοντος
 
+        @ColumnInfo(name = "image")
+        private byte[] image;
+
+        public byte[] getImage() { return image; }
+
+        public void setImage(byte[] image) { this.image = image; }
 
         public int getPid() {
             return pid;

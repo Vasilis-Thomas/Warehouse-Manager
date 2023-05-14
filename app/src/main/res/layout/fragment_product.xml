@@ -170,6 +170,30 @@
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/photo"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_stock_til" />
+
+            <Button
+                android:id="@+id/add_image_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_border"
+                android:padding="8dp"
+                android:text="Add Image"
+                android:textColor="@color/colorPrimary4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+
             <TextView
                 android:id="@+id/question_text"
                 android:layout_width="wrap_content"
@@ -185,7 +209,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_stock_til">
+                app:layout_constraintTop_toBottomOf="@+id/add_image_button">
                 <!--        android:textAppearance="@color/redFix"-->
             </TextView>
 
