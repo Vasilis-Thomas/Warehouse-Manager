@@ -3,6 +3,8 @@ package com.example.eshopapplication;
 //import static com.example.eshopapplication.MainActivity.showInfo;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -91,45 +93,6 @@ public class Product_Inventory_Activity extends AppCompatActivity{
 
         Button searchBtn = findViewById(R.id.searchProducts);
 
-//        //categorySpinner.performItemClick();
-//        categorySpinner.setSelection(0);
-//        supplierSpinner.setSelection(0);
-//searchBtn.callOnClick();
-
-
-//        AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener(){
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-//                // Get the selected product
-//                selectedCategory = (String) adapterView.getItemAtPosition(position);
-//
-//                selectedSupplier = (String) adapterView.getItemAtPosition(position);
-//
-//                System.out.println("Category: " + selectedCategory + "Supplier: " + selectedSupplier);
-//
-//                // Do something with the selected product
-//                Toast.makeText(Product_Inventory_Activity.this, "Selected Supplier: " + selectedSupplier, Toast.LENGTH_SHORT).show();
-//
-//                // Do something with the selected product
-//                Toast.makeText(Product_Inventory_Activity.this, "Selected Category: " + selectedCategory, Toast.LENGTH_SHORT).show();
-//
-//                if (selectedCategory.equals(defaultCategory)) {
-//                    // Handle default selection
-//                } else {
-//                    // Handle other selections
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//                // Do nothing
-//            }
-//        };
-//
-//        categorySpinner.setOnItemSelectedListener(spinnerListener);
-//        supplierSpinner.setOnItemSelectedListener(spinnerListener);
-
         // Create an event listener for the spinner
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -139,6 +102,7 @@ public class Product_Inventory_Activity extends AppCompatActivity{
 
                 // Do something with the selected product
                 Toast.makeText(Product_Inventory_Activity.this, "Selected Category: " + selectedCategory, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
