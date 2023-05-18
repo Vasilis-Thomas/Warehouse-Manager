@@ -2,6 +2,8 @@ package remote.database;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,7 +40,6 @@ import java.util.List;
 import java.util.Objects;
 
 import database.Product;
-
 public class Orders_Activity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -49,14 +50,16 @@ public class Orders_Activity extends AppCompatActivity {
     //    TextInputEditText orderID, productID, customerName, orderDate, quantity; // msrp = recommended supplier price
     TextInputEditText orderID, productID, customerName, quantity; // msrp = recommended supplier price
     Button insertButton, deleteButton, updateButton, queryButton;
-    TextView displaySupplyError, questionText;
-    EditText dateEdt;
-    TextView orderDate, toolbarTitle;
-
+    TextView displayOrderError, questionText;
+    EditText dateEdt, orderDate;
+//    TextView orderDate, toolbarTitle;
+    TextView toolbarTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
+
+        db = FirebaseFirestore.getInstance();
 
         toolbar = makeToolbar();
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -118,12 +121,13 @@ public class Orders_Activity extends AppCompatActivity {
             email_text.setText(userEmail);
         }
 
-        displaySupplyError = findViewById(R.id.supply_error_textview);
+        displayOrderError = findViewById(R.id.orders_error_textview);
         questionText = findViewById(R.id.question_text);
 
         orderID = findViewById(R.id.orders_orderid_tiet);
         productID = findViewById(R.id.orders_productid_tiet);
         customerName = findViewById(R.id.orders_customernameid_tiet);
+//        orderDate = findViewById(R.id.orders_orderdate_tiet);
         orderDate = findViewById(R.id.orders_orderdate_tiet);
         quantity = findViewById(R.id.orders_quantity_tiet);
 
@@ -132,8 +136,8 @@ public class Orders_Activity extends AppCompatActivity {
         updateButton = findViewById(R.id.update_button);
         deleteButton = findViewById(R.id.delete_button);
 
-        dateEdt = findViewById(R.id.orders_orderdate_tiet);
-        dateEdt.setOnClickListener(new View.OnClickListener() {
+//        dateEdt = findViewById(R.id.orders_orderdate_tiet);
+        orderDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // on below line we are getting
@@ -158,13 +162,13 @@ public class Orders_Activity extends AppCompatActivity {
                                 year = Integer.parseInt(yearString.substring(1)); // TO REMOVE THE FIRST 2 DIGITS FROM LIKE 2023 ->> 23
 //                                dateEdt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                                 if (dayOfMonth < 10 && monthOfYear < 10)
-                                    dateEdt.setText("0" + dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
+                                    orderDate.setText("0" + dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
                                 else if (dayOfMonth < 10)
-                                    dateEdt.setText("0" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                    orderDate.setText("0" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                                 else if (monthOfYear < 10)
-                                    dateEdt.setText("" + dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
+                                    orderDate.setText("" + dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
                                 else
-                                    dateEdt.setText("" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                    orderDate.setText("" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             }
                         },
                         // on below line we are passing year,
@@ -179,7 +183,7 @@ public class Orders_Activity extends AppCompatActivity {
         insertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displaySupplyError.setText("");
+                displayOrderError.setText("");
                 if (orderID.getText().length() == 0) {
                     orderID.setError("You must fill this field");
                 }
@@ -222,7 +226,7 @@ public class Orders_Activity extends AppCompatActivity {
 //                        msrp.getText().length()==0){
 //                    return;
 //                }
-
+                int currentQuantityProduct = 0;
                 try {
                     boolean flagProductID = false;
                     List<Product> aproduct = MainActivity.myAppDatabase.myDao().getProduct();
@@ -230,6 +234,7 @@ public class Orders_Activity extends AppCompatActivity {
                         int var_productID_for_check = i.getPid();
                         if (var_productID_for_check == var_productID) {
                             flagProductID = true;  // THA GINEI true APO TH STIGMH POY TO var_productID YPARXEI STHN VASH DHLADH STON PINAKA product
+                            currentQuantityProduct = i.getStock();
                             Log.i(TAG, "TO flagProductID egine true");
                             break;
                         }
@@ -237,7 +242,8 @@ public class Orders_Activity extends AppCompatActivity {
 
                     if (orderID.getText().length() == 0 || productID.getText().length() == 0 || var_customerName.isEmpty()
                             || var_orderDate.isEmpty() || !var_orderDate.matches("\\d{2}-\\d{2}-\\d{2}")
-                            || var_quantity == 0 || quantity.getText().toString().isEmpty() || !flagProductID)
+                            || quantity.getText().toString().equals("0") || quantity.getText().toString().isEmpty() ||
+                            (var_quantity > currentQuantityProduct) ||!flagProductID)
                         throw new Exception("Exception thrown");
 
 
@@ -271,35 +277,77 @@ public class Orders_Activity extends AppCompatActivity {
                     order.setOrderDate(var_orderDate);
                     order.setQuantity(var_quantity);
 
-                    int finalVar_orderID = var_orderID;
-                    db.collection("Orders").
-                            document("" + var_orderID).
-                            set(order).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    int finalVar_productID = var_productID;
+                    int finalVar_quantity = var_quantity;
+                    db.
+                            collection("Orders").
+                            document(""+var_orderID).
+                            set(order).
+                            addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     // EDW THA MPAINEI ENA NOTIFICATION EPITYXIAS
-                                    Toast.makeText(getApplicationContext(), "Order added: " + finalVar_orderID, Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(getApplicationContext(), "Order added: " + finalVar_orderID, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Order added: ", Toast.LENGTH_LONG).show();
+
+                                    String currentPrName = "Unknown", currentPrCategory = "Unknown";
+                                    double currentPrPrice = 0.0;
+                                    int currentPrID = 0 ,currentPrStock = 0;
+                                    byte[] currentPrImage = null;
+                                    Bitmap currentPrBitmap = null;
+                                    List<Product> bproduct = MainActivity.myAppDatabase.myDao().getProduct();
+                                    for (Product i : bproduct) {
+                                        int var_productID_for_check = i.getPid();
+                                        if (var_productID_for_check == finalVar_productID) {
+                                            currentPrID = i.getPid();
+                                            currentPrName = i.getName();
+                                            currentPrCategory = i.getCategory();
+                                            currentPrPrice = i.getPrice();
+                                            currentPrStock = i.getStock() - finalVar_quantity;
+                                            currentPrImage = i.getImage();
+                                            currentPrBitmap = BitmapFactory.decodeByteArray( currentPrImage, 0, currentPrImage.length);
+
+                                            Product configproduct = new Product();
+                                            configproduct.setPid(currentPrID);
+                                            configproduct.setName(currentPrName);
+                                            configproduct.setCategory(currentPrCategory);
+                                            configproduct.setPrice(currentPrPrice);
+                                            configproduct.setStock(currentPrStock);
+                                            configproduct.setImage(currentPrImage);
+
+                                            MainActivity.myAppDatabase.myDao().updateProduct(configproduct);
+                                            Log.i(TAG, "TO flagProductID egine true");
+                                            break;
+                                        }
+                                    }
+                                    orderID.setText("");
+                                    productID.setText("");
+                                    customerName.setText("");
+                                    orderDate.setText("");
+                                    quantity.setText("");
+                                    setErrorMessagesToNull();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     // EDW THA MPAINEI ENA NOTIFICATION APOTYXIAS
-                                    Toast.makeText(getApplicationContext(), "Order error: " + finalVar_orderID, Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(getApplicationContext(), "Order error: " + finalVar_orderID, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Order error: ", Toast.LENGTH_LONG).show();
                                 }
                             });
-                    orderID.setText("");
-                    productID.setText("");
-                    customerName.setText("");
-                    orderDate.setText("");
-                    quantity.setText("");
-                    setErrorMessagesToNull();
+//                    orderID.setText("");
+//                    productID.setText("");
+//                    customerName.setText("");
+//                    orderDate.setText("");
+//                    quantity.setText("");
+//                    setErrorMessagesToNull();
 
                 } catch (Exception e) {
                     String message = e.getMessage();
                     Log.i(TAG, e.getMessage());
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI APOTYXHS H PROSTHIKI TOY NEOY PROIONTOS
 //                    if(message.equals("FOREIGN KEY constraint failed (code 787 SQLITE_CONSTRAINT_FOREIGNKEY)")){
-//                        Toast.makeText(getActivity(),"The productID or the supplier or the supplyDate you submitted is not registered.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"The productID or the supplier or the supplyDate you submitted is not registered\n or some other error.", Toast.LENGTH_LONG).show();
 //                    }
 
                     boolean flagProductID = false;
@@ -326,31 +374,43 @@ public class Orders_Activity extends AppCompatActivity {
 //                            break;
 //                        }
 //                    }
-
-                    if (!flagProductID)
+                    if(productID.getText().toString().isEmpty())
+                        productID.setError("You must fill this field");
+                    else if(!flagProductID)
                         productID.setError("The productID you filled is not registered");
-//                    if (!flagSupplierID)
-//                        supplierID.setError("The supplierID you filled is not registered");
-                    if (quantity.getText().toString().isEmpty())
-                        quantity.setError("You must fill this field");
                     if (var_orderDate.isEmpty())
                         orderDate.setError("You must fill this field");
                     else if (!var_orderDate.matches("\\d{2}-\\d{2}-\\d{2}"))
                         orderDate.setError("Required format is dd-mm-yy");
-//                    if (flagSupplyExists)
-//                        displaySupplyError.setText("The supply you want to make has already been recorded.");
                     else
-                        displaySupplyError.setText("");
-                    if (quantity.getText().length() == 0)
+                        orderDate.setText("");
+//                        displayOrderError.setText("");
+                    if (quantity.getText().toString().isEmpty())
                         quantity.setError("You must fill this field");
+                    else if (quantity.getText().toString().equals("0"))
+                        quantity.setError("The value of stock must be at least 1");
+                    else if(currentQuantityProduct == 0)
+                        quantity.setError("There are no stock of the selected product\n");
+                    else if(var_quantity > currentQuantityProduct){
+                        quantity.setError("The apotheke has only "+currentQuantityProduct+" stock of the selected product"+
+                                          "\nPlease make an order with maximum  " +currentQuantityProduct+ "stock");
+                    }
+
                 }
+
+//                int var_productID = 0;
+//                try {
+//                    var_productID = Integer.parseInt(productID.getText().toString());
+//                } catch (NumberFormatException exception) {
+//                    System.out.println("Could not parse" + exception);
+//                }
             }
         });
 
 //        updateButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                displaySupplyError.setText("");
+//                displayOrderError.setText("");
 //
 //                int var_productID = 0;
 //                try {
@@ -432,9 +492,9 @@ public class Orders_Activity extends AppCompatActivity {
 //                    else if (!var_supplyDate.matches("\\d{2}-\\d{2}-\\d{2}"))
 //                        supplyDate.setError("Required format is dd-mm-yy");
 //                    if(!flagSupplyExists)
-//                        displaySupplyError.setText("The productID or supplierID or supplyDate you filled do not exist\nPlease give an already recorded supply");
+//                        displayOrderError.setText("The productID or supplierID or supplyDate you filled do not exist\nPlease give an already recorded supply");
 //                    else
-//                        displaySupplyError.setText("");
+//                        displayOrderError.setText("");
 //                }
 //            }
 //        });

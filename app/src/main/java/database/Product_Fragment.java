@@ -272,10 +272,9 @@ public class Product_Fragment extends Fragment {
                 int currentStock= 0;
                 byte[] currentImage = null;
 
-                List<Product> aproduct= MainActivity.myAppDatabase.myDao().getProduct();
-
                 Bitmap currentBitmap = null;
 
+                List<Product> aproduct= MainActivity.myAppDatabase.myDao().getProduct();
                 for(Product i: aproduct){
                     int var_productID_for_check = i.getPid();
                     if(var_productID_for_check == var_id){

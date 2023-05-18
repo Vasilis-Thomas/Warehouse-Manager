@@ -122,8 +122,8 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorSecond1"
                         android:hint="Customer Name"
-                        android:inputType="number"
-                        android:maxLength="20"
+                        android:inputType="textPersonName"
+                        android:maxLength="30"
                         android:textColor="@color/colorPrimary3"
                         android:textColorHint="@color/colorDrawerLayoutBackground"
                         android:textSize="20sp"></com.google.android.material.textfield.TextInputEditText>
@@ -182,7 +182,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/supply_error_textview"
+                    android:id="@+id/orders_error_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
