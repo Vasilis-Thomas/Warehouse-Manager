@@ -28,6 +28,7 @@ import signuploginfirebase.sharedPreferenceConfig;
 
 
 public class SettingsActivity extends AppCompatActivity {
+//    private Stack<Class<?>> activityStack = new Stack<>();
     private signuploginfirebase.sharedPreferenceConfig sharedPreferenceConfig;
     Toolbar toolbar;
     private final static String TAG = "com.example.applicationwithmenu (Setting Activity)";
@@ -43,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_settings);
         sharedPreferenceConfig = new sharedPreferenceConfig(getApplicationContext());
-
+//        int selectedItem = getIntent().getIntExtra("selectedItem", -1);
         toolbar = makeToolbar();
 
 
@@ -59,6 +60,9 @@ public class SettingsActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
+        navigationView.setCheckedItem(R.id.logout);
+//        navigationView.setCheckedItem(selectedItem);
+        navigationView.setCheckedItem(R.id.logout);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -66,6 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
                     case R.id.dr_database:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
@@ -73,18 +78,22 @@ public class SettingsActivity extends AppCompatActivity {
                     case R.id.dr_orders:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, Orders_Activity.class));
+//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
                     case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, Product_Inventory_Activity.class));
+//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
                     case R.id.dr_supplier_info:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, Supplier_Info_Activity.class));
+//                        startActivity(new Intent(SettingsActivity.this, Supplier_Info_Activity.class).putExtra("selectedItem",R.id.logout));
+//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
@@ -210,5 +219,33 @@ public class SettingsActivity extends AppCompatActivity {
                         + "Application: Android\n"
                         + "MinimumSdk: 24").show();
     }
+
+
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(SettingsActivity.this, Supplier_Info_Activity.class);
+//        intent.putExtra("selectedItem", R.id.dr_orders);
+//        startActivity(intent);
+//        finish();
+//    }
+
+//    @Override
+//    public void onBackPressed() {
+//        if (!activityStack.isEmpty()) {
+//            // Pop the current activity from the stack
+//            activityStack.pop();
+//            if (!activityStack.isEmpty()) {
+//                // Get the previous activity class
+//                Class<?> previousActivity = activityStack.peek();
+//
+//                // Start the previous activity
+//                Intent intent = new Intent(SettingsActivity.this, previousActivity).putExtra("selectedItem", R.id.dr_orders);;
+//                startActivity(intent);
+//            }
+//        } else {
+//            // If there are no more activities in the stack, perform the default back button behavior
+//            super.onBackPressed();
+//        }
+//    }
 
 }

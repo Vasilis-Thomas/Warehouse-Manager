@@ -32,16 +32,15 @@ public class Supplier_Info_Activity extends AppCompatActivity {
 
     private List<Supplier> suppliers = MainActivity.myAppDatabase.myDao().getSupplier();
 
-    public Toolbar toolbar;
+    Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter myAdapter;
 
     private signuploginfirebase.sharedPreferenceConfig sharedPreferenceConfig;
-    TextView username_text, email_text;
+    TextView username_text, email_text, toolbarTitle;
     AlertDialog.Builder builder;
 
     public int getSuppliersCount() {
@@ -53,6 +52,7 @@ public class Supplier_Info_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_info);
         builder = new AlertDialog.Builder(this);
+//    int selectedItem = getIntent().getIntExtra("selectedItem",-1);
 
         int supplierCount = getSuppliersCount();
 
@@ -72,11 +72,13 @@ public class Supplier_Info_Activity extends AppCompatActivity {
 
 //        MainActivity toolbarButton = new MainActivity();
 //        toolbarButton.makeToolbarButton(toolbar);
-        makeToolbarButton(toolbar);
+        toolbar = makeToolbarButton();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
+        navigationView.setCheckedItem(R.id.dr_supplier_info);
+//        navigationView.setCheckedItem(selectedItem);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -154,13 +156,24 @@ public class Supplier_Info_Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public Toolbar makeToolbarButton(Toolbar toolbar){
+    public Toolbar makeToolbarButton(){
         toolbar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
+        actionBar.setTitle("");
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText(R.string.app_name); //  edw na valoyme string "Supplier Info"
         return toolbar;
     }
+
+//    @Override
+//    public void onBackPressed(){
+//        Intent intent = new Intent(Supplier_Info_Activity.this,SettingsActivity.class);
+//        intent.putExtra("selectedItem", R.id.logout);
+//        startActivity(intent);
+//        finish();
+//    }
 
 }

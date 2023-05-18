@@ -2,12 +2,12 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
     android:background="@color/colorSecond1"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="com.example.eshopapplication.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,13 +25,10 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
             android:background="@color/colorSecond2"
             android:contentDescription="Tabs for navigating in different tables-fragments UIs of the app"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
-            app:layout_constraintTop_toTopOf="parent"
             app:tabIndicatorColor="@color/colorPrimary3"
             app:tabSelectedTextColor="@color/colorPrimary3"
             app:tabTextColor="@color/colorPrimary2">
@@ -39,21 +36,27 @@
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/item1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_tabItem" />
+                android:text="@string/product_tabItem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/item2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/supplier_tabItem" />
+                android:text="@string/supplier_tabItem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/item3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/supplies_tabItem" />
+                android:text="@string/supplies_tabItem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -71,16 +74,17 @@
 
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
-        style="@style/Widget.Custom.NavigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:id="@+id/navigationView"
         android:layout_gravity="start"
-
         android:fitsSystemWindows="true"
+
+        style="@style/Widget.Custom.NavigationView"
         app:headerLayout="@layout/drawer_menu_header"
         app:menu="@menu/drawer_menu">
     </com.google.android.material.navigation.NavigationView>
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
