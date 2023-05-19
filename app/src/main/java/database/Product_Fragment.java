@@ -1,8 +1,7 @@
 package database;
 
 import android.app.Activity;
-import android.app.NotificationManager;
-import android.content.Context;
+import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,7 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.eshopapplication.MainActivity;
@@ -31,6 +30,8 @@ import java.util.List;
 
 public class Product_Fragment extends Fragment {
     private final static String TAG = "remote.database (Product_Fragment)";
+    NotificationManagerCompat notificationManagerCompat;
+    Notification notification;
     TextInputEditText id, name, category, price, stock;
 //    TextInputLayout id, name, category, price;
     Button insertButton, deleteButton, updateButton, queryButton, addImageButton;
@@ -186,7 +187,6 @@ public class Product_Fragment extends Fragment {
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI EPITYXEIS H PROSTHIKI TOY NEOY PROIONTOS
                     Toast.makeText(getActivity(),"Record added.",Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
 
-
                     id.setText("");
                     name.setText("");
                     category.setText("");
@@ -194,7 +194,12 @@ public class Product_Fragment extends Fragment {
                     stock.setText("");
                     imageView.setImageResource(R.drawable.photo);
                     setErrorMessagesToNull();
-//                stock.setText("Stock: 0");
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                        NotificationChannel channel = new NotificationChannel("myChLocalDatabase", "MyChannelLocalDatabase", NotificationManager.IMPORTANCE_DEFAULT);
+//                        NotificationManager manager = requireActivity().getSystemService(NotificationManager.class);
+//                        manager.createNotificationChannel(channel);
+//                    ((MainActivity)requireActivity()).pushNotification();
+//                    }
                 } catch (Exception e) {
                     String message = e.getMessage();
                     //ANTISTOIXA MPOROYME NA VALOYME TO NOTIFICATION GIA UNSUCCESFUL YLOPOIHSH

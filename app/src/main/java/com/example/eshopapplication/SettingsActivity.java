@@ -24,6 +24,7 @@ import java.util.Objects;
 
 import remote.database.Order_Info_Activity;
 import remote.database.Orders_Activity;
+import signuploginfirebase.LoginActivity;
 import signuploginfirebase.sharedPreferenceConfig;
 
 
@@ -166,8 +167,11 @@ public class SettingsActivity extends AppCompatActivity {
                     builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-//                            sharedPreferenceConfig.writeLoginStatus(false);
-//                            startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
+                            sharedPreferenceConfig.writeLoginStatus(false);
+                            Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                            // PARAKATW: OTAN KANEI LOGOUT O user KAI PROSPATHISEI NA KANEI onBackPressed TOTE TON KANEI EXIT APO THN EFARMOGH
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
 //                            dialogInterface.dismiss();
                         }
                     });
