@@ -1,12 +1,12 @@
-package com.example.eshopapplication;
-
-//import static com.example.eshopapplication.MainActivity.showInfo;
+package remote.database;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,19 +19,26 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.eshopapplication.MainActivity;
+import com.example.eshopapplication.Product_Inventory_Activity;
+import com.example.eshopapplication.R;
+import com.example.eshopapplication.SettingsActivity;
+import com.example.eshopapplication.SupplierListAdapter;
+import com.example.eshopapplication.Supplier_Info_Activity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import database.Supplier;
-import remote.database.Orders_Activity;
-
-public class Supplier_Info_Activity extends AppCompatActivity {
-
-    private List<Supplier> suppliers = MainActivity.myAppDatabase.myDao().getSupplier();
-
+public class Order_Info_Activity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -43,31 +50,66 @@ public class Supplier_Info_Activity extends AppCompatActivity {
     TextView username_text, email_text, toolbarTitle;
     AlertDialog.Builder builder;
 
-    public int getSuppliersCount() {
-        return suppliers.size();
+
+    public static List<Orders> orderList;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+
+    CollectionReference collectionReference = firestore.collection("Orders");
+
+    public int getOrdersCount() {
+        return orderList.size();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_supplier_info);
-        builder = new AlertDialog.Builder(this);
-//    int selectedItem = getIntent().getIntExtra("selectedItem",-1);
+        setContentView(R.layout.activity_order_info);
 
-        int supplierCount = getSuppliersCount();
 
-        if (supplierCount == 0) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, new NoSupplierFragment());
-            transaction.commit();
-        } else {
-            // continue showing the current fragment that displays supplier information
-            recyclerView = findViewById(R.id.recyclerView);
-            layoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(layoutManager);
-            SupplierListAdapter supplierListAdapter = new SupplierListAdapter(this);
-            recyclerView.setAdapter(supplierListAdapter);
-        }
+
+        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        orderList = new ArrayList<>();
+
+                        for(QueryDocumentSnapshot documentSnapshot: queryDocumentSnapshots){
+                            Orders orders = documentSnapshot.toObject(Orders.class);
+                            Integer orderId = orders.getOrderID();
+                            Integer productId = orders.getProductID();
+                            String cName = orders.getCustomerName();
+                            String orderDate = orders.getOrderDate();
+                            Integer quantity = orders.getQuantity();
+                            orderList.add(orders);
+                        }
+//                        querytextresult.setText(result);
+                        int ordersCount = getOrdersCount();
+
+                        if (ordersCount == 0) {
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container, new NoOrderFragment());
+                            transaction.commit();
+                        } else {
+                            // continue showing the current fragment that displays supplier information
+                            recyclerView = findViewById(R.id.recyclerView);
+                            layoutManager = new LinearLayoutManager(getApplicationContext());
+                            recyclerView.setLayoutManager(layoutManager);
+                            OrderListAdapter orderListAdapter = new OrderListAdapter(getApplicationContext());
+                            recyclerView.setAdapter(orderListAdapter);
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Firestore", "Error retrieving data", e);
+                        //Toast.makeText(getActivity(),"query operation failed.", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+
 
 
 //        MainActivity toolbarButton = new MainActivity();
@@ -77,7 +119,7 @@ public class Supplier_Info_Activity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
-        navigationView.setCheckedItem(R.id.dr_supplier_info);
+        navigationView.setCheckedItem(R.id.dr_order_info);
 //        navigationView.setCheckedItem(selectedItem);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -85,27 +127,22 @@ public class Supplier_Info_Activity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.dr_database:
                         menuItem.setChecked(true);
-                        startActivity(new Intent(Supplier_Info_Activity.this, MainActivity.class));
-//                        Intent intent = new Intent(Logout_Activity.this, LoginActivity.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("StringKey1", "from :- Logout Activity");
-//                        Supplier_Fragment fv = new Supplier_Fragment();
-//                        fv.setArguments(bundle);
-//                        startActivity(intent);
+                        startActivity(new Intent(Order_Info_Activity.this, MainActivity.class));
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_orders:
                         menuItem.setChecked(true);
-                        startActivity(new Intent(Supplier_Info_Activity.this, Orders_Activity.class));
+                        startActivity(new Intent(Order_Info_Activity.this, Orders_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
-                        startActivity(new Intent(Supplier_Info_Activity.this, Product_Inventory_Activity.class));
+                        startActivity(new Intent(Order_Info_Activity.this, Product_Inventory_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_supplier_info:
                         menuItem.setChecked(true);
+                        startActivity(new Intent(Order_Info_Activity.this, Supplier_Info_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_about:
@@ -115,7 +152,7 @@ public class Supplier_Info_Activity extends AppCompatActivity {
                         return true;
                     case R.id.logout:
                         menuItem.setChecked(true);
-                        startActivity(new Intent(Supplier_Info_Activity.this, SettingsActivity.class));
+                        startActivity(new Intent(Order_Info_Activity.this, SettingsActivity.class));
 //                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 //                        Intent n = new Intent(MainActivity.this, Logout_Activity.class);
                         drawerLayout.closeDrawers();
@@ -167,13 +204,4 @@ public class Supplier_Info_Activity extends AppCompatActivity {
         toolbarTitle.setText(R.string.app_name); //  edw na valoyme string "Supplier Info"
         return toolbar;
     }
-
-//    @Override
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Supplier_Info_Activity.this,SettingsActivity.class);
-//        intent.putExtra("selectedItem", R.id.logout);
-//        startActivity(intent);
-//        finish();
-//    }
-
 }

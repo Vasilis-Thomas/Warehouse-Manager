@@ -16,6 +16,10 @@
                     android:icon="@drawable/ic_orders"
                     android:title="Orders">
                 </item>
+                <item android:title="Order Info"
+                    android:id="@+id/dr_order_info"
+                    android:icon="@drawable/ic_order_info">
+                </item>
                 <item
                     android:id="@+id/dr_product_inventory"
                     android:icon="@drawable/ic_inventory"

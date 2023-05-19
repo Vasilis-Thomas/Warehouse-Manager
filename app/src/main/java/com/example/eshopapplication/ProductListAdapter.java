@@ -15,11 +15,11 @@ import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListViewHolder> {
 
+    private List<ProductInfo> productInfo;
+
     public ProductListAdapter(List<ProductInfo> productInfo) {
         this.productInfo = productInfo;
     }
-
-    private List<ProductInfo> productInfo;
 
     //private int image = R.drawable.image;
     Context context;

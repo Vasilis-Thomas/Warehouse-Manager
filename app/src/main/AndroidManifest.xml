@@ -65,6 +65,9 @@
         <activity
             android:name="remote.database.Orders_Activity"
             android:exported="false"/>
+        <activity
+            android:name="remote.database.Order_Info_Activity"
+            android:exported="false"/>
     </application>
 
 </manifest>

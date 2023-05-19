@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-    tools:context="database.Product_Fragment">
+    tools:context="database.Supplier_Fragment"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:padding="10dp"
-                android:text="PRODUCT"
+                android:text="SUPPLIER"
                 android:textColor="@color/colorPrimary3"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -34,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent"></TextView>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_id_til"
+                android:id="@+id/supplier_id_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
@@ -48,7 +49,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/content_description_txtview">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/product_id_tiet"
+                    android:id="@+id/supplier_id_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ID"
@@ -63,7 +64,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_name_til"
+                android:id="@+id/supplier_name_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -75,10 +76,10 @@
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_id_til">
+                app:layout_constraintTop_toBottomOf="@+id/supplier_id_til">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/product_name_tiet"
+                    android:id="@+id/supplier_name_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
@@ -94,7 +95,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_category_til"
+                android:id="@+id/supplier_email_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -104,49 +105,24 @@
                 android:textCursorDrawable="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_name_til">
+                app:layout_constraintTop_toBottomOf="@+id/supplier_name_til">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/product_category_tiet"
+                    android:id="@+id/supplier_email_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Category"
+                    android:background="@color/colorSecond1"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="40"
                     android:textColor="@color/colorPrimary3"
                     android:textColorHint="@color/colorDrawerLayoutBackground"
-                    android:textSize="20sp"
-                    android:inputType="textPersonName"
-                    android:maxLength="20"
-                    android:background="@color/colorSecond1">
+                    android:textSize="20sp">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/product_price_til"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/colorPrimary3"
-            android:textColorHint="@color/colorDrawerLayoutBackground"
-            android:paddingStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_category_til">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/product_price_tiet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Price"
-                android:textColor="@color/colorPrimary3"
-                android:textColorHint="@color/colorDrawerLayoutBackground"
-                android:textCursorDrawable="@null"
-                android:textSize="20sp"
-                android:inputType="number"
-                android:maxLength="10"
-                android:background="@color/colorSecond1">
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_stock_til"
+                android:id="@+id/supplier_phone_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -155,45 +131,47 @@
                 android:paddingStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_price_til">
+                app:layout_constraintTop_toBottomOf="@+id/supplier_email_til">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/product_stock_tiet"
+                    android:id="@+id/supplier_phone_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Stock"
+                    android:hint="Phone"
                     android:textColor="@color/colorPrimary3"
                     android:textColorHint="@color/colorDrawerLayoutBackground"
                     android:textCursorDrawable="@null"
                     android:textSize="20sp"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
+                    android:inputType="phone"
+                    android:maxLength="10"
                     android:background="@color/colorSecond1">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:src="@drawable/photo"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_stock_til" />
-
-            <Button
-                android:id="@+id/add_image_button"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/supplier_address_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_border"
-                android:padding="8dp"
-                android:text="Add Image"
-                android:textColor="@color/colorPrimary4"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimary3"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
+                android:paddingStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+                app:layout_constraintTop_toBottomOf="@+id/supplier_phone_til">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/supplier_address_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address"
+                    android:textColor="@color/colorPrimary3"
+                    android:textColorHint="@color/colorDrawerLayoutBackground"
+                    android:textCursorDrawable="@null"
+                    android:textSize="20sp"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:background="@color/colorSecond1">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/question_text"
@@ -210,7 +188,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_image_button">
+                app:layout_constraintTop_toBottomOf="@+id/supplier_address_til">
                 <!--        android:textAppearance="@color/redFix"-->
             </TextView>
 
@@ -223,13 +201,12 @@
                 android:drawableLeft="@drawable/ic_config_add_circle_outline_24"
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
-                android:text="Add Product"
+                android:text="Add New Supplier"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/question_text">
-            </Button>
+                app:layout_constraintTop_toBottomOf="@+id/question_text"></Button>
 
             <Button
                 android:id="@+id/query_button"
@@ -257,13 +234,12 @@
                 android:drawableLeft="@drawable/ic_config_outline_update_24"
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
-                android:text="Update Product"
+                android:text="Update Supplier"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/query_button">
-            </Button>
+                app:layout_constraintTop_toBottomOf="@+id/query_button"></Button>
 
             <Button
                 android:id="@+id/delete_button"
@@ -274,13 +250,12 @@
                 android:drawableLeft="@drawable/ic_config_outline_delete_24"
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
-                android:text="Delete Product"
+                android:text="Delete Supplier"
                 android:textSize="18sp"
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/update_button" >
-            </Button>
+                app:layout_constraintTop_toBottomOf="@+id/update_button"></Button>
 
             <TextView
                 android:layout_width="match_parent"

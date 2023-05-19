@@ -35,8 +35,6 @@ public class Product_Fragment extends Fragment {
 //    TextInputLayout id, name, category, price;
     Button insertButton, deleteButton, updateButton, queryButton, addImageButton;
 //    TextView stock;
-
-
     ImageView imageView;
 
     Bitmap bitmap = null;
@@ -48,8 +46,8 @@ public class Product_Fragment extends Fragment {
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+       super.onActivityResult(requestCode, resultCode, data);
 
         // Check if the result is for the image picker
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
@@ -65,13 +63,35 @@ public class Product_Fragment extends Fragment {
             imageView.setImageBitmap(bitmap);
 
         }
-    }
+   }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product, container, false);
+
+//        // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
+//        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+//                new ActivityResultContracts.StartActivityForResult(),
+//                new ActivityResultCallback<ActivityResult>() {
+//                    @Override
+//                    public void onActivityResult(ActivityResult result) {
+////                        if (result.getResultCode() == Activity.RESULT_OK) {
+////                            // There are no request codes
+//                            Intent data = result.getData();
+//                        if (result.getResultCode() == Activity.RESULT_OK && data != null) {
+//                            Uri imageUri = data.getData();
+//                            try {
+//                                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                            imageView = getView().findViewById(R.id.imageView);
+//                            imageView.setImageBitmap(bitmap);
+//                        }
+//                    }
+//                });
 
 //        id = view.findViewById(R.id.product_id_til);
 //        name = view.findViewById(R.id.product_name_til);
@@ -191,7 +211,7 @@ public class Product_Fragment extends Fragment {
                         }
                     }
                     if(id.getText().length()==0){
-                    id.setError("You must fill this field");
+                        id.setError("You must fill this field");
                     }
                     else if(flagProductID){
                         id.setError("The productID you filled has already registered\nPlease give another productID");
@@ -255,10 +275,9 @@ public class Product_Fragment extends Fragment {
                 int currentStock= 0;
                 byte[] currentImage = null;
 
-                List<Product> aproduct= MainActivity.myAppDatabase.myDao().getProduct();
-
                 Bitmap currentBitmap = null;
 
+                List<Product> aproduct= MainActivity.myAppDatabase.myDao().getProduct();
                 for(Product i: aproduct){
                     int var_productID_for_check = i.getPid();
                     if(var_productID_for_check == var_id){
@@ -267,7 +286,8 @@ public class Product_Fragment extends Fragment {
                         currentPrice = i.getPrice();
                         currentStock = i.getStock();
                         currentImage = i.getImage();
-                        currentBitmap = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
+                        currentBitmap = BitmapFactory.decodeByteArray( currentImage, 0, currentImage.length);
+//                        currentBitmap = BitmapFactory.decodeByteArray(i.getImage(), 0, currentImage.length);
                         flagProductID = true;  // THA GINEI true APO TH STIGMH POY TO var_productID YPARXEI STHN VASH DHLADH STON PINAKA product
                         Log.i(TAG,"To flagProductID egine true");
                         break;
@@ -399,4 +419,26 @@ public class Product_Fragment extends Fragment {
         }
     }
 
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putString("id_pr",id.getText().toString());
+//        outState.putString("name_pr",name.getText().toString());
+//        outState.putString("category_pr",category.getText().toString());
+//        outState.putString("price",price.getText().toString());
+//        outState.putString("stock",stock.getText().toString());
+//    }
+//
+//    public String getTextFieldName() {
+//        if (name != null) {
+//            return name.getText().toString();
+//        }
+//        return null;
+//    }
+//
+//    public void setTextFieldName(String productName) {
+//        if (name != null) {
+//            name.setText(productName);
+//        }
+//    }
 }

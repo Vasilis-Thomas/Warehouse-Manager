@@ -31,11 +31,12 @@ import database.MyAppDatabase;
 import database.Product_Fragment;
 import database.Supplier_Fragment;
 import database.Supplies_Fragment;
+import remote.database.Order_Info_Activity;
 import remote.database.Orders_Activity;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String SELECTED_TAB_KEY = "selected_tab";
     private final static String TAG = "com.example.applicationwithmenu";
     Toolbar toolbar;
     public static FragmentManager fragmentManager;
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     TextView username_text, email_text, toolbarTitle;
     AlertDialog.Builder builder;
-
     Fragment fragment;
     FragmentTransaction fragmentTransaction;
     TabLayout tablayout;
@@ -74,10 +74,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(savedInstanceState !=null){
-            Bundle b = getIntent().getExtras();
-            String title = b.getString("stringaki");
-        }
+//        if(savedInstanceState !=null){
+////            Bundle b = getIntent().getExtras();
+////            String title = b.getString("stringaki");
+////            return;
+//        }
         builder = new AlertDialog.Builder(MainActivity.this);
         Log.i(TAG,"onCreate callback method");
 
@@ -102,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.dr_orders:
                         menuItem.setChecked(true);
                         startActivity(new Intent(MainActivity.this, Orders_Activity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
+
+                    case R.id.dr_order_info:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(MainActivity.this, Order_Info_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
 
@@ -162,7 +169,28 @@ public class MainActivity extends AppCompatActivity {
         myAppDatabase = Room.databaseBuilder(getApplicationContext(), MyAppDatabase.class,"reservesBD").allowMainThreadQueries().build();
         if(findViewById(R.id.fragment_container)!=null) {
             if (savedInstanceState != null) {
-                return;
+//                return;
+                int selectedTabPosition = savedInstanceState.getInt(SELECTED_TAB_KEY, 0);
+                tablayout.getTabAt(selectedTabPosition).select();
+                // Restore the corresponding fragment based on the selected tab position
+                switch (selectedTabPosition) {
+                    case 0:
+                        fragment = new Product_Fragment();
+//                        if(savedInstanceState.containsKey("product_name")){
+//                            String product_name = savedInstanceState.getString("product_name");
+//                            ((Product_Fragment)fragment).setTextFieldName(product_name);
+//                        }
+                        break;
+                    case 1:
+                        fragment = new Supplier_Fragment();
+                        break;
+                    case 2:
+                        fragment = new Supplies_Fragment();
+                        break;
+                }
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.commit();
             }
 //            fragmentManager.beginTransaction().add(R.id.fragment_container, new Product_Fragment()).setTransition(fragmentManager.TRANSIT_FRAGMENT_OPEN).commit();
             fragmentTransaction = fragmentManager.beginTransaction();
@@ -264,11 +292,11 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG,"onPause callback method");
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState){
-            super.onSaveInstanceState(outState);
-        Log.i(TAG,"onSaveInstanceState callback method");
-    }
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState){
+//            super.onSaveInstanceState(outState);
+//        Log.i(TAG,"onSaveInstanceState callback method");
+//    }
 
 
     @Override
@@ -288,6 +316,24 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.i(TAG,"onDestroy callback method");
     }
+
+
+//    @Override
+//    protected void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        // Save the selected tab position
+//        int selectedTabPosition = tablayout.getSelectedTabPosition();
+//        outState.putInt(SELECTED_TAB_KEY, selectedTabPosition);
+//        Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
+//        if(currentFragment instanceof Product_Fragment){
+//            outState.putString("product_name",((Product_Fragment) currentFragment).getTextFieldName());
+////            outState.putString("name_id",id.getText().toString());
+////            outState.putString("category_pr",category.getText().toString());
+////            outState.putString("price",price.getText().toString());
+////            outState.putString("stock",stock.getText().toString());
+//
+//        }
+//    }
 
 }
 

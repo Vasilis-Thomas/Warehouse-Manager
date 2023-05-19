@@ -1,21 +1,14 @@
 package com.example.eshopapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -98,8 +91,8 @@ public class SupplierListAdapter extends RecyclerView.Adapter<SupplierListAdapte
         public SupplierListViewHolder(View itemView) {
             super(itemView);
             // get the reference of item view's
-            nameTxt = (TextView) itemView.findViewById(R.id.text_supplier_name);
-            addressTxt = (TextView) itemView.findViewById(R.id.address);
+            nameTxt = (TextView) itemView.findViewById(R.id.text_customer_name);
+            addressTxt = (TextView) itemView.findViewById(R.id.Date);
             phoneBtn = (Button) itemView.findViewById(R.id.btn_supplier_phone);
             emailBtn = (Button)itemView.findViewById(R.id.btn_supplier_email);
         }

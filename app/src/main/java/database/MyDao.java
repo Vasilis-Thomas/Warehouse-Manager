@@ -24,27 +24,37 @@ public interface MyDao {
     @Query("select * from product")
     public List<Product> getProduct();
 
+    @Query("select distinct productName from product where productID = :inputProductID")
+    public String getProductName(int inputProductID);
+
+    @Query("select distinct price from product where productID = :inputProductID")
+    public double getProductPrice(int inputProductID);
+
     @Query("select distinct product.productName, product.category, product.price, product.stock, product.image, supplier.supplierName as supplier \n" +
             "from product inner join supplies on product.productID=supplies.productID " +
-                        "inner join supplier on supplies.supplierID=supplier.supplierID")
+                        "inner join supplier on supplies.supplierID=supplier.supplierID "+
+            "order by product.price, supplier.supplierName ASC")
     public List<ProductInfo> getAllProductsCategoriesAllSuppliers();
 
     @Query("select distinct product.productName, product.category, product.price, product.stock, product.image, supplier.supplierName as supplier \n" +
             "from product inner join supplies on product.productID=supplies.productID " +
             "inner join supplier on supplies.supplierID=supplier.supplierID "+
-            "where supplier.supplierName= :inputSupplier")
+            "where supplier.supplierName= :inputSupplier "+
+            "order by product.price, supplier.supplierName ASC ")
     public List<ProductInfo> getAllProductsCategories_Supplier(String inputSupplier);
 
     @Query("select distinct product.productName, product.category, product.price, product.stock, product.image, supplier.supplierName as supplier \n" +
             "from product inner join supplies on product.productID=supplies.productID " +
             "inner join supplier on supplies.supplierID=supplier.supplierID "+
-            "where product.category = :inputCategory")
+            "where product.category = :inputCategory "+
+            "order by product.price, supplier.supplierName ASC ")
     public List<ProductInfo> get_ProductsCategoriesAllSupplier(String inputCategory);
 
     @Query("select distinct product.productName, product.category, product.price, product.stock, product.image, supplier.supplierName as supplier \n" +
             "from product inner join supplies on product.productID=supplies.productID " +
             "inner join supplier on supplies.supplierID=supplier.supplierID "+
-            "where product.category = :inputCategory and supplier.supplierName= :inputSupplier")
+            "where product.category = :inputCategory and supplier.supplierName= :inputSupplier " +
+            "order by product.price, supplier.supplierName ASC ")
     public List<ProductInfo> get_ProductsCategories_Supplier(String inputSupplier, String inputCategory);
 
     @Query("select distinct category from product")

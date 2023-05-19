@@ -29,9 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,21 +40,19 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.Product;
 import remote.database.Orders_Activity;
 
 public class Product_Inventory_Activity extends AppCompatActivity{
-    public Toolbar toolbar;
+    Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     RecyclerView recyclerView;
-
     FrameLayout frameLayout;
 
     RecyclerView.LayoutManager layoutManager;
 
     private signuploginfirebase.sharedPreferenceConfig sharedPreferenceConfig;
-    TextView username_text, email_text;
+    TextView username_text, email_text, toolbarTitle;
     AlertDialog.Builder builder;
 
     private List<ProductInfo> products;
@@ -187,11 +183,12 @@ public class Product_Inventory_Activity extends AppCompatActivity{
 
         searchBtn.performClick();
 
-        makeToolbarButton(toolbar);
+        toolbar = makeToolbarButton();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
+        navigationView.setCheckedItem(R.id.dr_product_inventory);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -260,12 +257,15 @@ public class Product_Inventory_Activity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public Toolbar makeToolbarButton(Toolbar toolbar) {
+    public Toolbar makeToolbarButton() {
         toolbar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
+        actionBar.setTitle("");
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText(R.string.app_name); //  edw na valoyme string "Product Inventory
         return toolbar;
     }
 

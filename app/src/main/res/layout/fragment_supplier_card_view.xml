@@ -17,7 +17,7 @@
         android:layout_height="193dp">
 
         <TextView
-            android:id="@+id/text_supplier_name"
+            android:id="@+id/text_customer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -35,12 +35,12 @@
             android:layout_marginTop="24dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_supplier_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_customer_name"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/location" />
 
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -48,7 +48,7 @@
             android:text="Address"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toEndOf="@+id/locationImg"
-            app:layout_constraintTop_toBottomOf="@+id/text_supplier_name" />
+            app:layout_constraintTop_toBottomOf="@+id/text_customer_name" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address"
+            app:layout_constraintTop_toBottomOf="@+id/Date"
             app:layout_constraintVertical_bias="0.578"
             tools:layout_editor_absoluteX="0dp">
 
