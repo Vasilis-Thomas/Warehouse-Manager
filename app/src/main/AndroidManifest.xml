@@ -64,9 +64,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Logout_Activity"
-            android:exported="false" />
-        <activity
             android:name="signuploginfirebase.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
