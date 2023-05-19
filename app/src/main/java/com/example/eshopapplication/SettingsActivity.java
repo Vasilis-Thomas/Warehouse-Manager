@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
+import remote.database.Order_Info_Activity;
 import remote.database.Orders_Activity;
 import signuploginfirebase.LoginActivity;
 import signuploginfirebase.sharedPreferenceConfig;
@@ -60,9 +61,9 @@ public class SettingsActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
-        navigationView.setCheckedItem(R.id.logout);
+        navigationView.setCheckedItem(R.id.settings);
 //        navigationView.setCheckedItem(selectedItem);
-        navigationView.setCheckedItem(R.id.logout);
+        navigationView.setCheckedItem(R.id.settings);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -82,6 +83,13 @@ public class SettingsActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         return true;
 
+                    case R.id.dr_order_info:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(SettingsActivity.this, Order_Info_Activity.class));
+//                        activityStack.push(SettingsActivity.class);
+                        drawerLayout.closeDrawers();
+                        return true;
+
                     case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, Product_Inventory_Activity.class));
@@ -97,13 +105,8 @@ public class SettingsActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         return true;
 
-                    case R.id.dr_about:
-                        menuItem.setChecked(true);
-                        //showInfo(builder);
-                        drawerLayout.closeDrawers();
-                        return true;
 
-                    case R.id.logout:
+                    case R.id.settings:
                         menuItem.setChecked(true);
 //                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
 //                        startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));

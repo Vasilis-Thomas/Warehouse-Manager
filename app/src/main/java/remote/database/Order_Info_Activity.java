@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -23,7 +22,6 @@ import com.example.eshopapplication.MainActivity;
 import com.example.eshopapplication.Product_Inventory_Activity;
 import com.example.eshopapplication.R;
 import com.example.eshopapplication.SettingsActivity;
-import com.example.eshopapplication.SupplierListAdapter;
 import com.example.eshopapplication.Supplier_Info_Activity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -135,6 +133,11 @@ public class Order_Info_Activity extends AppCompatActivity {
                         startActivity(new Intent(Order_Info_Activity.this, Orders_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
+                    case R.id.dr_order_info:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(Order_Info_Activity.this, Order_Info_Activity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
                     case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
                         startActivity(new Intent(Order_Info_Activity.this, Product_Inventory_Activity.class));
@@ -145,12 +148,7 @@ public class Order_Info_Activity extends AppCompatActivity {
                         startActivity(new Intent(Order_Info_Activity.this, Supplier_Info_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
-                    case R.id.dr_about:
-                        menuItem.setChecked(true);
-                        //showInfo(builder);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.logout:
+                    case R.id.settings:
                         menuItem.setChecked(true);
                         startActivity(new Intent(Order_Info_Activity.this, SettingsActivity.class));
 //                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));

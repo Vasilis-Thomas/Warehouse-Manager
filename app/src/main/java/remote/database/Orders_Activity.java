@@ -87,6 +87,12 @@ public class Orders_Activity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         return true;
 
+                    case R.id.dr_order_info:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(Orders_Activity.this, Order_Info_Activity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
+
                     case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
                         startActivity(new Intent(Orders_Activity.this, Product_Inventory_Activity.class));
@@ -98,13 +104,7 @@ public class Orders_Activity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         return true;
 
-                    case R.id.dr_about:
-                        menuItem.setChecked(true);
-//                        showInfo(builder);
-                        drawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.logout:
+                    case R.id.settings:
                         menuItem.setChecked(true);
 //                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
                         startActivity(new Intent(Orders_Activity.this, SettingsActivity.class));

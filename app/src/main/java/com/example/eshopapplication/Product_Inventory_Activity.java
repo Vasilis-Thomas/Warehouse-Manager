@@ -3,8 +3,6 @@ package com.example.eshopapplication;
 //import static com.example.eshopapplication.MainActivity.showInfo;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -40,6 +38,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import remote.database.Order_Info_Activity;
 import remote.database.Orders_Activity;
 
 public class Product_Inventory_Activity extends AppCompatActivity{
@@ -203,6 +202,11 @@ public class Product_Inventory_Activity extends AppCompatActivity{
                         startActivity(new Intent(Product_Inventory_Activity.this, Orders_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
+                    case R.id.dr_order_info:
+                        menuItem.setChecked(true);
+                        startActivity(new Intent(Product_Inventory_Activity.this, Order_Info_Activity.class));
+                        drawerLayout.closeDrawers();
+                        return true;
                     case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
                         return true;
@@ -211,12 +215,7 @@ public class Product_Inventory_Activity extends AppCompatActivity{
                         startActivity(new Intent(Product_Inventory_Activity.this, Supplier_Info_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
-                    case R.id.dr_about:
-                        menuItem.setChecked(true);
-                        //showInfo(builder);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.logout:
+                    case R.id.settings:
                         menuItem.setChecked(true);
                         startActivity(new Intent(Product_Inventory_Activity.this, SettingsActivity.class));
 //                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));

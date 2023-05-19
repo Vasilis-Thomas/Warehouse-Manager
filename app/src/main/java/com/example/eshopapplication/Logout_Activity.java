@@ -89,12 +89,14 @@ public class Logout_Activity extends AppCompatActivity {
                         startActivity(new Intent(Logout_Activity.this, Supplier_Info_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
-                    case R.id.dr_about:
-                        menuItem.setChecked(true);
-//                        showInfo(builder);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.logout:
+
+//                    case R.id.dr_about:
+//                        menuItem.setChecked(true);
+////                        showInfo(builder);
+//                        drawerLayout.closeDrawers();
+//                        return true;
+
+                    case R.id.settings:
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         return true;

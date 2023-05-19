@@ -124,13 +124,7 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         return true;
 
-                    case R.id.dr_about:
-                        menuItem.setChecked(true);
-                        //showInfo(builder);
-                        drawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.logout:
+                    case R.id.settings:
                         menuItem.setChecked(true);
 //                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
                         startActivity(new Intent(MainActivity.this, SettingsActivity.class));
