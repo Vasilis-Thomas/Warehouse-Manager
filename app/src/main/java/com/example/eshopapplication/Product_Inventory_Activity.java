@@ -264,7 +264,7 @@ public class Product_Inventory_Activity extends AppCompatActivity{
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
         actionBar.setTitle("");
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(R.string.app_name); //  edw na valoyme string "Product Inventory
+        toolbarTitle.setText(R.string.toolbar_title_to_product_inventory_activity); //  edw na valoyme string "Product Inventory
         return toolbar;
     }
 

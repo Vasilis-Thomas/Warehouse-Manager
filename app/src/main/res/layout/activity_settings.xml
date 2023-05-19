@@ -189,7 +189,7 @@
                 android:id="@+id/logout_subtxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You have been signed up as Uknown"
+                android:text="You are logged in as Uknown"
                 android:textSize="18dp"></TextView>
         </LinearLayout>
 
@@ -204,9 +204,6 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_menu_header"
         app:menu="@menu/drawer_menu">
-
-
-
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

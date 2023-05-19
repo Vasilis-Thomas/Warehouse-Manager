@@ -3,37 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-        <group android:checkableBehavior="single"
-            android:background="@color/colorPrimary4">
+    <group
+        android:id="@+id/seperator_databases"
+        android:background="@color/colorPrimary4"
+        android:checkableBehavior="single">
 
-                <item
-                    android:id="@+id/dr_database"
-                    android:icon="@drawable/ic_database_storage"
-                    android:title="Database">
-                </item>
-                <item
-                    android:id="@+id/dr_orders"
-                    android:icon="@drawable/ic_orders"
-                    android:title="Orders">
-                </item>
-                <item android:title="Order Info"
-                    android:id="@+id/dr_order_info"
-                    android:icon="@drawable/ic_order_info">
-                </item>
-                <item
-                    android:id="@+id/dr_product_inventory"
-                    android:icon="@drawable/ic_inventory"
-                    android:title="Product Inventory">
-                </item>
-                <item
-                    android:id="@+id/dr_supplier_info"
-                    android:icon="@drawable/ic_supplier"
-                    android:title="Supplier Info">
-                </item>
-                <item
-                    android:id="@+id/settings"
-                    android:icon="@drawable/ic_setting"
-                    android:title="Settings">
-                </item>
-        </group>
+        <item
+            android:id="@+id/dr_database"
+            android:icon="@drawable/ic_database_storage"
+            android:title="Local Database"></item>
+        <item
+            android:id="@+id/dr_orders"
+            android:icon="@drawable/ic_orders"
+            android:title="Orders"></item>
+    </group>
+
+    <group
+        android:id="@+id/seperator_databases_info"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/dr_product_inventory"
+            android:icon="@drawable/ic_inventory"
+            android:title="Product Inventory">
+        </item>
+        <item
+            android:id="@+id/dr_supplier_info"
+            android:icon="@drawable/ic_supplier"
+            android:title="Supplier Info">
+        </item>
+        <item
+            android:id="@+id/dr_order_info"
+            android:icon="@drawable/ic_order_info"
+            android:title="Order Info">
+        </item>
+    </group>
+    <group
+        android:id="@+id/seperator_settings"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_setting"
+            android:title="Settings">
+        </item>
+    </group>
 </menu>
