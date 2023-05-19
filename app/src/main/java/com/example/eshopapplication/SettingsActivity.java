@@ -178,8 +178,12 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             sharedPreferenceConfig.writeLoginStatus(false);
-                            startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
-//                            dialogInterface.dismiss();
+
+                            Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                            // PARAKATW: OTAN KANEI LOGOUT O user KAI PROSPATHISEI NA KANEI onBackPressed TOTE TON KANEI EXIT APO THN EFARMOGH
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+
                         }
                     });
                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

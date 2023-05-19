@@ -51,24 +51,44 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         builder = new AlertDialog.Builder(MainActivity.this);
         Log.i(TAG,"onCreate callback method");
 
         toolbar = makeToolbarButton();
 
         drawerLayout   = findViewById(R.id.drawer_layout);
+//        if(savedInstanceState !=null){
+
+////            return;
+//        }
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            NotificationChannel channel = new NotificationChannel("myChLocalDatabase", "MyChannelLocalDatabase", NotificationManager.IMPORTANCE_DEFAULT);
+//            NotificationManager manager = getSystemService(NotificationManager.class);
+//            manager.createNotificationChannel(channel);
+//        }
+
+        builder = new AlertDialog.Builder(MainActivity.this);
+        Log.i(TAG, "onCreate callback method");
+
+
+        toolbar = makeToolbarButton();
+
+
+        drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
         navigationView.setCheckedItem(R.id.dr_database);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.dr_database:
 //                        menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
@@ -110,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
-        if(firebaseuser != null){
+        if (firebaseuser != null) {
 //            Uri userphoto = firebaseUser.getPhotoUrl();
 //            String userID = firebaseUser.getUid();
 //            boolean emailVerified = firebaseUser.isEmailVerified();
@@ -123,9 +143,8 @@ public class MainActivity extends AppCompatActivity {
             email_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_email_text);
             username_text.setText(userName);
             email_text.setText(userEmail);
-            Log.i(TAG,"username_text: "+email_text.getText());
-        }
-        else{
+            Log.i(TAG, "username_text: " + email_text.getText());
+        } else {
             View menu_drawer_head = navigationView.getHeaderView(0);
             email_text = menu_drawer_head.findViewById(R.id.drawer_menu_header_email_text);
             email_text.setText("Unknown");
@@ -134,8 +153,8 @@ public class MainActivity extends AppCompatActivity {
 
         tablayout = findViewById(R.id.tabLayout);
         fragmentManager = getSupportFragmentManager();
-        myAppDatabase = Room.databaseBuilder(getApplicationContext(), MyAppDatabase.class,"reservesBD").allowMainThreadQueries().build();
-        if(findViewById(R.id.fragment_container)!=null) {
+        myAppDatabase = Room.databaseBuilder(getApplicationContext(), MyAppDatabase.class, "reservesBD").allowMainThreadQueries().build();
+        if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
 //                return;
                 int selectedTabPosition = savedInstanceState.getInt(SELECTED_TAB_KEY, 0);
@@ -170,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
+                switch (tab.getPosition()) {
                     case 0:
                         fragment = new Product_Fragment();
                         break;
@@ -200,12 +219,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+//    public void pushNotification() {
+//        NotificationCompat.Builder builder1 = new NotificationCompat.Builder(fragment.requireContext(), "myChLocalDatabase")
+//                .setSmallIcon(R.drawable.warning)
+//                .setContentTitle("Notification")
+////        if(fragment.requireContext().equals(Product_Fragment.class.getName()))
+//                .setContentText("Order successfully added!");
+////        else if(fragment.requireContext().equals(Supplier_Fragment.class.getName()))
+////            builder.setContentText("Supplier successfully added!");
+////        else
+////            builder.setContentText("Supply successfully added!!!");
+//
+////        Notification notification = builder.build();
+//        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(fragment.requireContext());
+//
+//        if (ActivityCompat.checkSelfPermission(fragment.requireContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+//            return;
+//        }
+//        notificationManagerCompat.notify(1, builder1.build());
+//    };
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer((GravityCompat.START));
                 return true;
@@ -214,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public Toolbar makeToolbarButton(){
+    public Toolbar makeToolbarButton() {
         Toolbar toolbar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -226,29 +266,28 @@ public class MainActivity extends AppCompatActivity {
         return toolbar;
     }
 
-
     @Override
-    protected void onRestart(){
+    protected void onRestart() {
         super.onRestart();
-        Log.i(TAG,"onRestart callback method");
+        Log.i(TAG, "onRestart callback method");
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
-        Log.i(TAG,"onStart callback method");
+        Log.i(TAG, "onStart callback method");
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        Log.i(TAG,"onResume callback method");
+        Log.i(TAG, "onResume callback method");
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
-        Log.i(TAG,"onPause callback method");
+        Log.i(TAG, "onPause callback method");
     }
 
 //    @Override
@@ -259,38 +298,39 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected  void onRestoreInstanceState(Bundle savedInstanceState){
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.i(TAG,"onRestoreInstanceState callback method");
+        Log.i(TAG, "onRestoreInstanceState callback method");
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
-        Log.i(TAG,"onStop callback method");
+        Log.i(TAG, "onStop callback method");
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        Log.i(TAG,"onDestroy callback method");
+        Log.i(TAG, "onDestroy callback method");
     }
 
 
 //    @Override
-//    protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        // Save the selected tab position
-//        int selectedTabPosition = tablayout.getSelectedTabPosition();
-//        outState.putInt(SELECTED_TAB_KEY, selectedTabPosition);
-//        Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
-//        if(currentFragment instanceof Product_Fragment){
-//            outState.putString("product_name",((Product_Fragment) currentFragment).getTextFieldName());
-////            outState.putString("name_id",id.getText().toString());
-////            outState.putString("category_pr",category.getText().toString());
-////            outState.putString("price",price.getText().toString());
-////            outState.putString("stock",stock.getText().toString());
+//    public void onBackPressed() {
+//        // Get the next activity that will be launched
+//        Intent nextIntent = new Intent(this, LoginActivity.class);  // Replace with the specific activity you want to check against
 //
+//        PackageManager packageManager = getPackageManager();
+//        ComponentName componentName = nextIntent.resolveActivity(packageManager);
+//
+//        // Check if the next activity is the one you want to handle differently which is LoginActivity.class
+//        if (componentName != null && componentName.getClassName().equals(LoginActivity.class.getName())) {
+//            // Do nothing
+//            // Since the next activity is the specific activity, we skip the super.onBackPressed() call
+//        } else {
+//            // Call the superclass implementation to allow the default behavior
+//            super.onBackPressed();
 //        }
 //    }
 

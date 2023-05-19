@@ -1,10 +1,16 @@
 package remote.database;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,6 +26,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -48,6 +57,8 @@ import database.Product;
 public class Orders_Activity extends AppCompatActivity {
     private final static String TAG = "remote.database (Orders Activity)";
     protected static FirebaseFirestore db;
+    NotificationManagerCompat notificationManagerCompat;
+    Notification notification;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -265,9 +276,33 @@ public class Orders_Activity extends AppCompatActivity {
                                     db.collection("Orders").document("" + finalVar_orderID).set(order).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            // EDW THA MPAINEI ENA NOTIFICATION EPITYXIAS
-//                                    Toast.makeText(getApplicationContext(), "Order added: " + finalVar_orderID, Toast.LENGTH_LONG).show();
                                             Toast.makeText(getApplicationContext(), "Order added: ", Toast.LENGTH_LONG).show();
+
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                                NotificationChannel channel = new NotificationChannel("myCh", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
+                                                NotificationManager manager = getSystemService(NotificationManager.class);
+                                                manager.createNotificationChannel(channel);
+                                            }
+                                            NotificationCompat.Builder builder = new NotificationCompat.Builder(Orders_Activity.this, "myCh")
+                                                    .setSmallIcon(R.drawable.warning)
+                                                    .setContentTitle("Notification")
+                                                    .setContentText("Order successfully added!");
+
+                                            notification = builder.build();
+                                            notificationManagerCompat = NotificationManagerCompat.from(Orders_Activity.this);
+
+                                            if (ActivityCompat.checkSelfPermission(Orders_Activity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                                                // TODO: Consider calling
+                                                //    ActivityCompat#requestPermissions
+                                                // here to request the missing permissions, and then overriding
+                                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                                //                                          int[] grantResults)
+                                                // to handle the case where the user grants the permission. See the documentation
+                                                // for ActivityCompat#requestPermissions for more details.
+                                                return;
+                                            }
+                                            notificationManagerCompat.notify(1, notification);
+
 
                                             String currentPrName = "Unknown", currentPrCategory = "Unknown";
                                             double currentPrPrice = 0.0;
