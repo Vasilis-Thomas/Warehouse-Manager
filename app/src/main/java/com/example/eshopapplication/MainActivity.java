@@ -52,40 +52,14 @@ public class MainActivity extends AppCompatActivity {
     private ListView mDrawerList;
 
 
-//    FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
-//    if (fbuser != null){
-//     for (UserInfo profile : fbuser.getProviderData()) {
-//        // Id of the provider (ex: google.com)
-//        String providerId = profile.getProviderId();
-//
-//        // UID specific to the provider
-//        String uid = profile.getUid();
-//
-//        // Name, email address, and profile photo Url
-//        String name = profile.getDisplayName();
-//        String fbuseremail = profile.getEmail();
-//        Uri photoUrl = profile.getPhotoUrl();
-////
-//    }
-//    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        if(savedInstanceState !=null){
-////            Bundle b = getIntent().getExtras();
-////            String title = b.getString("stringaki");
-////            return;
-//        }
         builder = new AlertDialog.Builder(MainActivity.this);
         Log.i(TAG,"onCreate callback method");
 
-
-
         toolbar = makeToolbarButton();
-
 
         drawerLayout   = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
@@ -252,15 +226,6 @@ public class MainActivity extends AppCompatActivity {
         return toolbar;
     }
 
-//    public static void showInfo(AlertDialog.Builder b){
-//        b.setTitle("Application Information").
-//                setMessage("Constructors: Nikolas Sarakenidis, Vasilis Thomas\n"
-//                        + "Institution: International University of Greece\n"
-//                        + "Supervisor: Euklidis Keramopoylos\n"
-//                        + "Project name: Economy E-shop Application\n"
-//                        + "Application: Android\n"
-//                        + "MinimumSdk: 24").show();
-//    }
 
     @Override
     protected void onRestart(){

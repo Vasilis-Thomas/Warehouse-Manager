@@ -25,7 +25,7 @@ public class Supplies_Fragment extends Fragment {
 //    TextInputLayout supplies_msrp_til;
 //    TextInputEditText productID, supplierID, supplyDate, quantity, msrp; // msrp = recommended supplier price
 TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended supplier price
-    Button insertButton, deleteButton, updateButton, queryButton;
+    Button insertButton, deleteButton, updateButton;
     TextView displaySupplyError, questionText;
     EditText dateEdt;
     TextView supplyDate;
@@ -58,7 +58,6 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
         msrp = view.findViewById(R.id.supplies_msrp_tiet);
 
         insertButton = view.findViewById(R.id.insert_button);
-//        queryButton = view.findViewById(R.id.query_button);
         updateButton = view.findViewById(R.id.update_button);
         deleteButton = view.findViewById(R.id.delete_button);
 

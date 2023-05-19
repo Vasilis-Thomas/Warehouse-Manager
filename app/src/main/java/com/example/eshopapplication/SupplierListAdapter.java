@@ -57,6 +57,8 @@ public class SupplierListAdapter extends RecyclerView.Adapter<SupplierListAdapte
             }
         });
 
+
+
         holder.emailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

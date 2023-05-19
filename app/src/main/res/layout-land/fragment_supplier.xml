@@ -202,28 +202,12 @@
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
                 android:text="Add New Supplier"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:cornerRadius="20dp"
+                style="@style/Widget.MaterialComponents.Button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/question_text"></Button>
-
-            <Button
-                android:id="@+id/query_button"
-                android:layout_width="190dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/colorPrimary1"
-                android:drawableLeft="@drawable/ic_config_outline_arrow_circle_right_24"
-                android:gravity="center"
-                android:soundEffectsEnabled="true"
-                android:text="Entry Queries"
-                android:textSize="18sp"
-                app:cornerRadius="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/insert_button">
-            </Button>
+                app:layout_constraintTop_toBottomOf="@+id/question_text"/>
 
             <Button
                 android:id="@+id/update_button"
@@ -235,11 +219,12 @@
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
                 android:text="Update Supplier"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:cornerRadius="20dp"
+                style="@style/Widget.MaterialComponents.Button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/query_button"></Button>
+                app:layout_constraintTop_toBottomOf="@+id/insert_button"/>
 
             <Button
                 android:id="@+id/delete_button"
@@ -251,11 +236,12 @@
                 android:gravity="center"
                 android:soundEffectsEnabled="true"
                 android:text="Delete Supplier"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:cornerRadius="20dp"
+                style="@style/Widget.MaterialComponents.Button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/update_button"></Button>
+                app:layout_constraintTop_toBottomOf="@+id/update_button"/>
 
             <TextView
                 android:layout_width="match_parent"

@@ -70,9 +70,6 @@ public class Supplier_Info_Activity extends AppCompatActivity {
             recyclerView.setAdapter(supplierListAdapter);
         }
 
-
-//        MainActivity toolbarButton = new MainActivity();
-//        toolbarButton.makeToolbarButton(toolbar);
         toolbar = makeToolbarButton();
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -87,12 +84,6 @@ public class Supplier_Info_Activity extends AppCompatActivity {
                     case R.id.dr_database:
                         menuItem.setChecked(true);
                         startActivity(new Intent(Supplier_Info_Activity.this, MainActivity.class));
-//                        Intent intent = new Intent(Logout_Activity.this, LoginActivity.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("StringKey1", "from :- Logout Activity");
-//                        Supplier_Fragment fv = new Supplier_Fragment();
-//                        fv.setArguments(bundle);
-//                        startActivity(intent);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.dr_orders:

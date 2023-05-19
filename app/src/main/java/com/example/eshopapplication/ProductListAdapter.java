@@ -46,14 +46,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         holder.productImg.setImageBitmap(BitmapFactory.decodeByteArray(productInfo.get(position).getImage(), 0, productInfo.get(position).getImage().length));
 
-       // BitmapFactory.decodeByteArray(productInfo.get(position).getImage(), 0, productInfo.get(position).getImage().length)
-        //holder.productImg.setImageResource(image);
-
         // detect item selection
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "The card "+(position+1)+" is selected", Toast.LENGTH_LONG).show();
+               // Toast.makeText(view.getContext(), "The card "+(position+1)+" is selected", Toast.LENGTH_LONG).show();
             }
         });
     }

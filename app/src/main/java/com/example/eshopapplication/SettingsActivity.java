@@ -2,6 +2,7 @@ package com.example.eshopapplication;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -139,10 +140,19 @@ public class SettingsActivity extends AppCompatActivity {
 
             logoutSubTxt.setText("You have been signed up as "+  userName);
 
+            String[] emailAddresses = {"billthomas308@gmail.com", "sarakenidisn@gmail.com"};
+
             reportABugTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // IMPLICIT sto gmail
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setData(Uri.parse("mailto:")); // Use the "mailto:" scheme to specify sending email
+                    intent.putExtra(Intent.EXTRA_EMAIL, emailAddresses); // Set the email addresses
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Report a bug"); // Set the subject
+                    intent.putExtra(Intent.EXTRA_TEXT, ""); // Set the email body
+
+                    startActivity(intent);
+
                 }
             });
 

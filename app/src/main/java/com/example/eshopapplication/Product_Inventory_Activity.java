@@ -1,6 +1,5 @@
 package com.example.eshopapplication;
 
-//import static com.example.eshopapplication.MainActivity.showInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -96,7 +95,7 @@ public class Product_Inventory_Activity extends AppCompatActivity{
                 selectedCategory = (String) adapterView.getItemAtPosition(position);
 
                 // Do something with the selected product
-                Toast.makeText(Product_Inventory_Activity.this, "Selected Category: " + selectedCategory, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Product_Inventory_Activity.this, "Selected Category: " + selectedCategory, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -115,7 +114,7 @@ public class Product_Inventory_Activity extends AppCompatActivity{
                 selectedSupplier = (String) adapterView.getItemAtPosition(position);
 
                 // Do something with the selected product
-                Toast.makeText(Product_Inventory_Activity.this, "Selected Supplier: " + selectedSupplier, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Product_Inventory_Activity.this, "Selected Supplier: " + selectedSupplier, Toast.LENGTH_SHORT).show();
             }
 
             @Override

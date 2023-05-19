@@ -30,7 +30,8 @@
                 android:gravity="center"
                 android:text="SIGN UP"
                 android:textStyle="bold"
-                android:textSize="24dp" />
+                android:textColor="@color/colorPrimary3"
+                android:textSize="30dp" />
 
             <EditText
                 android:id="@+id/signup_username"
@@ -41,10 +42,10 @@
                 android:drawableLeft="@drawable/ic_person"
                 android:drawablePadding="8dp"
                 android:hint="Username"
-                android:textColorHint="@color/colorSecond1"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:inputType="textPersonName"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/colorPrimary1" />
 
             <EditText
                 android:id="@+id/signup_email"
@@ -52,13 +53,13 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_person"
+                android:drawableLeft="@drawable/ic_email"
                 android:drawablePadding="8dp"
                 android:hint="Email"
-                android:textColorHint="@color/colorSecond1"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:inputType="textEmailAddress"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/colorPrimary1" />
 
             <EditText
                 android:id="@+id/signup_password"
@@ -66,13 +67,13 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableStart="@drawable/ic_lock_password"
+                android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="8dp"
                 android:hint="Password"
-                android:textColorHint="@color/colorSecond1"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/colorPrimary1" />
 
             <EditText
                 android:id="@+id/signup_confirm_password"
@@ -80,13 +81,13 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableStart="@drawable/ic_lock_password"
+                android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="8dp"
                 android:hint="Confirm Password"
-                android:textColorHint="@color/colorSecond1"
+                android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/colorPrimary1" />
 
             <Button
                 android:id="@+id/signup_button"

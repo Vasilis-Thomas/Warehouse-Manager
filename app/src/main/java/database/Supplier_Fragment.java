@@ -19,7 +19,7 @@ import java.util.List;
 public class Supplier_Fragment extends Fragment {
     private final static String TAG = "remote.database (Supplier_Fragment)";
     TextInputEditText supplierID, supplierName, email, phone, address;
-    Button insertButton, deleteButton, updateButton, queryButton;
+    Button insertButton, deleteButton, updateButton;
 
     public Supplier_Fragment() {
         // Required empty public constructor
@@ -44,7 +44,6 @@ public class Supplier_Fragment extends Fragment {
         address = view.findViewById(R.id.supplier_address_tiet);
 
         insertButton = view.findViewById(R.id.insert_button);
-        queryButton = view.findViewById(R.id.query_button);
         updateButton = view.findViewById(R.id.update_button);
         deleteButton = view.findViewById(R.id.delete_button);
 

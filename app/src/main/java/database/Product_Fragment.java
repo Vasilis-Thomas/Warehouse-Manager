@@ -33,7 +33,7 @@ public class Product_Fragment extends Fragment {
     private final static String TAG = "remote.database (Product_Fragment)";
     TextInputEditText id, name, category, price, stock;
 //    TextInputLayout id, name, category, price;
-    Button insertButton, deleteButton, updateButton, queryButton, addImageButton;
+    Button insertButton, deleteButton, updateButton, addImageButton;
 //    TextView stock;
     ImageView imageView;
 
@@ -109,7 +109,6 @@ public class Product_Fragment extends Fragment {
         imageView = view.findViewById(R.id.imageView);
 
         insertButton = view.findViewById(R.id.insert_button);
-        queryButton = view.findViewById(R.id.query_button);
         updateButton = view.findViewById(R.id.update_button);
         deleteButton = view.findViewById(R.id.delete_button);
 

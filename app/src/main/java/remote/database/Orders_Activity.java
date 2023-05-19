@@ -52,7 +52,7 @@ public class Orders_Activity extends AppCompatActivity {
     TextView username_text, email_text, usernameTxt, emailTxt;
     //    TextInputEditText orderID, productID, customerName, orderDate, quantity; // msrp = recommended supplier price
     TextInputEditText orderID, productID, customerName, quantity; // msrp = recommended supplier price
-    Button insertButton, deleteButton, updateButton, queryButton;
+    Button insertButton, deleteButton, updateButton;
     TextView displayOrderError, questionText;
     EditText dateEdt, orderDate;
     //    TextView orderDate, toolbarTitle;
@@ -137,7 +137,6 @@ public class Orders_Activity extends AppCompatActivity {
         quantity = findViewById(R.id.orders_quantity_tiet);
 
         insertButton = findViewById(R.id.insert_button);
-        queryButton = findViewById(R.id.query_button);
         updateButton = findViewById(R.id.update_button);
         deleteButton = findViewById(R.id.delete_button);
 
