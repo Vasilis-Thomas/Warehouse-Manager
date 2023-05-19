@@ -1,6 +1,7 @@
 package remote.database;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -53,6 +55,7 @@ public class Orders_Activity extends AppCompatActivity {
     //    TextInputEditText orderID, productID, customerName, orderDate, quantity; // msrp = recommended supplier price
     TextInputEditText orderID, productID, customerName, quantity; // msrp = recommended supplier price
     Button insertButton, deleteButton, updateButton;
+
     TextView displayOrderError, questionText;
     EditText dateEdt, orderDate;
     //    TextView orderDate, toolbarTitle;
@@ -549,6 +552,104 @@ public class Orders_Activity extends AppCompatActivity {
                 });
             }
         });
+
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayOrderError.setText("");
+                productID.setError(null);
+
+                int var_orderID = 0;
+                try {
+                    var_orderID = Integer.parseInt(orderID.getText().toString());
+                } catch (NumberFormatException exception) {
+                    System.out.println("Could not parse" + exception);
+                }
+
+                try {
+                    if (orderID.getText().length() == 0)
+                        throw new Exception();
+
+                    documentReference = db.collection("Orders").document(orderID.getText().toString());
+                    int finalVar_orderID = var_orderID;
+                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot documentSnapshot = task.getResult();
+                                if (documentSnapshot.exists()) {
+                                    Orders beforeDeleteOrder = documentSnapshot.toObject(Orders.class);
+                                    Integer currentOrderIdOfOrder = beforeDeleteOrder.getOrderID();
+                                    Integer currentProductIdOfOrder = beforeDeleteOrder.getProductID();
+                                    String currentOrderDateOfOrder = beforeDeleteOrder.getOrderDate();
+                                    String currentCustomerNameOfOrder = beforeDeleteOrder.getCustomerName();
+                                    Integer currentQuantityOfOrder = beforeDeleteOrder.getQuantity();
+
+                                    Orders order = new Orders();
+                                    order.setOrderID(finalVar_orderID);
+//                                order.setProductID(var_prod);
+//                                if (customerName.getText().length() == 0)
+//                                    order.setCustomerName(currentCustomerNameOfOrder);
+//                                else order.setCustomerName(var_customerName);
+//                                if (orderDate.getText().length() == 0)
+//                                    order.setOrderDate(currentOrderDateOfOrder);
+//                                else order.setOrderDate(var_orderDate);
+//                                if (quantity.getText().length() == 0)
+//                                    order.setQuantity(oldQuantity);
+//                                else order.setQuantity(finalVar_quantity);
+
+                                    new AlertDialog.Builder(Orders_Activity.this)
+                                            .setTitle("Delete Order")
+                                            .setMessage("Are you sure, you want to delete the order with orderID " + finalVar_orderID + " ?")
+                                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    db.collection("Orders").document("" + finalVar_orderID).delete()
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    // EDW THA MPAINEI ENA NOTIFICATION EPITYXIAS
+
+                                                                    Toast.makeText(getApplicationContext(), "Order deleted: ", Toast.LENGTH_LONG).show();
+                                                                    orderID.setText("");
+                                                                    productID.setText("");
+                                                                    customerName.setText("");
+                                                                    orderDate.setText("");
+                                                                    quantity.setText("");
+                                                                    setErrorMessagesToNull();
+                                                                }
+                                                            }).addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    // EDW THA MPAINEI ENA NOTIFICATION APOTYXIAS
+//                                          Toast.makeText(getApplicationContext(), "Order error: " + finalVar_orderID, Toast.LENGTH_LONG).show();
+                                                                    Toast.makeText(getApplicationContext(), "Order delete error: ", Toast.LENGTH_LONG).show();
+                                                                }
+                                                            });
+                                                }
+                                            })
+                                            .setNegativeButton("Cancel", null)
+                                            .setIcon(R.drawable.warning)
+                                            .show();
+                                } else {
+                                    displayOrderError.setText("The order you want to delete doesn't exist");
+                                }
+                            }
+                        }
+                    });
+                }catch (Exception e){
+                    String message = e.getMessage();
+                    //ANTISTOIXA MPROYME NA VALOYME TO NOTIFICATION GIA UNSUCCESFUL YLOPOIHSH
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
+                    if(orderID.getText().length() == 0)
+                        orderID.setError("You must fill this field");
+                }
+
+            }
+        });
+
+
 //        return view;
     }
 
@@ -572,7 +673,7 @@ public class Orders_Activity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
         actionBar.setTitle("");
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(R.string.app_name);
+        toolbarTitle.setText(R.string.toolbar_title_to_orders_activity);
         return toolbar;
     }
 
@@ -583,5 +684,4 @@ public class Orders_Activity extends AppCompatActivity {
         if (orderDate.getText().length() == 0) orderDate.setError(null);
         if (quantity.getText().length() == 0) quantity.setError(null);
     }
-
 }

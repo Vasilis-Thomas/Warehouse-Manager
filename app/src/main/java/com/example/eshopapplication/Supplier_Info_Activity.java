@@ -156,7 +156,7 @@ public class Supplier_Info_Activity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
         actionBar.setTitle("");
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(R.string.app_name); //  edw na valoyme string "Supplier Info"
+        toolbarTitle.setText(R.string.toolbar_title_to_supplier_info_activity); //  edw na valoyme string "Supplier Info"
         return toolbar;
     }
 

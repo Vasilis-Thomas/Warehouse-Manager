@@ -225,6 +225,7 @@
 
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_menu_header"
-        app:menu="@menu/drawer_menu"></com.google.android.material.navigation.NavigationView>
+        app:menu="@menu/drawer_menu">
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

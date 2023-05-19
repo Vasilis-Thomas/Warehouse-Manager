@@ -4,8 +4,13 @@
     <string name="login_preference">signuploginfirebase_loginPreference</string>
     <string name="login_status">signuploginfirebase_loginStatus</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="set_toolbar_title_to_settings_activity">SETTINGS</string>
-    <string name="set_toolbar_title_to_orders_activity">ORDERS</string>
+
+    <string name="toolbar_title_to_main_activity">Local Database</string>
+    <string name="toolbar_title_to_orders_activity">Orders</string>
+    <string name="toolbar_title_to_product_inventory_activity">Product Inventory</string>
+    <string name="toolbar_title_to_supplier_info_activity">Supplier Info</string>
+    <string name="toolbar_title_to_settings_activity">Settings</string>
+    <string name="toolbar_title_to_order_info_activity">Order Info</string>
 
     <string name="firebaseUserEmail"></string>
     <string name="product_tabItem">Product</string>

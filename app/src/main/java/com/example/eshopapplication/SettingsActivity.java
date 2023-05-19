@@ -138,7 +138,7 @@ public class SettingsActivity extends AppCompatActivity {
             usernameTxt.setText(userName);
             emailTxt.setText(userEmail);
 
-            logoutSubTxt.setText("You have been signed up as "+  userName);
+            logoutSubTxt.setText("You are logged in as "+  userName);
 
             String[] emailAddresses = {"billthomas308@gmail.com", "sarakenidisn@gmail.com"};
 
@@ -172,20 +172,19 @@ public class SettingsActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     builder = new AlertDialog.Builder(SettingsActivity.this);
                     builder.setTitle("Confirmation message");
-                    builder.setMessage("You are log in as " + userName + ".\nAre you sure you want to logout?");
-                    builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            sharedPreferenceConfig.writeLoginStatus(false);
-//                            startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
-                            dialogInterface.dismiss();
-                        }
-                    });
-                    builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                    builder.setMessage("You are logged in as " + userName + ".\nAre you sure you want to logout?");
+                    builder.setIcon(R.drawable.warning);
+                    builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             sharedPreferenceConfig.writeLoginStatus(false);
                             startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
+//                            dialogInterface.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                         }
                     });
@@ -219,7 +218,7 @@ public class SettingsActivity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
         actionBar.setTitle("");
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(R.string.set_toolbar_title_to_settings_activity);
+        toolbarTitle.setText(R.string.toolbar_title_to_settings_activity);
         return toolbar;
     }
 
@@ -228,37 +227,8 @@ public class SettingsActivity extends AppCompatActivity {
                 setMessage("Constructors: Nikolas Sarakenidis, Vasilis Thomas\n"
                         + "Institution: International University of Greece\n"
                         + "Supervisor: Euklidis Keramopoylos\n"
-                        + "Project name: Economy E-shop Application\n"
+                        + "Project name: Warehouse Manager\n"
                         + "Application: Android\n"
                         + "MinimumSdk: 24").show();
     }
-
-
-//    @Override
-//    public void onBackPressed() {
-//        Intent intent = new Intent(SettingsActivity.this, Supplier_Info_Activity.class);
-//        intent.putExtra("selectedItem", R.id.dr_orders);
-//        startActivity(intent);
-//        finish();
-//    }
-
-//    @Override
-//    public void onBackPressed() {
-//        if (!activityStack.isEmpty()) {
-//            // Pop the current activity from the stack
-//            activityStack.pop();
-//            if (!activityStack.isEmpty()) {
-//                // Get the previous activity class
-//                Class<?> previousActivity = activityStack.peek();
-//
-//                // Start the previous activity
-//                Intent intent = new Intent(SettingsActivity.this, previousActivity).putExtra("selectedItem", R.id.dr_orders);;
-//                startActivity(intent);
-//            }
-//        } else {
-//            // If there are no more activities in the stack, perform the default back button behavior
-//            super.onBackPressed();
-//        }
-//    }
-
 }

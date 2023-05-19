@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
         actionBar.setTitle("");
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(R.string.app_name); //        toolbarTitle.setText("Economy E-shop Application");
+        toolbarTitle.setText(R.string.toolbar_title_to_main_activity); //        toolbarTitle.setText("Economy E-shop Application");
         return toolbar;
     }
 
