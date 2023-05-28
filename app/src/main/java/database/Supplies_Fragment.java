@@ -22,14 +22,12 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Supplies_Fragment extends Fragment {
-//    TextInputLayout supplies_msrp_til;
-//    TextInputEditText productID, supplierID, supplyDate, quantity, msrp; // msrp = recommended supplier price
-TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended supplier price
+    private final static String TAG = "remote.database (Supplies_Fragment)";
+    TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended supplier price
     Button insertButton, deleteButton, updateButton;
     TextView displaySupplyError, questionText;
     EditText dateEdt;
     TextView supplyDate;
-    private final static String TAG = "remote.database (Supplies_Fragment)";
 
 
     public Supplies_Fragment() {
@@ -43,10 +41,9 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_supplies, container, false);
+        View view = inflater.inflate(R.layout.fragment_supplies, container, false);
 
         displaySupplyError = view.findViewById(R.id.supply_error_textview);
         questionText = view.findViewById(R.id.question_text);
@@ -69,8 +66,6 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
         dateEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // on below line we are getting
-                // the instance of our calendar.
                 final Calendar c = Calendar.getInstance();
 
                 // on below line we are getting
@@ -82,24 +77,22 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
                 // on below line we are creating a variable for date picker dialog.
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         // on below line we are passing context.
-                        getContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                String yearString = Integer.toString(year); // WE ARE DOING THIS AND THE NEXT LINE
-                                year = Integer.parseInt(yearString.substring(1)); // TO REMOVE THE FIRST 2 DIGITS FROM LIKE 2023 ->> 23
+                        getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        String yearString = Integer.toString(year); // WE ARE DOING THIS AND THE NEXT LINE
+                        year = Integer.parseInt(yearString.substring(1)); // TO REMOVE THE FIRST 2 DIGITS FROM LIKE 2023 ->> 23
 //                                dateEdt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                                if(dayOfMonth < 10 && monthOfYear < 10)
-                                    dateEdt.setText("0"+dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
-                                else if (dayOfMonth < 10)
-                                    dateEdt.setText("0"+dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                                else if (monthOfYear < 10)
-                                    dateEdt.setText(""+dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
-                                else
-                                    dateEdt.setText(""+dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                            }
-                        },
+                        if (dayOfMonth < 10 && monthOfYear < 10)
+                            dateEdt.setText("0" + dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
+                        else if (dayOfMonth < 10)
+                            dateEdt.setText("0" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        else if (monthOfYear < 10)
+                            dateEdt.setText("" + dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
+                        else
+                            dateEdt.setText("" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                    }
+                },
                         // on below line we are passing year,
                         // month and day for selected date in our date picker.
                         year, month, day);
@@ -113,10 +106,18 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
             @Override
             public void onClick(View view) {
                 displaySupplyError.setText("");
-                if(productID.getText().length()==0) { productID.setError("You must fill this field");  }
-                if(supplierID.getText().length()==0){ supplierID.setError("You must fill this field"); }
-                if(supplyDate.getText().length()==0){ supplyDate.setError("You must fill this field"); }
-                if(quantity.getText().length()==0)  { quantity.setError("You must fill this field");   }
+                if (productID.getText().length() == 0) {
+                    productID.setError("You must fill this field");
+                }
+                if (supplierID.getText().length() == 0) {
+                    supplierID.setError("You must fill this field");
+                }
+                if (supplyDate.getText().length() == 0) {
+                    supplyDate.setError("You must fill this field");
+                }
+                if (quantity.getText().length() == 0) {
+                    quantity.setError("You must fill this field");
+                }
                 // ΤΟ QUANTITY DEN APOTELEI KYRIO KLEIDI OMWS THA PREPEI NA MHN EINAI OYTE 0 OYTE NULL
 //                if(msrp.getText().length()==0)      { msrp.setError("It is optional to fill this field");}
 
@@ -159,8 +160,7 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
 //                    if(var_supplyDate.isEmpty() || !var_supplyDate.matches("\\d{2}-\\d{2}-\\d{2}") || (checkIfDateGivenIsValid() == false)
 //                        || var_quantity == 0 || quantity.getText().toString().isEmpty())
 //                        throw new Exception("Exception thrown");
-                    if(var_supplyDate.isEmpty() || !var_supplyDate.matches("\\d{2}-\\d{2}-\\d{2}")
-                            || var_quantity == 0 || quantity.getText().toString().isEmpty())
+                    if (var_supplyDate.isEmpty() || !var_supplyDate.matches("\\d{2}-\\d{2}-\\d{2}") || var_quantity == 0 || quantity.getText().toString().isEmpty())
                         throw new Exception("Exception thrown");
 
                     Supplies supply = new Supplies();
@@ -181,7 +181,7 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
                     setErrorMessagesToNull();
                 } catch (Exception e) {
                     String message = e.getMessage();
-                    Log.i(TAG,e.getMessage());
+                    Log.i(TAG, e.getMessage());
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI APOTYXHS H PROSTHIKI TOY NEOY PROIONTOS
 //                    if(message.equals("FOREIGN KEY constraint failed (code 787 SQLITE_CONSTRAINT_FOREIGNKEY)")){
 //                        Toast.makeText(getActivity(),"The productID or the supplier or the supplyDate you submitted is not registered.", Toast.LENGTH_LONG).show();
@@ -189,48 +189,46 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
 
                     boolean flagProductID = false, flagSupplierID = false;
 
-                    List<Product> aproduct= MainActivity.myAppDatabase.myDao().getProduct();
-                    for(Product i: aproduct){
+                    List<Product> aproduct = MainActivity.myAppDatabase.myDao().getProduct();
+                    for (Product i : aproduct) {
                         int var_productID_for_check = i.getPid();
-                        if(var_productID_for_check == var_productID){
+                        if (var_productID_for_check == var_productID) {
                             flagProductID = true;  // THA GINEI true APO TH STIGMH POY TO var_productID YPARXEI STHN VASH DHLADH STON PINAKA supplies
-                            Log.i(TAG,"TO flagProductID egine true");
+                            Log.i(TAG, "TO flagProductID egine true");
                             break;
                         }
                     }
 
-                    List<Supplier> asupplier= MainActivity.myAppDatabase.myDao().getSupplier();
-                    for(Supplier i: asupplier){
+                    List<Supplier> asupplier = MainActivity.myAppDatabase.myDao().getSupplier();
+                    for (Supplier i : asupplier) {
                         int var_supplierID_for_check = i.getSid();
-                        if(var_supplierID_for_check == var_supplierID){
+                        if (var_supplierID_for_check == var_supplierID) {
                             flagSupplierID = true;  // THA GINEI true APO TH STIGMH POY TO var_supplierID YPARXEI STHN VASH DHLADH STON PINAKA supplies
-                            Log.i(TAG,"TO flagSupplierID egine true");
+                            Log.i(TAG, "TO flagSupplierID egine true");
                             break;
                         }
                     }
 
                     boolean flagSupplyExists = false;
                     List<Supplies> asupply = MainActivity.myAppDatabase.myDao().getSupplies();
-                    for(Supplies i: asupply){
+                    for (Supplies i : asupply) {
                         int var_productID_for_check = i.getProductID();
                         int var_supplierID_for_check = i.getSupplierID();
                         String var_supplyDate_for_check = i.getSupply_date();
-                        if((var_productID_for_check == var_productID) && (var_supplierID_for_check == var_supplierID) &&
-                                (var_supplyDate_for_check.equals(var_supplyDate)) ){
+                        if ((var_productID_for_check == var_productID) && (var_supplierID_for_check == var_supplierID) && (var_supplyDate_for_check.equals(var_supplyDate))) {
                             flagSupplyExists = true;  // THA GINEI true APO TH STIGMH POY TO DOSMENO supply YPARXEI HDH STHN VASH DHLADH STON PINAKA supplies
-                            Log.i(TAG,"TO flagSupplyExists egine true");
+                            Log.i(TAG, "TO flagSupplyExists egine true");
                             break;
                         }
                     }
 
-                    if(!flagProductID)
+                    if (!flagProductID)
                         productID.setError("The productID you filled is not registered");
-                    if(!flagSupplierID)
+                    if (!flagSupplierID)
                         supplierID.setError("The supplierID you filled is not registered");
-                    if(quantity.getText().toString().isEmpty())
+                    if (quantity.getText().toString().isEmpty())
                         quantity.setError("You must fill this field");
-                    if(var_supplyDate.isEmpty())
-                        supplyDate.setError("You must fill this field");
+                    if (var_supplyDate.isEmpty()) supplyDate.setError("You must fill this field");
                     else if (!var_supplyDate.matches("\\d{2}-\\d{2}-\\d{2}"))
                         supplyDate.setError("Required format is dd-mm-yy");
 //                    else if (!checkIfDateGivenIsValid()) {
@@ -238,11 +236,10 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
 //                        Log.d(TAG,"CurrentDate value is less than dateGivenByUser");
 ////                        throw new ParseException("Parse exception", ex);
 //                    }
-                    if(flagSupplyExists)
+                    if (flagSupplyExists)
                         displaySupplyError.setText("The supply you want to make has already been recorded.");
-                    else
-                        displaySupplyError.setText("");
-                    if(quantity.getText().length()==0)
+                    else displaySupplyError.setText("");
+                    if (quantity.getText().length() == 0)
                         quantity.setError("You must fill this field");
                 }
             }
@@ -282,12 +279,11 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
                 int currentQuantity = 0;
                 double currentMsrp = 0.0;
                 List<Supplies> asupply = MainActivity.myAppDatabase.myDao().getSupplies();
-                for(Supplies i: asupply){
+                for (Supplies i : asupply) {
                     int var_productID_for_check = i.getProductID();
                     int var_supplierID_for_check = i.getSupplierID();
                     String var_supplyDate_for_check = i.getSupply_date();
-                    if((var_productID_for_check == var_productID) && (var_supplierID_for_check == var_supplierID) &&
-                            (var_supplyDate_for_check.equals(var_supplyDate)) ){
+                    if ((var_productID_for_check == var_productID) && (var_supplierID_for_check == var_supplierID) && (var_supplyDate_for_check.equals(var_supplyDate))) {
                         currentQuantity = i.getQuantity();
                         currentMsrp = i.getMsrp();
                         flagSupplyExists = true;
@@ -295,17 +291,18 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
                     }
                 }
 
-                try{
-                    if(productID.getText().length() == 0 || supplierID.getText().length() == 0
-                            || supplyDate.getText().length() == 0 || !var_supplyDate.matches("\\d{2}-\\d{2}-\\d{2}") || !flagSupplyExists){
+                try {
+                    if (productID.getText().length() == 0 || supplierID.getText().length() == 0 || supplyDate.getText().length() == 0 || !var_supplyDate.matches("\\d{2}-\\d{2}-\\d{2}") || !flagSupplyExists) {
                         throw new Exception("Exception Error");
                     }
                     Supplies supply = new Supplies();
                     supply.setProductID(var_productID);
                     supply.setSupplierID(var_supplierID);
                     supply.setSupply_date(var_supplyDate);
-                    if(var_quantity == 0) supply.setQuantity(currentQuantity); else supply.setQuantity(var_quantity);
-                    if(var_msrp == 0.0) supply.setMsrp(currentMsrp); else supply.setMsrp(var_msrp);
+                    if (var_quantity == 0) supply.setQuantity(currentQuantity);
+                    else supply.setQuantity(var_quantity);
+                    if (var_msrp == 0.0) supply.setMsrp(currentMsrp);
+                    else supply.setMsrp(var_msrp);
 //                    supply.setQuantity(var_quantity);
 //                    supply.setMsrp(var_msrp);
                     MainActivity.myAppDatabase.myDao().updateSupply(supply);
@@ -317,24 +314,20 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
                     quantity.setText("");
                     msrp.setText("");
                     setErrorMessagesToNull();
-                }catch (Exception e) {
+                } catch (Exception e) {
                     String message = e.getMessage();
-                    Log.i(TAG,e.getMessage());
-                    Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, e.getMessage());
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(getActivity(),"The productID or the supplier you submitted is not registered.", Toast.LENGTH_LONG).show();
 //                    }
-                    if(productID.length() == 0)
-                        productID.setError("You must fill this field");
-                    if(supplierID.length() == 0)
-                        supplierID.setError("You must fill this field");
-                    if(var_supplyDate.isEmpty())
-                        supplyDate.setError("You must fill this field");
+                    if (productID.length() == 0) productID.setError("You must fill this field");
+                    if (supplierID.length() == 0) supplierID.setError("You must fill this field");
+                    if (var_supplyDate.isEmpty()) supplyDate.setError("You must fill this field");
                     else if (!var_supplyDate.matches("\\d{2}-\\d{2}-\\d{2}"))
                         supplyDate.setError("Required format is dd-mm-yy");
-                    if(!flagSupplyExists)
+                    if (!flagSupplyExists)
                         displaySupplyError.setText("The productID or supplierID or supplyDate you filled do not exist\nPlease give an already recorded supply");
-                    else
-                        displaySupplyError.setText("");
+                    else displaySupplyError.setText("");
                 }
             }
         });
@@ -344,33 +337,32 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
             public void onClick(View view) {
                 displaySupplyError.setText("");
                 int var_pid = 0;
-                try{
+                try {
                     var_pid = Integer.parseInt(productID.getText().toString());
-                }catch (NumberFormatException ex){
-                    System.out.println("Could not parse"+ ex);
+                } catch (NumberFormatException ex) {
+                    System.out.println("Could not parse" + ex);
                 }
                 int var_sid = 0;
-                try{
+                try {
                     var_sid = Integer.parseInt(supplierID.getText().toString());
-                }catch (NumberFormatException ex){
-                    System.out.println("Could not parse"+ ex);
+                } catch (NumberFormatException ex) {
+                    System.out.println("Could not parse" + ex);
                 }
                 String var_supplyDate = supplyDate.getText().toString();
                 boolean flagSupplyExists = false;
                 List<Supplies> asupply = MainActivity.myAppDatabase.myDao().getSupplies();
-                for(Supplies i: asupply){
+                for (Supplies i : asupply) {
                     int var_productID_for_check = i.getProductID();
                     int var_supplierID_for_check = i.getSupplierID();
                     String var_supplyDate_for_check = i.getSupply_date();
-                    if(var_productID_for_check == var_pid && var_supplierID_for_check == var_sid && var_supplyDate_for_check.equals(var_supplyDate)){
+                    if (var_productID_for_check == var_pid && var_supplierID_for_check == var_sid && var_supplyDate_for_check.equals(var_supplyDate)) {
                         flagSupplyExists = true;
                         break;
                     }
                 }
 
-                try{
-                    if(productID.getText().length() == 0 || supplierID.getText().length() == 0
-                            || supplyDate.getText().length() == 0 || !flagSupplyExists)
+                try {
+                    if (productID.getText().length() == 0 || supplierID.getText().length() == 0 || supplyDate.getText().length() == 0 || !flagSupplyExists)
                         throw new Exception("Exception Error");
                     Supplies supply = new Supplies();
                     supply.setSupplierID(var_sid);
@@ -384,15 +376,12 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
                     quantity.setText("");
                     msrp.setText("");
                     setErrorMessagesToNull();
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     String message = ex.getMessage();
-                    if(productID.length() == 0)
-                        productID.setError("You must fill this field");
-                    if(supplierID.length() == 0)
-                        supplierID.setError("You must fill this field");
-                    if(var_supplyDate.isEmpty())
-                        supplyDate.setError("You must fill this field");
-                    if(!flagSupplyExists)
+                    if (productID.length() == 0) productID.setError("You must fill this field");
+                    if (supplierID.length() == 0) supplierID.setError("You must fill this field");
+                    if (var_supplyDate.isEmpty()) supplyDate.setError("You must fill this field");
+                    if (!flagSupplyExists)
                         displaySupplyError.setText("The productID or supplierID or supplyDate you filled do not exist\nPlease give an already recorded supply");
                 }
             }
@@ -401,11 +390,11 @@ TextInputEditText productID, supplierID, quantity, msrp; // msrp = recommended s
     }
 
     public void setErrorMessagesToNull() {
-        if (productID.getText().length() == 0)    productID.setError(null);
-        if (supplierID.getText().length() == 0)   supplierID.setError(null);
-        if (supplyDate.getText().length() == 0)   supplyDate.setError(null);
-        if (quantity.getText().length() == 0)     quantity.setError(null);
-        if (msrp.getText().length() == 0)         msrp.setError(null);
+        if (productID.getText().length() == 0) productID.setError(null);
+        if (supplierID.getText().length() == 0) supplierID.setError(null);
+        if (supplyDate.getText().length() == 0) supplyDate.setError(null);
+        if (quantity.getText().length() == 0) quantity.setError(null);
+        if (msrp.getText().length() == 0) msrp.setError(null);
     }
 
 //    ΤΣΕΚΑΡΕΤΑΙ ΕΑΝ Η ΗΜΕΡΟΜΗΝΙΑ ΠΟΥ ΔΟΘΗΚΕ ΕΙΝΑΙ ΤΟΥ ΠΑΡΟΝΤΟΣ Ή ΜΕΛΛΟΝΤΙΚΗ

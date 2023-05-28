@@ -305,8 +305,8 @@ public class Product_Fragment extends Fragment {
                     product.setPid(var_id);
                     if(var_name.isEmpty()) product.setName(currentName);    else product.setName(var_name);
                     if(var_category.isEmpty()) product.setCategory(currentCategory); else product.setCategory(var_category);
-                    if(var_price == 0.0) product.setPrice(currentPrice); else product.setPrice(var_price);
-                    if(var_stock == 0) product.setStock(currentStock); else product.setStock(var_stock);
+                    if(price.getText().length() == 0) product.setPrice(currentPrice); else product.setPrice(var_price);
+                    if(stock.getText().length() == 0) product.setStock(currentStock); else product.setStock(var_stock);
                     if(compareBitmaps(bitmap, currentBitmap)){
                         product.setImage(currentImage);
                     }else if(compareBitmaps(bitmap, defaultBitmap)){

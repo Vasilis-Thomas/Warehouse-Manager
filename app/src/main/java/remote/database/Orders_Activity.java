@@ -68,8 +68,7 @@ public class Orders_Activity extends AppCompatActivity {
     Button insertButton, deleteButton, updateButton;
 
     TextView displayOrderError, questionText;
-    EditText dateEdt, orderDate;
-    //    TextView orderDate, toolbarTitle;
+    EditText orderDate;
     TextView toolbarTitle;
     DocumentReference documentReference;
 
@@ -96,8 +95,6 @@ public class Orders_Activity extends AppCompatActivity {
                         return true;
 
                     case R.id.dr_orders:
-//                        menuItem.setChecked(true);
-//                        startActivity(new Intent(Orders_Activity.this, Orders_Activity.class));
                         drawerLayout.closeDrawers();
                         return true;
 
@@ -120,7 +117,6 @@ public class Orders_Activity extends AppCompatActivity {
 
                     case R.id.settings:
                         menuItem.setChecked(true);
-//                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
                         startActivity(new Intent(Orders_Activity.this, SettingsActivity.class));
                         drawerLayout.closeDrawers();
                         return true;
@@ -154,12 +150,9 @@ public class Orders_Activity extends AppCompatActivity {
         updateButton = findViewById(R.id.update_button);
         deleteButton = findViewById(R.id.delete_button);
 
-//        dateEdt = findViewById(R.id.orders_orderdate_tiet);
         orderDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // on below line we are getting
-                // the instance of our calendar.
                 final Calendar c = Calendar.getInstance();
 
                 // on below line we are getting
@@ -236,20 +229,26 @@ public class Orders_Activity extends AppCompatActivity {
                     System.out.println("Could not parse" + exception);
                 }
 
+                boolean flagProductStock = false;
                 final boolean[] flagOrderID = {false};
                 int currentQuantityProduct = 0;
+                boolean flagProductID = false;
                 try {
-                    boolean flagProductID = false;
                     List<Product> aproduct = MainActivity.myAppDatabase.myDao().getProduct();
                     for (Product i : aproduct) {
                         int var_productID_for_check = i.getPid();
                         if (var_productID_for_check == var_productID) {
                             flagProductID = true;  // THA GINEI true APO TH STIGMH POY TO var_productID YPARXEI STHN VASH DHLADH STON PINAKA product
                             currentQuantityProduct = i.getStock();
+                            int finalStock = currentQuantityProduct - var_quantity;
+                            if (finalStock < 0)
+                                flagProductStock = true; // THA GINEI true APO TH STIGMH POY TO stock TOY PRODUCT EINAI MIKROTERO APO TO quantity POY THELOYME NA PARAGEILOYME
                             Log.i(TAG, "TO flagProductID egine true");
                             break;
                         }
                     }
+
+                    if (!flagProductID || flagProductStock) throw new Exception("Exception thrown");
 
                     documentReference = db.collection("Orders").document(orderID.getText().toString());
 
@@ -262,7 +261,6 @@ public class Orders_Activity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot documentSnapshot = task.getResult();
                                 if (documentSnapshot.exists()) {
-//                                     flagOrderID[0] = true;
                                     orderID.setError("The certain order ID has been recorded.\nPlease give another order ID");
                                     Log.d("TAG", "TO flagOrderID yparhei idi ");
                                 } else {
@@ -283,10 +281,7 @@ public class Orders_Activity extends AppCompatActivity {
                                                 NotificationManager manager = getSystemService(NotificationManager.class);
                                                 manager.createNotificationChannel(channel);
                                             }
-                                            NotificationCompat.Builder builder = new NotificationCompat.Builder(Orders_Activity.this, "myCh")
-                                                    .setSmallIcon(R.drawable.warning)
-                                                    .setContentTitle("Notification")
-                                                    .setContentText("Order successfully added!");
+                                            NotificationCompat.Builder builder = new NotificationCompat.Builder(Orders_Activity.this, "myCh").setSmallIcon(R.drawable.warning).setContentTitle("Notification").setContentText("Order successfully added!");
 
                                             notification = builder.build();
                                             notificationManagerCompat = NotificationManagerCompat.from(Orders_Activity.this);
@@ -357,52 +352,12 @@ public class Orders_Activity extends AppCompatActivity {
                     if (orderID.getText().length() == 0 || flagOrderID[0] || productID.getText().length() == 0 || var_customerName.isEmpty() || var_orderDate.isEmpty() || !var_orderDate.matches("\\d{2}-\\d{2}-\\d{2}") || quantity.getText().toString().equals("0") || quantity.getText().toString().isEmpty() || (var_quantity > currentQuantityProduct) || !flagProductID)
                         throw new Exception("Exception thrown");
 
-
-//                        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
-//                        Date dateCurrent = new Date();
-//                        Timestamp dateGiven = Timestamp.valueOf("2023-05-01 09:01:16");
-//                        String currentDate = formatter.format(dateCurrent);
-//                        String givenDateByUser = formatter.format(dateGiven);
-////                        System.out.println(formatter.format(currentDate));
-////                        System.out.println(formatter.format(givenDateByUser));
-//                        //compares ts1 with ts2
-//                        int checkDate = currentDate.compareTo(givenDateByUser);
-//                        if(checkDate>0){
-//                            // EAN TO CURRENT DATE EINAI > TOY GIVENDATEBYUSER TOTE SHMAINEI OTI EXEI
-//                            // PERASEI AYTH H HMEROMHNIA OPOTE DN MPOREI NA SYMVEI ORDER (PARAGGELIA)
-//                            System.out.println("CurrentDate value is less than giveDateByUser");
-//                        }
-////                        else if(checkDate>0){
-////                            System.out.println("TimeSpan1 value is greater");
-////                        }
-//                        else{
-//                            // EAN TO CURRENT DATE EINAI <= TOY GIVENDATEBYUSER TOTE SHMAINEI OTI h
-//                            // CURRENTDATE EINAI H HMERA THS PARAGGELIAS 'H OTI H PARAGGELIA THA GINEI KAPOIA EPOMENH MERA (STHN GIVENDATEBYUSER) AYTH
-//                            System.out.println("CurrentDate value is greater or equal to giveDateByUser");
-//                        }
-
-
                 } catch (Exception e) {
                     String message = e.getMessage();
                     Log.i(TAG, e.getMessage());
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI APOTYXHS H PROSTHIKI TOY NEOY PROIONTOS
-//                    if(message.equals("FOREIGN KEY constraint failed (code 787 SQLITE_CONSTRAINT_FOREIGNKEY)")){
                     Toast.makeText(getApplicationContext(), "The productID or the supplier or the supplyDate you submitted is not registered\n or some other error.", Toast.LENGTH_LONG).show();
-//                    }
 
-                    boolean flagProductID = false;
-                    List<Product> aproduct = MainActivity.myAppDatabase.myDao().getProduct();
-                    for (Product i : aproduct) {
-                        int var_productID_for_check = i.getPid();
-                        if (var_productID_for_check == var_productID) {
-                            flagProductID = true;  // THA GINEI true APO TH STIGMH POY TO var_productID YPARXEI STHN VASH DHLADH STON PINAKA product
-                            Log.i(TAG, "TO flagProductID egine true");
-                            break;
-                        }
-                    }
-
-//                    if(flagOrderID[0])
-//                        orderID.setError("The certain order ID has been registered.\nPlease give another order ID");
                     if (productID.getText().toString().isEmpty())
                         productID.setError("You must fill this field");
                     else if (!flagProductID)
@@ -410,15 +365,13 @@ public class Orders_Activity extends AppCompatActivity {
                     if (var_orderDate.isEmpty()) orderDate.setError("You must fill this field");
                     else if (!var_orderDate.matches("\\d{2}-\\d{2}-\\d{2}"))
                         orderDate.setError("Required format is dd-mm-yy");
-                    else orderDate.setText("");
-//                        displayOrderError.setText("");
                     if (quantity.getText().toString().isEmpty())
                         quantity.setError("You must fill this field");
                     else if (quantity.getText().toString().equals("0"))
                         quantity.setError("The value of stock must be at least 1");
                     else if (currentQuantityProduct == 0)
                         quantity.setError("There are no stock of the selected product\n");
-                    else if (var_quantity > currentQuantityProduct) {
+                    else if (flagProductStock) {
                         quantity.setError("The apotheke has only " + currentQuantityProduct + " stock of the selected product" + "\nPlease make an order with maximum  " + currentQuantityProduct + " stock");
                     }
 
@@ -464,42 +417,42 @@ public class Orders_Activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot documentSnapshot = task.getResult();
                             if (!documentSnapshot.exists()) {
-//                                     flagOrderID[0] = true;
-                                orderID.setError("The certain order ID doesnt exist.\nPlease give an existing order ID to update");
-//                                Log.d("TAG", "TO flagOrderID yparhei idi ");
+                                orderID.setError("The certain order ID doesn't exist.\nPlease give an existing order ID to update");
                             } else {
                                 boolean flagProductStock = false;  // AYTH H METAVLHTH GINETAI TRUE OTAN TO stock TOY product PROKYPTEI NA EINAI ARNITIKO ME THN DIAMORFOSH TOY UPDATE
                                 try {
                                     Orders beforeUpdateOrder = documentSnapshot.toObject(Orders.class);
                                     Integer currentOrderIdOfOrder = beforeUpdateOrder.getOrderID();
                                     Integer currentProductIdOfOrder = beforeUpdateOrder.getProductID();
+                                    Log.d(TAG + "currentProductIdOfOrder", "" + currentProductIdOfOrder);
                                     String currentOrderDateOfOrder = beforeUpdateOrder.getOrderDate();
                                     String currentCustomerNameOfOrder = beforeUpdateOrder.getCustomerName();
                                     // to oldQuantity tha mporoyse na legetai currentOldQuantityOrder
                                     Integer oldQuantity = beforeUpdateOrder.getQuantity();  // PAIRNOYME TO QUANTITY APO TO ORDER POY PROYPIRXE (PRIN TO UPDATE TOY)
-
                                     List<Product> bproduct = MainActivity.myAppDatabase.myDao().getProduct();
                                     for (Product i : bproduct) {
                                         int var_productID_for_check = i.getPid();
                                         if (var_productID_for_check == finalVar_productID) {
                                             if (i.getStock() + oldQuantity - finalVar_quantity < 0) {
-                                                flagProductStock = true;  // TRUE OTAN H TIMH TOY STOCK TOY product GINETAI ARNHTIKH PRAGMA POY DN GNT NA SYMVEI KAI TRWEI EXCEPTION META
+                                                flagProductStock = true;  // TRUE OTAN H TIMH TOY STOCK TOY product GINETAI ARNHTIKH PRAGMA POY DN EINAI EPITHYMITO KAI TRWEI EXCEPTION META
                                                 displayOrderError.setText("Cannot update the order due to lack of stock\nCurrent stock of selected product:" + i.getStock() + "\nOldQuantity order: " + oldQuantity + "\nNewQuantity order:" + finalVar_quantity);
                                             }
                                             break;
                                         }
                                     }
-                                    if (flagProductStock || (currentProductIdOfOrder != finalVar_productID))
-                                        throw new Exception("Exception Thrown");
 
                                     if ((currentProductIdOfOrder != finalVar_productID)) {
                                         productID.setError("The given productID doesn't correspond appropriately to the given orderID");
+                                        throw new Exception("Exception Thrown");
+                                    } else if (flagProductStock) {
                                         throw new Exception("Exception Thrown");
                                     }
 
                                     Orders order = new Orders();
                                     order.setOrderID(finalVar_orderID);
-                                    order.setProductID(finalVar_productID);
+//                                    if(productID.getText().length() == 0)
+                                    order.setProductID(currentProductIdOfOrder);
+//                                        order.setProductID(finalVar_productID);
                                     if (customerName.getText().length() == 0)
                                         order.setCustomerName(currentCustomerNameOfOrder);
                                     else order.setCustomerName(var_customerName);
@@ -514,8 +467,7 @@ public class Orders_Activity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             // EDW THA MPAINEI ENA NOTIFICATION EPITYXIAS
-//                                    Toast.makeText(getApplicationContext(), "Order added: " + finalVar_orderID, Toast.LENGTH_LONG).show();
-                                            Toast.makeText(getApplicationContext(), "Order added: ", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Order " + finalVar_orderID + " updated: ", Toast.LENGTH_LONG).show();
 
                                             String currentPrName = "Unknown", currentPrCategory = "Unknown";
                                             double currentPrPrice = 0.0;
@@ -527,6 +479,7 @@ public class Orders_Activity extends AppCompatActivity {
                                                 int var_productID_for_check = i.getPid();
                                                 if (var_productID_for_check == finalVar_productID) {
                                                     currentPrID = i.getPid();
+//                                                    currentPrID = currentProductIdOfOrder;
                                                     currentPrName = i.getName();
                                                     currentPrCategory = i.getCategory();
                                                     currentPrPrice = i.getPrice();
@@ -558,8 +511,7 @@ public class Orders_Activity extends AppCompatActivity {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             // EDW THA MPAINEI ENA NOTIFICATION APOTYXIAS
-//                                          Toast.makeText(getApplicationContext(), "Order error: " + finalVar_orderID, Toast.LENGTH_LONG).show();
-                                            Toast.makeText(getApplicationContext(), "Order error: ", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Order update error: ", Toast.LENGTH_LONG).show();
                                         }
                                     });
                                 } catch (Exception e) {
@@ -603,8 +555,7 @@ public class Orders_Activity extends AppCompatActivity {
                 }
 
                 try {
-                    if (orderID.getText().length() == 0)
-                        throw new Exception();
+                    if (orderID.getText().length() == 0) throw new Exception("Exception thrown");
 
                     documentReference = db.collection("Orders").document(orderID.getText().toString());
                     int finalVar_orderID = var_orderID;
@@ -623,61 +574,43 @@ public class Orders_Activity extends AppCompatActivity {
 
                                     Orders order = new Orders();
                                     order.setOrderID(finalVar_orderID);
-//                                order.setProductID(var_prod);
-//                                if (customerName.getText().length() == 0)
-//                                    order.setCustomerName(currentCustomerNameOfOrder);
-//                                else order.setCustomerName(var_customerName);
-//                                if (orderDate.getText().length() == 0)
-//                                    order.setOrderDate(currentOrderDateOfOrder);
-//                                else order.setOrderDate(var_orderDate);
-//                                if (quantity.getText().length() == 0)
-//                                    order.setQuantity(oldQuantity);
-//                                else order.setQuantity(finalVar_quantity);
 
-                                    new AlertDialog.Builder(Orders_Activity.this)
-                                            .setTitle("Delete Order")
-                                            .setMessage("Are you sure, you want to delete the order with orderID " + finalVar_orderID + " ?")
-                                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                    new AlertDialog.Builder(Orders_Activity.this).setTitle("Delete Order").setMessage("Are you sure, you want to delete the order with orderID: " + finalVar_orderID + "?").setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            db.collection("Orders").document("" + finalVar_orderID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    db.collection("Orders").document("" + finalVar_orderID).delete()
-                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    // EDW THA MPAINEI ENA NOTIFICATION EPITYXIAS
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    // EDW THA MPAINEI ENA NOTIFICATION EPITYXIAS
 
-                                                                    Toast.makeText(getApplicationContext(), "Order deleted: ", Toast.LENGTH_LONG).show();
-                                                                    orderID.setText("");
-                                                                    productID.setText("");
-                                                                    customerName.setText("");
-                                                                    orderDate.setText("");
-                                                                    quantity.setText("");
-                                                                    setErrorMessagesToNull();
-                                                                }
-                                                            }).addOnFailureListener(new OnFailureListener() {
-                                                                @Override
-                                                                public void onFailure(@NonNull Exception e) {
-                                                                    // EDW THA MPAINEI ENA NOTIFICATION APOTYXIAS
-//                                          Toast.makeText(getApplicationContext(), "Order error: " + finalVar_orderID, Toast.LENGTH_LONG).show();
-                                                                    Toast.makeText(getApplicationContext(), "Order delete error: ", Toast.LENGTH_LONG).show();
-                                                                }
-                                                            });
+                                                    Toast.makeText(getApplicationContext(), "Order deleted: ", Toast.LENGTH_LONG).show();
+                                                    orderID.setText("");
+                                                    productID.setText("");
+                                                    customerName.setText("");
+                                                    orderDate.setText("");
+                                                    quantity.setText("");
+                                                    setErrorMessagesToNull();
                                                 }
-                                            })
-                                            .setNegativeButton("Cancel", null)
-                                            .setIcon(R.drawable.warning)
-                                            .show();
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    // EDW THA MPAINEI ENA NOTIFICATION APOTYXIAS
+                                                    Toast.makeText(getApplicationContext(), "Order delete error: ", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                        }
+                                    }).setNegativeButton("Cancel", null).setIcon(R.drawable.warning).show();
                                 } else {
                                     displayOrderError.setText("The order you want to delete doesn't exist");
                                 }
                             }
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     String message = e.getMessage();
                     //ANTISTOIXA MPROYME NA VALOYME TO NOTIFICATION GIA UNSUCCESFUL YLOPOIHSH
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
-                    if(orderID.getText().length() == 0)
+                    if (orderID.getText().length() == 0)
                         orderID.setError("You must fill this field");
                 }
 
@@ -704,7 +637,6 @@ public class Orders_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
-//        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_button);
         actionBar.setTitle("");
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
