@@ -24,6 +24,7 @@ public class Supplier_Fragment extends Fragment {
     public Supplier_Fragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +33,7 @@ public class Supplier_Fragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_supplier, container, false);
 
@@ -51,15 +51,24 @@ public class Supplier_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(supplierID.getText().length()==0)  { supplierID.setError("You must fill this field");   }
-                if(supplierName.getText().length()==0){ supplierName.setError("You must fill this field"); }
-                if(email.getText().length()==0)       { email.setError("You must fill this field");        }
-                if(phone.getText().length()==0)       { phone.setError("You must fill this field");        }
-                if(address.getText().length()==0)     { address.setError("You must fill this field");      }
+                if (supplierID.getText().length() == 0) {
+                    supplierID.setError("You must fill this field");
+                }
+                if (supplierName.getText().length() == 0) {
+                    supplierName.setError("You must fill this field");
+                }
+                if (email.getText().length() == 0) {
+                    email.setError("You must fill this field");
+                }
+                if (phone.getText().length() == 0) {
+                    phone.setError("You must fill this field");
+                }
+                if (address.getText().length() == 0) {
+                    address.setError("You must fill this field");
+                }
 
                 int var_id = 0;
                 try {
-//                    var_id = Integer.parseInt(id.getEditText().getText().toString()); // EAN TO id HTAN TYPOU TextInputLayout
                     var_id = Integer.parseInt(supplierID.getText().toString());  // EDW TO supplierID EINAI TYPOU TextInputEditText
                 } catch (NumberFormatException exception) {
                     System.out.println("Could not parse" + exception);
@@ -71,9 +80,8 @@ public class Supplier_Fragment extends Fragment {
 
                 try {
                     // EAN THELOYME OTAN OPOIODIPOTE APO TA PEDIA DN EXEI TIMH TOTE NA MHN GINETAI INSERT STO TABLE TO SYGKEKRIMENO supplier
-                    if(supplierID.getText().length()==0 || email.getText().length()==0 ||
-                       phone.getText().length()==0 || address.getText().length()==0 )
-                           throw new Exception("Excpetion thrown");
+                    if (supplierID.getText().length() == 0 || email.getText().length() == 0 || phone.getText().length() == 0 || address.getText().length() == 0)
+                        throw new Exception("Excpetion thrown");
 
                     Supplier supplier = new Supplier();
                     supplier.setSid(var_id);
@@ -83,7 +91,7 @@ public class Supplier_Fragment extends Fragment {
                     supplier.setAddress(var_address);
                     MainActivity.myAppDatabase.myDao().addSupplier(supplier);
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI EPITYXEIS H PROSTHIKI TOY NEOY PROIONTOS
-                    Toast.makeText(getActivity(), "Record added.", Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
+                    Toast.makeText(getActivity(), "Supplier added.", Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
                     supplierID.setText("");
                     supplierName.setText("");
                     email.setText("");
@@ -97,19 +105,18 @@ public class Supplier_Fragment extends Fragment {
 
                     boolean flagSupplierID = false;
 
-                    List<Supplier> asupplier= MainActivity.myAppDatabase.myDao().getSupplier();
-                    for(Supplier i: asupplier){
+                    List<Supplier> asupplier = MainActivity.myAppDatabase.myDao().getSupplier();
+                    for (Supplier i : asupplier) {
                         int var_supplierID_for_check = i.getSid();
-                        if(var_supplierID_for_check == var_id){
+                        if (var_supplierID_for_check == var_id) {
                             flagSupplierID = true;  // THA GINEI true APO TH STIGMH POY TO var_supplierID YPARXEI STHN VASH DHLADH STON PINAKA product
-                            Log.i(TAG,"TO flagSupplierID egine true");
+                            Log.i(TAG, "TO flagSupplierID egine true");
                             break;
                         }
                     }
-                    if(supplierID.getText().length()==0){
+                    if (supplierID.getText().length() == 0) {
                         supplierID.setError("You must fill this field");
-                    }
-                    else if(flagSupplierID){  // EAN YPARXEI HDH STH VASH TO SYGKEKRIMENO productID
+                    } else if (flagSupplierID) {  // EAN YPARXEI HDH STH VASH TO SYGKEKRIMENO productID
                         supplierID.setError("The supplierID you filled is already recorded\nPlease give another supplierID");
                     }
                 }
@@ -131,13 +138,13 @@ public class Supplier_Fragment extends Fragment {
                 String var_phone = phone.getText().toString();
                 String var_address = address.getText().toString();
 
-                String currentName="Unknown", currentEmail="Unknown", currentPhone="Unknown", currentAddress="Unknown";
+                String currentName = "Unknown", currentEmail = "Unknown", currentPhone = "Unknown", currentAddress = "Unknown";
                 boolean flagSupplierID = false;
 
-                List<Supplier> asupplier= MainActivity.myAppDatabase.myDao().getSupplier();
-                for(Supplier i: asupplier){
+                List<Supplier> asupplier = MainActivity.myAppDatabase.myDao().getSupplier();
+                for (Supplier i : asupplier) {
                     int var_supplierID_for_check = i.getSid();
-                    if(var_supplierID_for_check == var_id) {
+                    if (var_supplierID_for_check == var_id) {
                         currentName = i.getName();
                         currentEmail = i.getEmail();
                         currentPhone = i.getPhone();
@@ -149,19 +156,23 @@ public class Supplier_Fragment extends Fragment {
                 }
 
                 try {
-                    if(supplierID.getText().toString().isEmpty() || !flagSupplierID)
+                    if (supplierID.getText().toString().isEmpty() || !flagSupplierID)
                         throw new Exception("Exception thrown");
 
                     Supplier supplier = new Supplier();
                     supplier.setSid(var_id);
-                    if(var_name.isEmpty()) supplier.setName(currentName); else supplier.setName(var_name);
-                    if(var_email.isEmpty()) supplier.setEmail(currentEmail); else supplier.setEmail(var_email);
-                    if(var_phone.isEmpty()) supplier.setPhone(currentPhone); else supplier.setPhone(var_phone);
-                    if(var_address.isEmpty()) supplier.setAddress(currentAddress); else supplier.setAddress(var_address);
+                    if (var_name.isEmpty()) supplier.setName(currentName);
+                    else supplier.setName(var_name);
+                    if (var_email.isEmpty()) supplier.setEmail(currentEmail);
+                    else supplier.setEmail(var_email);
+                    if (var_phone.isEmpty()) supplier.setPhone(currentPhone);
+                    else supplier.setPhone(var_phone);
+                    if (var_address.isEmpty()) supplier.setAddress(currentAddress);
+                    else supplier.setAddress(var_address);
 
                     MainActivity.myAppDatabase.myDao().updateSupplier(supplier);
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI EPITYXHS H PROSTHIKI TOY NEOY PROIONTOS
-                    Toast.makeText(getActivity(), "Record added.", Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
+                    Toast.makeText(getActivity(), "Supplier updated.", Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
                     supplierID.setText("");
                     supplierName.setText("");
                     email.setText("");
@@ -193,21 +204,21 @@ public class Supplier_Fragment extends Fragment {
                 }
 
                 boolean flagSupplierID = false;
-                    List<Supplier> asupplier = MainActivity.myAppDatabase.myDao().getSupplier();
-                    for (Supplier i : asupplier) {
-                        int var_supplierID_for_check = i.getSid();
-                        if (var_supplierID_for_check == var_id) {
-                            flagSupplierID = true;
-                            break;
-                        }
+                List<Supplier> asupplier = MainActivity.myAppDatabase.myDao().getSupplier();
+                for (Supplier i : asupplier) {
+                    int var_supplierID_for_check = i.getSid();
+                    if (var_supplierID_for_check == var_id) {
+                        flagSupplierID = true;
+                        break;
                     }
+                }
                 try {
-                    if(supplierID.getText().length() == 0 || !flagSupplierID)
+                    if (supplierID.getText().length() == 0 || !flagSupplierID)
                         throw new Exception("Exception thrown");
                     Supplier supplier = new Supplier();
                     supplier.setSid(var_id);
                     MainActivity.myAppDatabase.myDao().deleteSupplier(supplier);
-                    Toast.makeText(getActivity(), "Supplier delete successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Supplier deleted successfully", Toast.LENGTH_LONG).show();
                     supplierID.setText("");
                     supplierName.setText("");
                     email.setText("");
@@ -216,10 +227,10 @@ public class Supplier_Fragment extends Fragment {
                     setErrorMessagesToNull();
                 } catch (Exception e) {
                     String message = e.getMessage();
-                    Toast.makeText(getActivity(), "Supplier delete did not happend "+message, Toast.LENGTH_LONG).show();
-                    if(supplierID.getText().length() == 0)
+                    Toast.makeText(getActivity(), "Supplier delete did not happened " + message, Toast.LENGTH_LONG).show();
+                    if (supplierID.getText().length() == 0)
                         supplierID.setError("You must fill this field");
-                    else if(!flagSupplierID)
+                    else if (!flagSupplierID)
                         supplierID.setError("The SuppliertID you filled does not exist");
                 }
             }
@@ -227,12 +238,22 @@ public class Supplier_Fragment extends Fragment {
         return view;
     }
 
-    public void setErrorMessagesToNull(){
-        if(supplierID.getText().length()==0)  { supplierID.setError(null);}
-        if(supplierName.getText().length()==0){ supplierName.setError(null);}
-        if(email.getText().length()==0)       { email.setError(null);}
-        if(phone.getText().length()==0)       { phone.setError(null);}
-        if(address.getText().length()==0)     { address.setError(null);}
+    public void setErrorMessagesToNull() {
+        if (supplierID.getText().length() == 0) {
+            supplierID.setError(null);
+        }
+        if (supplierName.getText().length() == 0) {
+            supplierName.setError(null);
+        }
+        if (email.getText().length() == 0) {
+            email.setError(null);
+        }
+        if (phone.getText().length() == 0) {
+            phone.setError(null);
+        }
+        if (address.getText().length() == 0) {
+            address.setError(null);
+        }
     }
 
 }

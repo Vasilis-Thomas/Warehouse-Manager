@@ -142,7 +142,7 @@ public class Supplies_Fragment extends Fragment {
                 }
                 double var_msrp = 0.0;
                 try {
-                    var_msrp = Integer.parseInt(msrp.getText().toString());
+                    var_msrp = Double.parseDouble(msrp.getText().toString());
                 } catch (NumberFormatException exception) {
                     System.out.println("Could not parse" + exception);
                 }
@@ -171,7 +171,7 @@ public class Supplies_Fragment extends Fragment {
                     supply.setMsrp(var_msrp);
                     MainActivity.myAppDatabase.myDao().addSupply(supply);
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI EPITYXHS H PROSTHIKI TOY NEOY PROIONTOS
-                    Toast.makeText(getActivity(), "Record added.", Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
+                    Toast.makeText(getActivity(), "Supply added.", Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
 
                     productID.setText("");
                     supplierID.setText("");
@@ -183,9 +183,7 @@ public class Supplies_Fragment extends Fragment {
                     String message = e.getMessage();
                     Log.i(TAG, e.getMessage());
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI APOTYXHS H PROSTHIKI TOY NEOY PROIONTOS
-//                    if(message.equals("FOREIGN KEY constraint failed (code 787 SQLITE_CONSTRAINT_FOREIGNKEY)")){
 //                        Toast.makeText(getActivity(),"The productID or the supplier or the supplyDate you submitted is not registered.", Toast.LENGTH_LONG).show();
-//                    }
 
                     boolean flagProductID = false, flagSupplierID = false;
 
@@ -270,7 +268,7 @@ public class Supplies_Fragment extends Fragment {
                 }
                 double var_msrp = 0.0;
                 try {
-                    var_msrp = Integer.parseInt(msrp.getText().toString());
+                    var_msrp = Double.parseDouble(msrp.getText().toString());
                 } catch (NumberFormatException exception) {
                     System.out.println("Could not parse" + exception);
                 }
@@ -303,11 +301,9 @@ public class Supplies_Fragment extends Fragment {
                     else supply.setQuantity(var_quantity);
                     if (var_msrp == 0.0) supply.setMsrp(currentMsrp);
                     else supply.setMsrp(var_msrp);
-//                    supply.setQuantity(var_quantity);
-//                    supply.setMsrp(var_msrp);
                     MainActivity.myAppDatabase.myDao().updateSupply(supply);
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI EPITYXHS H PROSTHIKI TOY NEOY PROIONTOS
-                    Toast.makeText(getActivity(), "Record added.", Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
+                    Toast.makeText(getActivity(), "Supply updated.", Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
                     productID.setText("");
                     supplierID.setText("");
                     supplyDate.setText("");
@@ -318,8 +314,7 @@ public class Supplies_Fragment extends Fragment {
                     String message = e.getMessage();
                     Log.i(TAG, e.getMessage());
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(getActivity(),"The productID or the supplier you submitted is not registered.", Toast.LENGTH_LONG).show();
-//                    }
+
                     if (productID.length() == 0) productID.setError("You must fill this field");
                     if (supplierID.length() == 0) supplierID.setError("You must fill this field");
                     if (var_supplyDate.isEmpty()) supplyDate.setError("You must fill this field");
@@ -369,6 +364,7 @@ public class Supplies_Fragment extends Fragment {
                     supply.setProductID(var_pid);
                     supply.setSupply_date(var_supplyDate);
                     MainActivity.myAppDatabase.myDao().deleteSupply(supply);
+                    Toast.makeText(getActivity(), "Supply deleted succesfully", Toast.LENGTH_LONG).show();
 
                     productID.setText("");
                     supplierID.setText("");
@@ -431,59 +427,4 @@ public class Supplies_Fragment extends Fragment {
 //    }
 
 
-//    public boolean checkIfDateGivenIsValid(){
-//        boolean validDate = false;
-//
-//        String dateGivenByUser = supplyDate.getText().toString();
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
-//        Date date = new Date();
-//        Date parsedDateGivenByUser =  date;
-//        try{
-//            parsedDateGivenByUser = formatter.parse(dateGivenByUser);
-//        }catch (ParseException e){
-//            e.printStackTrace();
-//        }
-//        int checkDates = parsedDateGivenByUser.compareTo(date);
-////        Timestamp ts1 = Timestamp.valueOf(supplyDate.getText().toString()+" 00:00:00");
-////        Timestamp ts2 = Timestamp.valueOf("2018-09-01 09:01:16");
-////        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
-////        Date date = new Date();
-//        System.out.println(formatter.format(date));
-//        System.out.println(formatter.format(parsedDateGivenByUser));
-////        System.out.println(formatter.format(ts1));
-////        System.out.println(formatter.format(ts2));
-////ts2 = formatter.format(ts2);
-//        //compares ts1 with ts2
-////        int checkDates = ts1.compareTo(date);
-//        if(formatter.format(date).equals(formatter.format(parsedDateGivenByUser)) && checkDates>0){
-//            System.out.println("Both values are equal");
-//            // ISOS NA METAFERETAI TO QUANTITY
-//            validDate = true;
-//        }
-//        else if(checkDates>0){
-//            System.out.println("TimeSpan1 value is greater");
-//            validDate = true;
-//        }
-//        else{
-//            System.out.println("TimeSpan2 value is greater");
-//            validDate = false;
-//        }
-////        if(formatter.format(date).equals(formatter.format(ts1))){
-////            System.out.println("they are equal");
-////        }
-//
-////        if(checkDates <= 0){
-////            // EAN TO CURRENT DATE EINAI <= TOY GIVENDATEBYUSER TOTE SHMAINEI OTI DEN EXEI
-////            // PERASEI AYTH H HMEROMHNIA OPOTE MPOREI NA SYMVEI Supply
-////            validDate = true;
-////            Log.d(TAG,"Ola kala me thn hmeromhnia supplyDate");
-//////            System.out.println("CurrentDate value is greater than dateGivenByUser, Ola Kala");
-////        }
-////        else{
-//////                        System.out.println("Exception Thrown: CurrentDate value is less than dateGivenByUser");
-////            validDate = false;
-//////            throw new Exception("Exception Thrown: CurrentDate value is less than dateGivenByUser");
-////        }
-//        return validDate;
-//    }
 }

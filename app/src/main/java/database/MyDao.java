@@ -50,10 +50,22 @@ public interface MyDao {
             "order by product.price, supplier.supplierName ASC ")
     public List<ProductInfo> get_ProductsCategoriesAllSupplier(String inputCategory);
 
+//    @Query("select distinct product.productName, product.category, product.price, product.stock, product.image, supplier.supplierName as supplier \n" +
+//            "from product inner join supplies on product.productID=supplies.productID " +
+//            "inner join supplier on supplies.supplierID=supplier.supplierID "+
+//            "where product.category = :inputCategory and supplier.supplierName= :inputSupplier " +
+//            "order by product.price, supplier.supplierName ASC ")
+//    public List<ProductInfo> get_ProductsCategories_Supplier(String inputSupplier, String inputCategory);
+
     @Query("select distinct product.productName, product.category, product.price, product.stock, product.image, supplier.supplierName as supplier \n" +
             "from product inner join supplies on product.productID=supplies.productID " +
             "inner join supplier on supplies.supplierID=supplier.supplierID "+
-            "where product.category = :inputCategory and supplier.supplierName= :inputSupplier " +
+            "where product.category = :inputCategory " +
+            "INTERSECT " +
+            "select distinct product.productName, product.category, product.price, product.stock, product.image, supplier.supplierName as supplier \n" +
+            "from product inner join supplies on product.productID=supplies.productID " +
+            "inner join supplier on supplies.supplierID=supplier.supplierID "+
+            "where supplier.supplierName= :inputSupplier " +
             "order by product.price, supplier.supplierName ASC ")
     public List<ProductInfo> get_ProductsCategories_Supplier(String inputSupplier, String inputCategory);
 

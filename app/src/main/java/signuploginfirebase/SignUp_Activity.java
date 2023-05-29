@@ -28,8 +28,6 @@ public class SignUp_Activity extends AppCompatActivity {
     private TextView redirectToLoginText;
     private Button buttonSignup;
 
-    boolean result = false;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +50,7 @@ public class SignUp_Activity extends AppCompatActivity {
                 String password = signupPassword.getText().toString().trim();
                 String confirmpassword = signupConfirmpassword.getText().toString().trim();
 
-                if (username.isEmpty() && useremail.isEmpty() && password.isEmpty() && confirmpassword.isEmpty()){
+                if (username.isEmpty() && useremail.isEmpty() && password.isEmpty() && confirmpassword.isEmpty()) {
                     signupUsername.setError("Username is required");
                     signupEmail.setError("Email  is required");
                     signupPassword.setError("Password  is required");
@@ -66,8 +64,7 @@ public class SignUp_Activity extends AppCompatActivity {
                 if (useremail.length() < 9)
                     signupEmail.setError("Email must be minimum 4 characters");
 
-                if (password.isEmpty())
-                    signupPassword.setError("Password  is required");
+                if (password.isEmpty()) signupPassword.setError("Password  is required");
 
                 if (confirmpassword.isEmpty())
                     signupConfirmpassword.setError("Confirm password  is required");
@@ -80,14 +77,10 @@ public class SignUp_Activity extends AppCompatActivity {
 
                 if (!(password.toString().equals(confirmpassword.toString()))) {
                     signupConfirmpassword.setError("Confirm password and password must be the same");
-                }
-
-                else if (!(useremail.length() > 9 && username.length() > 4)){
+                } else if (!(useremail.length() > 9 && username.length() > 4)) {
                     signupUsername.setError("Username must be minimum 4 characters");
                     signupEmail.setError("Email must be minimum 9 characters");
-                }
-
-                else
+                } else
                     auth.createUserWithEmailAndPassword(useremail, confirmpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -97,8 +90,8 @@ public class SignUp_Activity extends AppCompatActivity {
                                 user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Log.d(TAG, "User profile updated, displayName is set: " +username);
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User profile updated, displayName is set: " + username);
                                         }
                                     }
                                 });
@@ -115,65 +108,18 @@ public class SignUp_Activity extends AppCompatActivity {
                             }
                         }
                     });
-                }
-            });
+            }
+        });
 
-//                result = CheckAllFields();
-//
-//                if(result)
-//                    Toast.makeText("All Right");
-//                else
-//                    Toast.makeText("Negative");
-//
-//                private boolean CheckAllFields() {
-//                    boolean turn = false;
-//
-//                    if (signupUsername.length() == 0) {
-//                        signupUsername.setError("This field is required");
-//                        turn = false;
-//                    } else {
-//                        turn = true;
-//                    }
-//
-//                    if (signupEmail.length() == 0) {
-//                        signupEmail.setError("This field is required");
-//                        turn = false;
-//                    } else {
-//                        turn = true;
-//                    }
-//
-//                    if (signupPassword.length() == 0) {
-//                        signupPassword.setError("Email is required");
-//                        turn = false;
-//                    } else {
-//                        turn = true;
-//                    }
-//
-//                    if (signupAuthpassword.length() == 0) {
-//                        signupAuthpassword.setError("Password is required");
-//                        turn = false;
-//                    } else if (signupAuthpassword.length() < 8) {
-//                        signupAuthpassword.setError("Password must be minimum 8 characters");
-//                        turn = false;
-//                    } else {
-//                        turn = true;
-//                    }
-//
-//                    return turn;
-//                }
-
-
-
-                redirectToLoginText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                        startActivity(new Intent(SignUp_Activity.this, LoginActivity.class));
-                        Intent intent = new Intent(SignUp_Activity.this, LoginActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("key1", "1st :- Main Activity");
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    }
-                });
-        }
+        redirectToLoginText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignUp_Activity.this, LoginActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("key1", "1st :- Main Activity");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
 }

@@ -156,7 +156,7 @@ public class Product_Fragment extends Fragment {
                 }
                 String var_name = name.getText().toString();
                 String var_category = category.getText().toString();
-                double var_price = 0;
+                double var_price = 0.0;
                 try {
                     var_price = Double.parseDouble(price.getText().toString());
                 } catch (NumberFormatException exception) {
@@ -184,7 +184,7 @@ public class Product_Fragment extends Fragment {
 
                     MainActivity.myAppDatabase.myDao().addProduct(product);
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI EPITYXEIS H PROSTHIKI TOY NEOY PROIONTOS
-                    Toast.makeText(getActivity(),"Record added.",Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
+                    Toast.makeText(getActivity(),"Product added.",Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
 
                     id.setText("");
                     name.setText("");
@@ -236,7 +236,7 @@ public class Product_Fragment extends Fragment {
                 }
                 String var_name = name.getText().toString();
                 String var_category = category.getText().toString();
-                double var_price = 0;
+                double var_price = 0.0;
                 try {
                     var_price = Double.parseDouble(price.getText().toString());
                 } catch (NumberFormatException exception) {
@@ -318,7 +318,7 @@ public class Product_Fragment extends Fragment {
 
                     MainActivity.myAppDatabase.myDao().updateProduct(product);
                     //EDW THA VALOYME NA ERHETAI NOTIFICATION OTI EINAI EPITYXEIS H PROSTHIKI TOY NEOY PROIONTOS
-                    Toast.makeText(getActivity(),"Record added.",Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
+                    Toast.makeText(getActivity(),"Product updated.",Toast.LENGTH_LONG).show(); // AYTO THA FYGEI
 
                     id.setText("");
                     name.setText("");

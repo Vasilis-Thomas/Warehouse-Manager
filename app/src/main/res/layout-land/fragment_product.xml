@@ -139,7 +139,7 @@
                 android:textColorHint="@color/colorDrawerLayoutBackground"
                 android:textCursorDrawable="@null"
                 android:textSize="20sp"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:maxLength="10"
                 android:background="@color/colorSecond1">
             </com.google.android.material.textfield.TextInputEditText>
@@ -165,7 +165,7 @@
                     android:textColorHint="@color/colorDrawerLayoutBackground"
                     android:textCursorDrawable="@null"
                     android:textSize="20sp"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:maxLength="6"
                     android:background="@color/colorSecond1">
                 </com.google.android.material.textfield.TextInputEditText>

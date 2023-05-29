@@ -62,17 +62,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = makeToolbarButton();
 
         drawerLayout   = findViewById(R.id.drawer_layout);
-//        if(savedInstanceState !=null){
-
-////            return;
-//        }
-
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationChannel channel = new NotificationChannel("myChLocalDatabase", "MyChannelLocalDatabase", NotificationManager.IMPORTANCE_DEFAULT);
-//            NotificationManager manager = getSystemService(NotificationManager.class);
-//            manager.createNotificationChannel(channel);
-//        }
 
         builder = new AlertDialog.Builder(MainActivity.this);
         Log.i(TAG, "onCreate callback method");
@@ -163,10 +152,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (selectedTabPosition) {
                     case 0:
                         fragment = new Product_Fragment();
-//                        if(savedInstanceState.containsKey("product_name")){
-//                            String product_name = savedInstanceState.getString("product_name");
-//                            ((Product_Fragment)fragment).setTextFieldName(product_name);
-//                        }
                         break;
                     case 1:
                         fragment = new Supplier_Fragment();
@@ -179,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.fragment_container, fragment);
                 fragmentTransaction.commit();
             }
-//            fragmentManager.beginTransaction().add(R.id.fragment_container, new Product_Fragment()).setTransition(fragmentManager.TRANSIT_FRAGMENT_OPEN).commit();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.fragment_container, new Product_Fragment());
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -222,26 +206,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-//    public void pushNotification() {
-//        NotificationCompat.Builder builder1 = new NotificationCompat.Builder(fragment.requireContext(), "myChLocalDatabase")
-//                .setSmallIcon(R.drawable.warning)
-//                .setContentTitle("Notification")
-////        if(fragment.requireContext().equals(Product_Fragment.class.getName()))
-//                .setContentText("Order successfully added!");
-////        else if(fragment.requireContext().equals(Supplier_Fragment.class.getName()))
-////            builder.setContentText("Supplier successfully added!");
-////        else
-////            builder.setContentText("Supply successfully added!!!");
-//
-////        Notification notification = builder.build();
-//        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(fragment.requireContext());
-//
-//        if (ActivityCompat.checkSelfPermission(fragment.requireContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-//            return;
-//        }
-//        notificationManagerCompat.notify(1, builder1.build());
-//    };
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -314,25 +278,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.i(TAG, "onDestroy callback method");
     }
-
-
-//    @Override
-//    public void onBackPressed() {
-//        // Get the next activity that will be launched
-//        Intent nextIntent = new Intent(this, LoginActivity.class);  // Replace with the specific activity you want to check against
-//
-//        PackageManager packageManager = getPackageManager();
-//        ComponentName componentName = nextIntent.resolveActivity(packageManager);
-//
-//        // Check if the next activity is the one you want to handle differently which is LoginActivity.class
-//        if (componentName != null && componentName.getClassName().equals(LoginActivity.class.getName())) {
-//            // Do nothing
-//            // Since the next activity is the specific activity, we skip the super.onBackPressed() call
-//        } else {
-//            // Call the superclass implementation to allow the default behavior
-//            super.onBackPressed();
-//        }
-//    }
 
 }
 

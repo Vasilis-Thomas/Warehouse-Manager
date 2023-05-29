@@ -30,15 +30,18 @@ import signuploginfirebase.sharedPreferenceConfig;
 
 
 public class SettingsActivity extends AppCompatActivity {
-//    private Stack<Class<?>> activityStack = new Stack<>();
-    private signuploginfirebase.sharedPreferenceConfig sharedPreferenceConfig;
-    Toolbar toolbar;
     private final static String TAG = "com.example.applicationwithmenu (Setting Activity)";
+    Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     TextView username_text, email_text;
     AlertDialog.Builder builder;
     TextView toolbarTitle, usernameTxt, emailTxt, reportABugTxt, infoTxt, logoutTxt, logoutSubTxt;
+    private signuploginfirebase.sharedPreferenceConfig sharedPreferenceConfig;
+
+    public static void showInfo(AlertDialog.Builder b) {
+        b.setTitle("Application Information").setMessage("Constructors: Nikolas Sarakenidis, Vasilis Thomas\n" + "Institution: International University of Greece\n" + "Supervisor: Euklidis Keramopoylos\n" + "Project name: Warehouse Manager\n" + "Application: Android\n" + "MinimumSdk: 24").show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,6 @@ public class SettingsActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_settings);
         sharedPreferenceConfig = new sharedPreferenceConfig(getApplicationContext());
-//        int selectedItem = getIntent().getIntExtra("selectedItem", -1);
         toolbar = makeToolbar();
 
 
@@ -63,16 +65,14 @@ public class SettingsActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         navigationView.bringToFront();
         navigationView.setCheckedItem(R.id.settings);
-//        navigationView.setCheckedItem(selectedItem);
         navigationView.setCheckedItem(R.id.settings);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.dr_database:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
-//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
@@ -80,38 +80,29 @@ public class SettingsActivity extends AppCompatActivity {
                     case R.id.dr_orders:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, Orders_Activity.class));
-//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
                     case R.id.dr_order_info:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, Order_Info_Activity.class));
-//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
                     case R.id.dr_product_inventory:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, Product_Inventory_Activity.class));
-//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
                     case R.id.dr_supplier_info:
                         menuItem.setChecked(true);
                         startActivity(new Intent(SettingsActivity.this, Supplier_Info_Activity.class));
-//                        startActivity(new Intent(SettingsActivity.this, Supplier_Info_Activity.class).putExtra("selectedItem",R.id.logout));
-//                        activityStack.push(SettingsActivity.class);
                         drawerLayout.closeDrawers();
                         return true;
 
-
                     case R.id.settings:
                         menuItem.setChecked(true);
-//                        startActivity(new Intent(MainActivity.this, Logout_Activity.class));
-//                        startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
-//                        Intent n = new Intent(MainActivity.this, Logout_Activity.class);
                         drawerLayout.closeDrawers();
                         return true;
                 }
@@ -120,7 +111,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
-        if(firebaseuser != null) {
+        if (firebaseuser != null) {
             String userName = firebaseuser.getDisplayName();
             String userEmail = firebaseuser.getEmail();
             View menu_drawer_head = navigationView.getHeaderView(0);
@@ -138,7 +129,7 @@ public class SettingsActivity extends AppCompatActivity {
             usernameTxt.setText(userName);
             emailTxt.setText(userEmail);
 
-            logoutSubTxt.setText("You are logged in as "+  userName);
+            logoutSubTxt.setText("You are logged in as " + userName);
 
             String[] emailAddresses = {"billthomas308@gmail.com", "sarakenidisn@gmail.com"};
 
@@ -181,7 +172,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
                             // PARAKATW: OTAN KANEI LOGOUT O user KAI PROSPATHISEI NA KANEI onBackPressed TOTE TON KANEI EXIT APO THN EFARMOGH
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 
                         }
@@ -200,8 +191,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
 //                NavUtils.navigateUpFromSameTask(this);
 //                onBackPressed();
@@ -211,7 +202,6 @@ public class SettingsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     public Toolbar makeToolbar() {
         toolbar = findViewById(R.id.toolbar_layout);
@@ -224,15 +214,5 @@ public class SettingsActivity extends AppCompatActivity {
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
         toolbarTitle.setText(R.string.toolbar_title_to_settings_activity);
         return toolbar;
-    }
-
-    public static void showInfo(AlertDialog.Builder b){
-        b.setTitle("Application Information").
-                setMessage("Constructors: Nikolas Sarakenidis, Vasilis Thomas\n"
-                        + "Institution: International University of Greece\n"
-                        + "Supervisor: Euklidis Keramopoylos\n"
-                        + "Project name: Warehouse Manager\n"
-                        + "Application: Android\n"
-                        + "MinimumSdk: 24").show();
     }
 }

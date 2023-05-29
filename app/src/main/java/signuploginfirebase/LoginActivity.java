@@ -39,9 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_login);
 
-//        Bundle bundl = getIntent().getExtras();
-//        String title = bundl.getString("key1");
-
         auth = FirebaseAuth.getInstance();
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
